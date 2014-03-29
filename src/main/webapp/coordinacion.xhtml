@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ace="http://www.icefaces.org/icefaces/components">
+    <h:head>
+    </h:head>
+    <h:body>
+        <br/>
+        <ice:form><ice:outputConnectionStatus /></ice:form>
+        <ice:form>
+
+            <table align="center" width="900" style="border: 1px black solid ">
+                <tr>
+                    <td width="150">
+                        <ice:outputText value="Nombre" style="width: 150px"/>    
+                    </td>
+                    <td width="150">
+                        <ice:inputText value="#{coordinacion.coordinacion.nombre}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="150">
+                        <ice:outputText value="Calle" style="width: 150px"/>    
+                    </td>
+                    <td width="150">
+                        <ice:inputText value="#{coordinacion.coordinacion.calle}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="150">
+                        <ice:outputText value="Numero interior" style="width: 150px"/>    
+                    </td>
+                    <td width="150">
+                        <ice:inputText value="#{coordinacion.coordinacion.numeroInterior}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="150">
+                        <ice:outputText value="Numero exterior" style="width: 150px"/>    
+                    </td>
+                    <td width="150">
+                        <ice:inputText value="#{coordinacion.coordinacion.numeroExterior}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="150">
+                        <ice:outputText value="Colonia" style="width: 150px"/>    
+                    </td>
+                    <td width="150">
+                        <ice:inputText value="#{coordinacion.coordinacion.colonia}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="150">
+                        <ice:outputText value="Telefono" style="width: 150px"/>    
+                    </td>
+                    <td width="150">
+                        <ice:inputText value="#{coordinacion.coordinacion.telefono}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="150">
+                        <ice:outputText value="email" style="width: 150px"/>    
+                    </td>
+                    <td width="150">
+                        <ice:inputText value="#{coordinacion.coordinacion.email}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="150">
+                        <ice:outputText value="Username" style="width: 150px"/>    
+                    </td>
+                    <td width="150">
+                        <ice:inputText value="#{coordinacion.coordinacion.username}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="150">
+                        <ice:outputText value="Password" style="width: 150px"/>    
+                    </td>
+                    <td width="150">
+                        <ice:inputSecret value="#{coordinacion.coordinacion.nombre}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <ice:commandButton value="insertar" action="#{coordinacion.insertar}"/>
+                    </td>
+                </tr>
+            </table>
+            <ice:outputText value=" Hola coordinacion !!!"/> 
+        </ice:form>
+    </h:body>
+</html>

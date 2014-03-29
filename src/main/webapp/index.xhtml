@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+    </h:head>
+    <h:body>
+        <br />
+        <ice:form>
+            <title>Login</title>
+            <table width="300" align="center">
+                <tr>
+                    <td align="center">
+                        <ice:graphicImage url="#{login.imagen}"/>
+                    </td>
+                </tr>
+            </table>
+            <table align="center" width="900"  style="border: 1px black solid ">
+                <tr style="border-bottom: 1px black solid">
+                    <td colspan="0" align="center">
+                        <ice:outputText value="Iniciar sesión"/>
+                    </td>
+                </tr>
+                <tr style="border-bottom: 1px black solid">
+                    <td>
+                        <ice:outputText value="*" style="color: red"/><ice:outputText value="Nombre de usuario:"/>
+                    </td>
+                    <td>
+                        <ice:inputText value="#{login.nombre}"/>
+
+                    </td>
+                </tr>
+                <tr style="border-bottom: 1px black solid">
+                    <td >
+                        <ice:outputText value="*" style="color: red"/><ice:outputText value="Contraseña:"/>
+                    </td>
+                    <td>
+                        <ice:inputSecret value="#{login.password}"/>
+                    </td>
+                </tr>
+            </table>
+            <table align="center" width="900">
+                <tr>
+                    <td align="center" colspan="0">
+                        <ice:commandButton action="#{login.verificarUsuario}" value="Ingresar"/>
+                    </td>
+                    <td>
+                        <ice:commandButton action="#{login.limpiar}" value="Limpiar"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="0" align="center">
+                        <ice:outputText value="#{login.mensajeError}" style="color: red"/>
+                    </td>
+                </tr>
+            </table>
+        </ice:form>
+    </h:body>
+</html>
+

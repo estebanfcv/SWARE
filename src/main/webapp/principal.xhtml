@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ace="http://www.icefaces.org/icefaces/components">
+    <h:head>
+    </h:head>
+    <h:body>
+        <br />
+<!--        <ice:form id="popup">
+            <ice:panelPopup visible="#{login2.pop}" 
+                            style="width: 500px; left: 20%; top: 10%;
+                            z-index:999;position: absolute; background: #FFFFFF;" 
+                            modal="false" >
+                <f:facet name="header">
+                    <table align="center" width="500">
+                        <tr>
+                            <td width="490">
+                                <ice:outputText  value="Manuales"/>
+                            </td>
+                            <td width="10" align="left">
+                                <ice:commandButton style="width:10px"
+                                                   action="#{login2.cerrarpopUpManuales}"
+                                                   value="X"/>
+                            </td>
+                        </tr>
+                    </table>
+                </f:facet>
+                <f:facet name="body">
+                    <table width="440" style="border: 1px">
+                        <tr>
+                            <td align="center">
+                                <table width="440">
+                                    <tr>
+                                        <td>
+                                            <ice:outputText value="PDF general"/>
+                                        </td>
+                                        <td>
+                                            <ace:fileEntry id="file-entry" 
+                                                           maxFileCount="1" 
+                                                           fileEntryListener="#{login2.sampleListener}" 
+                                                           maxFileSize="#{login2.tamanioArchivo}" 
+                                                           maxTotalSize="#{login2.tamanioArchivo}" 
+                                                           useSessionSubdir="true" 
+                                                           style="width: 280px"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center">
+                                <h:commandLink value="Upload" onclick="var form = document.getElementById('popup');
+                                        form.onsubmit();
+                                        form.submit();"/> 
+                            </td>    
+                        </tr>
+                    </table>
+                </f:facet>
+            </ice:panelPopup> -->
+        <!--</ice:form>-->
+            <title>SWARE</title>
+<!--            <table width="300" align="center">
+                <tr>
+                    <td align="center">
+                        <ice:graphicImage value="/imagenes/logo2.png" />
+                        <ice:graphicImage value="#{login2.bytes}" height="200" width="200" />
+                    </td>
+                </tr>
+            </table>-->
+<!--        <ice:form id="file">
+            <table  align="center" width="390">
+                <tr>
+                    <td align="center">
+                        <ice:outputText value="¡BIENVENIDO AL SISTEMA!"/>
+                    </td>
+                </tr>
+            </table>
+            <table width="390" style="border: 1px" align="center">
+                <tr>
+                    <td align="center">
+                        <table width="390">
+                            <tr>
+                                <td>
+                                    <ice:outputText value="IFE"/>
+                                </td>
+                                <td>
+                                    <ace:fileEntry id="file-entry" 
+                                                   maxFileCount="1" 
+                                                   
+                                                   fileEntryListener="#{login2.sampleListener}" 
+                                                   maxFileSize="#{login2.tamanioArchivo}" 
+                                                   maxTotalSize="#{login2.tamanioArchivo}" 
+                                                   useSessionSubdir="true" 
+                                                   style="width: 280px"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center"> 
+                        <h:commandLink value="Upload" onclick="var form = document.getElementById('file');
+                                        form.onsubmit();
+                                        form.submit();"/>
+                    </td>    
+                </tr>
+            </table>
+        </ice:form>-->
+        <ice:form>
+            <table width="900" style="border: 1px" align="center">
+                <tr>
+                    <td>
+                        <ice:outputText value="Catalogos"/>
+                    </td>
+                    <td>
+                        <ice:commandLink value="Coordinacion" action="/coordinacion.xhtml"/>
+                    </td>
+                    <td>
+                        <ice:commandLink value="Usuarios" action="/usuarios.xhtml"/>
+                    </td>
+                </tr>
+            </table>
+        </ice:form>
+    </h:body>
+</html>

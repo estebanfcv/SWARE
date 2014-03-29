@@ -46,7 +46,7 @@ public class IndexBean implements Serializable {
             return "";
         } else {
             for (UsuarioTO usuario : listaUsuario) {
-                if (usuario.getNombre().equals(nombre) && usuario.getPassword().equals(password)) {
+                if (usuario.getUsername().equals(nombre) && usuario.getPassword().equals(password)) {
                     encontrado = true;
                     return "/principal.xhtml";
                 }

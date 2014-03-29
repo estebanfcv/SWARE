@@ -65,6 +65,19 @@
         <param-name>org.icefaces.connectionTimeout</param-name>
         <param-value>180000</param-value>
     </context-param>
+    <context-param>
+        <description>JNDI Conexion Lectura</description>
+        <param-name>JNDI_BD</param-name>
+        <param-value>jdbc/base</param-value>
+    </context-param>
+    <context-param>
+        <description>Debug de base de datos</description>
+        <param-name>debugBD</param-name>
+        <param-value>true</param-value>
+    </context-param>
+     <listener>
+        <listener-class>com.pan.sware.listener.ContextListener</listener-class>
+    </listener>
      <context-param>
         <param-name>org.icefaces.standardRequestScope</param-name>
         <param-value>false</param-value>

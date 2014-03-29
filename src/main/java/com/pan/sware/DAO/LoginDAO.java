@@ -3,6 +3,7 @@ package com.pan.sware.DAO;
 import com.pan.sware.Queries.Usuarios;
 import com.pan.sware.db.ConnectionManager;
 import com.pan.sware.TO.UsuarioTO;
+import com.pan.sware.db.DBConnectionManager;
 import java.awt.Image;
 import java.io.File;
 import java.io.FileInputStream;
@@ -31,13 +32,13 @@ public class LoginDAO {
         ResultSet rs = null;
         List<UsuarioTO> listaUsuarios = new ArrayList<>();
         try {
-            con = ConnectionManager.getConnection();
+            con = DBConnectionManager.getInstance().getConnection(DBConnectionManager.BD);
             ps = con.prepareCall(Usuarios.CONSULTAR_USUARIOS);
             rs = ps.executeQuery();
             while (rs.next()) {
                 UsuarioTO u = new UsuarioTO();
                 u.setId(rs.getInt("ID"));
-                u.setNombre(rs.getString("USERNAME"));
+//                u.setNombre(rs.getString("USERNAME"));
                 u.setPassword(rs.getString("PASSWORD"));
                 listaUsuarios.add(u);
             }
@@ -72,7 +73,7 @@ public class LoginDAO {
         try {
             file = new File(ruta);
             fis = new FileInputStream(file);
-            con = ConnectionManager.getConnection();
+//            con = ConnectionManager.getConnection();
             con.setAutoCommit(false);
             ps = con.prepareStatement(Usuarios.INSERTAR_IMAGENES);
             ps.setBinaryStream(1, fis, (int) file.length());
@@ -105,7 +106,7 @@ public class LoginDAO {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            con = ConnectionManager.getConnection();
+//            con = ConnectionManager.getConnection();
             ps = con.prepareStatement(Usuarios.CONSULTAR_IMAGENES);
             rs = ps.executeQuery();
             while (rs.next()) {

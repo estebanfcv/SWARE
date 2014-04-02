@@ -12,8 +12,7 @@ import javax.faces.bean.ViewScoped;
  *
  * @author estebanfcv
  */
-@ManagedBean(name = "login")
-@ViewScoped
+
 public class IndexBean implements Serializable {
 
     private List<UsuarioTO> listaUsuario = new ArrayList<>();

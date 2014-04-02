@@ -7,7 +7,7 @@ import java.util.Map;
 
 /**
  *
- * @author Cesar Villegas
+ * @author estebanfcv
  */
 public class DatosSesion {
     

@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
 
 /**
  *
- * @author Cesar Villegas
+ * @author estebanfcv
  */
 @SuppressWarnings({"CallToThreadDumpStack", "SleepWhileInLoop"})
 public class HiloSesiones implements Runnable {

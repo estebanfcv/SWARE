@@ -6,58 +6,86 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
-    </h:head>
-    <h:body>
-        <br />
-        <ice:form>
-            <title>Login</title>
-            <table width="300" align="center">
-                <tr>
-                    <td align="center">
-                        <ice:graphicImage url="#{login.imagen}"/>
-                    </td>
-                </tr>
-            </table>
-            <table align="center" width="900"  style="border: 1px black solid ">
-                <tr style="border-bottom: 1px black solid">
-                    <td colspan="0" align="center">
-                        <ice:outputText value="Iniciar sesión"/>
-                    </td>
-                </tr>
-                <tr style="border-bottom: 1px black solid">
-                    <td>
-                        <ice:outputText value="*" style="color: red"/><ice:outputText value="Nombre de usuario:"/>
-                    </td>
-                    <td>
-                        <ice:inputText value="#{login.nombre}"/>
 
-                    </td>
-                </tr>
-                <tr style="border-bottom: 1px black solid">
-                    <td >
-                        <ice:outputText value="*" style="color: red"/><ice:outputText value="Contraseña:"/>
-                    </td>
-                    <td>
-                        <ice:inputSecret value="#{login.password}"/>
-                    </td>
-                </tr>
-            </table>
-            <table align="center" width="900">
-                <tr>
-                    <td align="center" colspan="0">
-                        <ice:commandButton action="#{login.verificarUsuario}" value="Ingresar"/>
-                    </td>
-                    <td>
-                        <ice:commandButton action="#{login.limpiar}" value="Limpiar"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="0" align="center">
-                        <ice:outputText value="#{login.mensajeError}" style="color: red"/>
-                    </td>
-                </tr>
-            </table>
-        </ice:form>
+    </h:head>
+    <title>Login</title>
+    <h:body>
+        <div id="page-container">
+            <div id="header">
+                <div style="position: relative; top:80px;">
+                    <ui:insert name="menu_top">
+                        <ui:include src="./Header.xhtml"/>
+                    </ui:insert>
+                </div>
+            </div>
+            <div id="content">
+                <div id="topBar">
+                    <h:form id="boton_menu">
+                        <ice:panelPopup visible="#{index.recuperarPassword.popUp}"
+                                        style="z-index:999;left: 20%; top: 20%;
+                                        width: 380px; position:absolute; background: #FFFFFF;"
+                                        modal="true">
+                            <ui:include src="./RecuperarPassword.xhtml" />
+                        </ice:panelPopup>
+                    </h:form>
+                </div>
+                <h:form>
+                    <br /><br />
+                    <ice:graphicImage value="${index.bytes}" width="200" height="200" />
+                </h:form>
+                <ice:form>
+
+                    <table width="300" align="center" bgcolor="#CCCCCC">
+                        <tr  style="border-bottom: 1px white solid">
+                            <td align="center"  bgcolor="#999999">
+                                <ice:outputText value="Inicio de Sesión" style="color:white"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <table width="300" align="center" bgcolor="#CCCCCC">
+                        <tr style="border-bottom: 1px white solid">
+                            <td width="100">
+                                <ice:outputText value="Username" style="width: 100px"/>
+                            </td>
+                            <td width="200">
+                                <ice:inputText value="#{index.usuario.username}" style="width: 200px"/>
+                            </td>
+                        </tr>
+                        <tr style="border-bottom: 1px white solid">
+                            <td width="100">
+                                <ice:outputText value="Password" style="width: 100px"/>
+                            </td>
+                            <td width="200">
+                                <ice:inputText value="#{index.usuario.password}" style="width: 200px"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <table width="300" align="center" bgcolor="#CCCCCC">
+                        <tr style="border-bottom: 1px white solid">
+                            <td width="150">
+                                <ice:commandLink value="Recuperar password" action="#{index.recuperarPassword.abrirPopUp}" style="width: 150px"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <table width="300" align="center" >
+                        <tr>
+                            <td width="150">
+                                <ice:commandButton value="Aceptar" action="#{index.consultarUsuario}" style="width: 150px"/>
+                            </td>
+                            <td width="150">
+                                <ice:commandButton value="Limpiar" action="#{index.limpiar}" style="width: 150px"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <table width="300" align="center">
+                        <tr>
+                            <td align="center">
+                                <ice:outputText value="#{index.mensajeError}" style="#{index.color}"/>
+                            </td>
+                        </tr>
+                    </table>
+                </ice:form>
+            </div>
+        </div>
     </h:body>
 </html>
-

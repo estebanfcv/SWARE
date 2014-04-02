@@ -1,6 +1,7 @@
 package com.pan.sware.TO;
 
 import com.pan.sware.db.DBConnectionManager;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.util.Calendar;
@@ -10,21 +11,30 @@ import java.util.Date;
  *
  * @author estebanfcv
  */
-public class UsuarioTO implements Serializable,Cloneable {
-    
+public class UsuarioTO implements Serializable, Cloneable {
+
     private Connection conexion;
-    
+
     private int id;
     private String username;
     private String password;
+    private String email;
+    private byte[] avatar;
+    private String nombre;
+    private String apellidoPaterno;
+    private String apellidoMaterno;
+    private int idCoordinacion;
+    private int idPerfil;
+    private Date fechaAlta;
     
-     private Date fechaIngreso;
+
+    private Date fechaIngreso;
     private Date fechaFinSesion;
     private String idSesion;
     private String ubicacion;
-    
-     @Override
-     public UsuarioTO clone() {
+
+    @Override
+    public UsuarioTO clone() {
         UsuarioTO clon = null;
         try {
             clon = (UsuarioTO) super.clone();
@@ -34,13 +44,13 @@ public class UsuarioTO implements Serializable,Cloneable {
         }
         return clon;
     }
-     
-       public void crearConexion() {
-        conexion=null;
+
+    public void crearConexion() {
+        conexion = null;
         conexion = DBConnectionManager.getInstance().getConnection(DBConnectionManager.BD);
     }
-      
-      public void asignarfechasSesion() {
+
+    public void asignarfechasSesion() {
         Calendar cal = Calendar.getInstance();
         this.fechaIngreso = cal.getTime();
 //        cal.add(Calendar.MILLISECOND, (int) (this.perfil.getTiempoSesion()));
@@ -65,7 +75,6 @@ public class UsuarioTO implements Serializable,Cloneable {
     public void setUsername(String username) {
         this.username = username;
     }
-
 
     public String getPassword() {
         return password;
@@ -113,5 +122,69 @@ public class UsuarioTO implements Serializable,Cloneable {
 
     public void setConexion(Connection conexion) {
         this.conexion = conexion;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public byte[] getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(byte[] avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellidoPaterno() {
+        return apellidoPaterno;
+    }
+
+    public void setApellidoPaterno(String apellidoPaterno) {
+        this.apellidoPaterno = apellidoPaterno;
+    }
+
+    public String getApellidoMaterno() {
+        return apellidoMaterno;
+    }
+
+    public void setApellidoMaterno(String apellidoMaterno) {
+        this.apellidoMaterno = apellidoMaterno;
+    }
+
+    public int getIdCoordinacion() {
+        return idCoordinacion;
+    }
+
+    public void setIdCoordinacion(int idCoordinacion) {
+        this.idCoordinacion = idCoordinacion;
+    }
+
+    public int getIdPerfil() {
+        return idPerfil;
+    }
+
+    public void setIdPerfil(int idPerfil) {
+        this.idPerfil = idPerfil;
+    }
+
+    public Date getFechaAlta() {
+        return fechaAlta;
+    }
+
+    public void setFechaAlta(Date fechaAlta) {
+        this.fechaAlta = fechaAlta;
     }
 }

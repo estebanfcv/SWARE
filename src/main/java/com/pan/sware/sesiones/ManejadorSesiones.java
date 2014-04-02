@@ -13,7 +13,7 @@ import net.sf.uadetector.service.UADetectorServiceFactory;
 
 /**
  *
- * @author Cesar Villegas
+ * @author estebanfcv
  */
 public class ManejadorSesiones {
 

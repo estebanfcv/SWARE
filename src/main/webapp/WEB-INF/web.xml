@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <web-app xmlns="http://java.sun.com/xml/ns/javaee"
-	 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	 xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
-	 version="3.0">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         version="3.0">
     <context-param>
         <param-name>javax.faces.PROJECT_STAGE</param-name>
         <param-value>Development</param-value>
     </context-param>
-     <context-param>
+    <context-param>
         <param-name>javax.faces.CONFIG_FILES</param-name>
         <param-value>/WEB-INF/faces-config.xml</param-value>
     </context-param>
@@ -45,7 +45,7 @@
     <welcome-file-list>
         <welcome-file>index.xhtml</welcome-file>
     </welcome-file-list>
-       <context-param>
+    <context-param>
         <param-name>org.icefaces.blockingConnectionTimeout</param-name>
         <param-value>300000</param-value>
     </context-param>
@@ -66,19 +66,19 @@
         <param-value>180000</param-value>
     </context-param>
     <context-param>
-        <description>JNDI Conexion Lectura</description>
+        <description>JNDI Conexion</description>
         <param-name>JNDI_BD</param-name>
-        <param-value>jdbc/base</param-value>
+        <param-value>jdbc/sware</param-value>
     </context-param>
     <context-param>
         <description>Debug de base de datos</description>
         <param-name>debugBD</param-name>
         <param-value>true</param-value>
     </context-param>
-     <listener>
+    <listener>
         <listener-class>com.pan.sware.listener.ContextListener</listener-class>
     </listener>
-     <context-param>
+    <context-param>
         <param-name>org.icefaces.standardRequestScope</param-name>
         <param-value>false</param-value>
     </context-param>
@@ -90,4 +90,9 @@
         <param-name>org.icefaces.async.server</param-name>
         <param-value>true</param-value>
     </context-param>
+    <servlet> 
+        <servlet-name>Resource Servlet</servlet-name> 
+        <servlet-class>com.icesoft.faces.webapp.CompatResourceServlet</servlet-class> 
+        <load-on-startup>1</load-on-startup> 
+    </servlet> 
 </web-app>

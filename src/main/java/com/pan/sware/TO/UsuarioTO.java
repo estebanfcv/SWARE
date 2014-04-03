@@ -26,6 +26,9 @@ public class UsuarioTO implements Serializable, Cloneable {
     private int idCoordinacion;
     private int idPerfil;
     private Date fechaAlta;
+    private String telefonoCasa;
+    private String telefonoOficina;
+    private String telefonoCelular;
     
 
     private Date fechaIngreso;
@@ -187,4 +190,30 @@ public class UsuarioTO implements Serializable, Cloneable {
     public void setFechaAlta(Date fechaAlta) {
         this.fechaAlta = fechaAlta;
     }
+
+    public String getTelefonoCasa() {
+        return telefonoCasa;
+    }
+
+    public void setTelefonoCasa(String telefonoCasa) {
+        this.telefonoCasa = telefonoCasa;
+    }
+
+    public String getTelefonoOficina() {
+        return telefonoOficina;
+    }
+
+    public void setTelefonoOficina(String telefonoOficina) {
+        this.telefonoOficina = telefonoOficina;
+    }
+
+    public String getTelefonoCelular() {
+        return telefonoCelular;
+    }
+
+    public void setTelefonoCelular(String telefonoCelular) {
+        this.telefonoCelular = telefonoCelular;
+    }
+    
+    
 }

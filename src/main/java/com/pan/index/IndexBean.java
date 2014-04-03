@@ -44,7 +44,7 @@ public class IndexBean implements Serializable {
                 System.out.println("PASASTE A LA SIGUIENTE PANTALLA :D");
                 bytes = usuario.getAvatar();
 
-                return "";
+                return "cuenta";
             } else {
                 mensajeError = "El username y/o el password son incorrectos.";
                 color = "color: red";

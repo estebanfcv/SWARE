@@ -15,8 +15,8 @@ import javax.faces.bean.ViewScoped;
 @ViewScoped
 public class MiCuentaBean implements  Serializable{
     
-    private PopUpCambiarAvatar cambiarAvatar = new PopUpCambiarAvatar();
-    private UsuarioTO usuario = new UsuarioTO();
+    private PopUpCambiarAvatar cambiarAvatar;
+    private UsuarioTO usuario;
    
 
     public MiCuentaBean() {
@@ -24,12 +24,15 @@ public class MiCuentaBean implements  Serializable{
     }
     
     private void inicializar(){
+       
         usuario=ManejadorSesiones.getUsuario();
+        cambiarAvatar= new PopUpCambiarAvatar(usuario);
         System.out.println("el usuario es:::: "+GeneralUtil.debugImprimirContenidoObjecto(usuario));
         
     }
     
     public void limpiar(){
+         System.out.println("LIMPIAR");
         inicializar();
     }
 

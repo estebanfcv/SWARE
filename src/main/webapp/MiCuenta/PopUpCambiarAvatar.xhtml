@@ -1,16 +1,55 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width"/>
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:ace="http://www.icefaces.org/icefaces/components">
+    <f:view>
+        <f:facet name="header">
+            <table align="center" width="400px" bgcolor="#2672A1"><tr>
+                    <td width="480px" align="center" bgcolor="#2672A1">
+                        <ice:outputText style="color: #FFFFFF;"
+                                        value="Cambiar Avatar"/>
+                    </td>
+                    <td width="20px" align="center">
+                        <ice:commandButton style="width:20px"
+                                           styleClass="button"
+                                           action="#{cuenta.cambiarAvatar.cerrarPopUp}"
+                                           value="X" partialSubmit="true"/>
+                    </td></tr>
+            </table>        
+        </f:facet>
+        <f:facet name="body" >
+            <table align="center" width="400"  style="border: 1px black solid; background: #FFFFFF ">
+                <tr>
+                    <td>
+                        <ace:fileEntry id="file-entry" 
+                                       maxFileCount="1" 
+                                       fileEntryListener="#{cuenta.cambiarAvatar.sampleListener}" 
+                                       maxFileSize="#{cuenta.cambiarAvatar.TAMANIO_ARCHIVO}" 
+                                       maxTotalSize="#{cuenta.cambiarAvatar.TAMANIO_ARCHIVO}" 
+                                       useSessionSubdir="true" 
+                                       style="width: 280px"/>
+                    </td>
+                </tr>
+                 <tr>
+                    <td align="center"> 
+                        <h:commandLink value="Upload" onclick="var form = document.getElementById('boton_menu');
+                                form.onsubmit();
+                                form.submit();" action="#{cuenta.limpiar}"/>
+                    </td>    
+                </tr>
+                <tr>
+                    <td>
+                        <ice:outputText value="#{cuenta.cambiarAvatar.mensajeError}"/>
+                    </td>
+                </tr>
+
+            </table>
+        </f:facet>
+
+    </f:view>
 </html>

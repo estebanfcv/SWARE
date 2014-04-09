@@ -5,7 +5,7 @@
 package com.pan.sware.inicio;
 
 import com.pan.sware.DAO.LoginDAO;
-import com.pan.sware.Util.GeneralUtil;
+import com.pan.sware.Util.Util;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -59,7 +59,7 @@ public class Index2Bean implements Serializable {
         }
         System.out.println("La extension del archivo es::::: " + extension);
         if (results.getFiles().get(0).isSaved()) {
-            if (GeneralUtil.archivosPermitidos(extension)) {
+            if (Util.archivosPermitidos(extension)) {
                 file = results.getFiles().get(0).getFile();
                 mensajeError= "Archivo Correcto";
                 System.out.println("File ::::: " + file.getPath());

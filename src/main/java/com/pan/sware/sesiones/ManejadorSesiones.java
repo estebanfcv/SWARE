@@ -69,6 +69,10 @@ public class ManejadorSesiones {
         System.out.println("cambio de ubicacion:::" + ubicacion);
         DatosSesion.getInstance().getUsuariosRegistrados().get(session.getId()).setUbicacion(ubicacion);
     }
+    public static synchronized void modificarAvatar(byte[] avatar) {
+        HttpSession session = ((HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true));
+        DatosSesion.getInstance().getUsuariosRegistrados().get(session.getId()).setAvatar(avatar);
+    }
     
     public static synchronized boolean isSesionAbierta(){
         return null != FacesContext.getCurrentInstance();

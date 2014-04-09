@@ -10,7 +10,7 @@ import javax.faces.event.ValueChangeEvent;
  *
  * @author estebanfcv
  */
-public class GeneralUtil {
+public class Util {
     
     public static boolean archivosPermitidos(String extension){
         List<String> extensionesPermitidas = new ArrayList<>();

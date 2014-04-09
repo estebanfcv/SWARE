@@ -44,6 +44,12 @@
                 </tr>
                 <tr>
                     <td>
+                        <ice:commandButton value="Modificar" action="#{cuenta.cambiarAvatar.modificarAvatar}"
+                                           disabled="#{cuenta.cambiarAvatar.bandera}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
                         <ice:outputText value="#{cuenta.cambiarAvatar.mensajeError}"/>
                     </td>
                 </tr>

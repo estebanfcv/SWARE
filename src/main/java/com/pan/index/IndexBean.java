@@ -1,9 +1,9 @@
 package com.pan.index;
 
 import com.pan.sware.TO.UsuarioTO;
+import com.pan.sware.Util.ParametroCache;
 import com.pan.sware.sesiones.ManejadorSesiones;
 import java.io.Serializable;
-import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
@@ -16,8 +16,6 @@ import javax.faces.bean.ViewScoped;
 public class IndexBean implements Serializable {
 
     private UsuarioTO usuario;
-    private Map<String, UsuarioTO> listaUsuarios;
-    private IndexDAO ind;
     private String mensajeError;
     private String color;
     private byte[] bytes = new byte[0];
@@ -32,18 +30,15 @@ public class IndexBean implements Serializable {
     private void inicializar() {
         recuperarPassword = new RecuperarPassword();
         usuario = new UsuarioTO();
-        ind = new IndexDAO();
     }
 
     public String consultarUsuario() {
         if (validarCamposVacios()) {
-            listaUsuarios = ind.obtenerListaUsuarios();
-            if (listaUsuarios.get(usuario.getUsername() + "|" + usuario.getPassword()) != null) {
-                usuario = listaUsuarios.get(usuario.getUsername() + "|" + usuario.getPassword());
+            usuario=ParametroCache.obtenerUsuarioTOPorUserPass(usuario.getUsername(), usuario.getPassword());
+            if (usuario!=null) {
                 ManejadorSesiones.agregarSesion(usuario);
                 System.out.println("PASASTE A LA SIGUIENTE PANTALLA :D");
                 bytes = usuario.getAvatar();
-
                 return "cuenta";
             } else {
                 mensajeError = "El username y/o el password son incorrectos.";

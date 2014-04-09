@@ -1,14 +1,14 @@
 package com.pan.sware.cuenta;
 
 import com.pan.sware.TO.UsuarioTO;
-import com.pan.sware.Util.GeneralUtil;
+import com.pan.sware.Util.ParametroCache;
+import com.pan.sware.Util.Util;
+import com.pan.sware.sesiones.ManejadorSesiones;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.StringTokenizer;
-import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import org.icefaces.ace.component.fileentry.*;
-import org.icefaces.application.PushRenderer;
 
 /**
  *
@@ -23,11 +23,12 @@ public class PopUpCambiarAvatar {
     private String color;
     private final int TAMANIO_ARCHIVO = 921600;
     private UsuarioTO usuario;
-    private static final String PUSH_GROUP = "colorPage";
+    private MiCuentaDAO cuenta;
+    private boolean bandera;
 
-    public PopUpCambiarAvatar(UsuarioTO usuario) {
-        PushRenderer.addCurrentSession(PUSH_GROUP);
+    public PopUpCambiarAvatar(UsuarioTO usuario, MiCuentaDAO cuenta) {
         this.usuario = usuario;
+        this.cuenta = cuenta;
         mensajeError = "";
         color = "color: green";
         inicializar();
@@ -36,6 +37,7 @@ public class PopUpCambiarAvatar {
     private void inicializar() {
         file = null;
         popUp = false;
+        bandera = file == null;
 
     }
 
@@ -43,12 +45,6 @@ public class PopUpCambiarAvatar {
         try {
             file = null;
             FileEntry fe = (FileEntry) e.getComponent();
-//            FacesContext ctx = FacesContext.getCurrentInstance();
-//            FacesMessage msg = new FacesMessage();
-//            msg.setSeverity(null);
-//            msg.setSummary("mysummary");
-//            msg.setDetail("mydetail");
-//            ctx.addMessage(fe.getClientId(), msg);
             FileEntryResults results = fe.getResults();
             extension = ".";
             System.out.println("EL contentType() es:::::::: " + results.getFiles().get(0).getContentType());
@@ -59,7 +55,7 @@ public class PopUpCambiarAvatar {
             }
             System.out.println("La extension del archivo es::::: " + extension);
             if (results.getFiles().get(0).isSaved()) {
-                if (GeneralUtil.archivosPermitidos(extension)) {
+                if (Util.archivosPermitidos(extension)) {
                     file = results.getFiles().get(0).getFile();
                     convertirFileABytes();
                     mensajeError = "Archivo Correcto";
@@ -76,9 +72,24 @@ public class PopUpCambiarAvatar {
                     mensajeError = "El archivo no pudo ser procesado. Contacte al administador del sistema.";
                 }
             }
+            bandera = file == null;
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    public void modificarAvatar() {
+        if (file != null) {
+            if (cuenta.actualizarAvatarUsuario(usuario)) {
+                mensajeError = "Correcto";
+                ParametroCache.inicializarUsuarios();
+                ManejadorSesiones.modificarAvatar(ParametroCache.obtenerUsuarioTOPorId(usuario.getId()).getAvatar());
+                file = null;
+                bandera = file == null;
+            } else {
+                mensajeError = "Incorrecto";
+            }
+        } 
     }
 
     private void convertirFileABytes() {
@@ -86,8 +97,7 @@ public class PopUpCambiarAvatar {
             FileInputStream fileInputStream = new FileInputStream(file);
             fileInputStream.read(usuario.getAvatar());
             fileInputStream.close();
-            PushRenderer.render(PUSH_GROUP);
-            System.out.println(GeneralUtil.debugImprimirContenidoObjecto(usuario));
+            System.out.println(Util.debugImprimirContenidoObjecto(usuario));
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -118,4 +128,9 @@ public class PopUpCambiarAvatar {
     public int getTAMANIO_ARCHIVO() {
         return TAMANIO_ARCHIVO;
     }
+
+    public boolean isBandera() {
+        return bandera;
+    }
+
 }

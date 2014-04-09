@@ -1,7 +1,7 @@
 package com.pan.index;
 
 import com.pan.sware.TO.UsuarioTO;
-import com.pan.sware.Util.GeneralUtil;
+import com.pan.sware.Util.Util;
 import com.pan.sware.correo.CuerpoCorreos;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +50,7 @@ public class RecuperarPassword {
     }
 
     public void valueChangeOpciones(ValueChangeEvent event) {
-        if (GeneralUtil.isUpdatePhase(event)) {
+        if (Util.isUpdatePhase(event)) {
             mensaje = "";
             usernameEmail = "";
         }

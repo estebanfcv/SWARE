@@ -1,5 +1,6 @@
 package com.pan.sware.listener;
 
+import com.pan.sware.Util.ParametroCache;
 import com.pan.sware.db.DBConnectionManager;
 import com.pan.sware.sesiones.HiloSesiones;
 import java.util.logging.Level;
@@ -19,7 +20,6 @@ public class ContextListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         
         String jndiBD = servletContextEvent.getServletContext().getInitParameter("JNDI_BD");
-        System.out.println("LECTURA::::: "+jndiBD);
         String debug = servletContextEvent.getServletContext().getInitParameter("debugBD");
         DBConnectionManager.initInstance( jndiBD, "true".equals(debug));
         inicializarParametroCache();
@@ -41,7 +41,7 @@ public class ContextListener implements ServletContextListener {
 //        ParametroCache.inicializarCiudades();
 //        ParametroCache.inicializarEmpresas();
 //        ParametroCache.inicializarPerfiles();
-//        ParametroCache.inicializarUsuarios();
+        ParametroCache.inicializarUsuarios();
 //        ParametroCache.inicializarSucursales();
 //        ParametroCache.inicializarColonias();
 //        ParametroCache.inicializarCalles();

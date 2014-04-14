@@ -6,20 +6,16 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
-
+        <title>Index</title>
     </h:head>
- 
+
     <h:body>
         <div id="page-container">
-            <div id="header">
-                <div style="position: relative; top:80px;">
+            <div id="content">
+                <div id="topBar">
                     <ui:insert name="menu_top">
                         <ui:include src="./Header.xhtml"/>
                     </ui:insert>
-                </div>
-            </div>
-            <div id="content">
-                <div id="topBar">
                     <h:form id="boton_menu">
                         <ice:panelPopup visible="#{index.recuperarPassword.popUp}"
                                         style="z-index:999;left: 20%; top: 20%;
@@ -56,7 +52,7 @@
                                 <ice:outputText value="Password" style="width: 100px"/>
                             </td>
                             <td width="200">
-                                <ice:inputText value="#{index.usuario.password}" style="width: 200px"/>
+                                <ice:inputSecret value="#{index.usuario.password}" style="width: 200px"/>
                             </td>
                         </tr>
                     </table>
@@ -85,6 +81,13 @@
                         </tr>
                     </table>
                 </ice:form>
+            </div>
+            <div id="footer">
+                <div style="position: relative; top:80px;">
+                    <ui:insert name="menu_back">
+                        <ui:include src="./Header.xhtml"/>
+                    </ui:insert>
+                </div>
             </div>
         </div>
     </h:body>

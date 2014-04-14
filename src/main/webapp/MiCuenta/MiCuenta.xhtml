@@ -7,24 +7,19 @@
       xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
         <title>Mi cuenta</title>
-        <div id="header">
-                <div style="position: relative; top:80px;">
-                    <ui:insert name="menu_top">
-                        <ui:include src="../Header.xhtml"/>
-                    </ui:insert>
-                </div>
-            </div> 
     </h:head>
     <h:body>
         <div id="page-container">
-            
-
             <div id="topBar">
+                <ui:insert name="menu_top">
+                    <ui:include src="../Header.xhtml"/>
+                </ui:insert>
                 <h:form id="boton_menu">
                     <ice:panelPopup visible="#{cuenta.cambiarAvatar.popUp}"
                                     style="z-index:999;left: 20%; top: 20%;
-                                    width: 400px; position:absolute; background: #FFFFFF;"
-                                    modal="false">
+                                    width: 600px; position:absolute; background: #FFFFFF;"
+                                    modal="true">
+                        
                         <ui:include src="./PopUpCambiarAvatar.xhtml" />
                     </ice:panelPopup>
                 </h:form>
@@ -50,10 +45,9 @@
                                 <ice:commandButton value="Cambiar Avatar" action="#{cuenta.cambiarAvatar.abrirPopUp}" 
                                                    style="width: 150px"/>
                             </td>
-
                         </tr>
-                        <tr >
-                            <td height="10" bgcolor="#FFFFFF" colspan="0"/>
+                        <tr>
+                            <td height="1" bgcolor="#FFFFFF" colspan="0"/>
                         </tr>
                     </table>
                     <table width="500" align="center" bgcolor="#CCCCCC">
@@ -62,7 +56,7 @@
                                 <ice:outputText value="Nombre" style="width: 200px"/>
                             </td>
                             <td width="300">
-                                <ice:inputText value="#{cuenta.usuario.nombre}" style="width: 300px"/>
+                                <ice:inputText value="#{cuenta.usuario.nombre}" style="width: 300px" readonly="true"/>
                             </td>
                         </tr>
                         <tr>
@@ -70,7 +64,7 @@
                                 <ice:outputText value="Apellido Paterno" style="width: 200px"/>
                             </td>
                             <td width="300">
-                                <ice:inputText value="#{cuenta.usuario.apellidoPaterno}" style="width: 300px"/>
+                                <ice:inputText value="#{cuenta.usuario.apellidoPaterno}" style="width: 300px" readonly="true"/>
                             </td>
                         </tr>
                         <tr>
@@ -78,7 +72,7 @@
                                 <ice:outputText value="Apellido Materno" style="width: 200px"/>
                             </td>
                             <td width="300">
-                                <ice:inputText value="#{cuenta.usuario.apellidoMaterno}" style="width: 300px"/>
+                                <ice:inputText value="#{cuenta.usuario.apellidoMaterno}" style="width: 300px" readonly="true"/>
                             </td>
                         </tr>
                         <tr>
@@ -86,7 +80,7 @@
                                 <ice:outputText value="Teléfono casa" style="width: 200px"/>
                             </td>
                             <td width="300">
-                                <ice:inputText value="#{cuenta.usuario.telefonoCasa}" style="width: 300px"/>
+                                <ice:inputText value="#{cuenta.usuario.telefonoCasa}" style="width: 300px" readonly="true"/>
                             </td>
                         </tr>
                         <tr>
@@ -94,7 +88,7 @@
                                 <ice:outputText value="Teléfono oficina" style="width: 200px"/>
                             </td>
                             <td width="300">
-                                <ice:inputText value="#{cuenta.usuario.telefonoOficina}" style="width: 300px"/>
+                                <ice:inputText value="#{cuenta.usuario.telefonoOficina}" style="width: 300px" readonly="true"/>
                             </td>
                         </tr>
                         <tr>
@@ -102,7 +96,7 @@
                                 <ice:outputText value="Teléfono celular" style="width: 200px"/>
                             </td>
                             <td width="300">
-                                <ice:inputText value="#{cuenta.usuario.telefonoCelular}" style="width: 300px"/>
+                                <ice:inputText value="#{cuenta.usuario.telefonoCelular}" style="width: 300px" readonly="true"/>
                             </td>
                         </tr>
                         <tr>
@@ -110,23 +104,25 @@
                                 <ice:outputText value="Email" style="width: 200px"/>
                             </td>
                             <td width="300">
-                                <ice:inputText value="#{cuenta.usuario.email}" style="width: 300px"/>
+                                <ice:inputText value="#{cuenta.usuario.email}" style="width: 300px" readonly="true"/>
                             </td>
                         </tr>
-                    </table>
-                    <table width="200" align="center">
                         <tr>
-                            <td align="center" width="100"> 
-                                <ice:commandButton value="Modificar" action="#{cuenta.modificarDatosUsuario}" style="width: 100px"/>
-                            </td>
-                            <td align="center" width="100">
-                                <ice:commandButton value="Limpiar" action="#{cuenta.limpiar}" 
-                                                   style="width: 100px"/>
+                            <td width="500" colspan="0">
+                                <ice:outputText value="Si sus datos son incorrectos contacte a su administrador" 
+                                                style="width: 500px; color: red"/>
                             </td>
                         </tr>
                     </table>
                 </h:form>
             </div>
+            <div id="footer">
+                <div style="position: relative; top:80px;">
+                    <ui:insert name="menu_back">
+                        <ui:include src="../Header.xhtml"/>
+                    </ui:insert>
+                </div>
+            </div> 
         </div>
     </h:body>
 </html>

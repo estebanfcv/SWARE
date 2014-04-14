@@ -1,6 +1,7 @@
 package com.pan.sware.cuenta;
 
 import com.pan.sware.TO.UsuarioTO;
+import com.pan.sware.Util.Constantes;
 import com.pan.sware.Util.ParametroCache;
 import com.pan.sware.Util.Util;
 import com.pan.sware.sesiones.ManejadorSesiones;
@@ -21,7 +22,6 @@ public class PopUpCambiarAvatar {
     private String extension;
     private String mensajeError;
     private String color;
-    private final int TAMANIO_ARCHIVO = 921600;
     private UsuarioTO usuario;
     private MiCuentaDAO cuenta;
     private boolean bandera;
@@ -59,17 +59,21 @@ public class PopUpCambiarAvatar {
                     file = results.getFiles().get(0).getFile();
                     convertirFileABytes();
                     mensajeError = "Archivo Correcto";
+                    color = "color: green";
                     System.out.println("File ::::: " + file.getPath());
                 } else {
                     mensajeError = "Archivo no valido";
+                    color = "color: red";
                 }
             } else {
                 if (results.getFiles().get(0).getStatus().getFacesMessage(
                         FacesContext.getCurrentInstance(), fe, results.getFiles().get(0)).getSummary().
                         contains("exceeds the maximum file size")) {
-                    mensajeError = "El Archivo es muy pesado";
+                    mensajeError = "El Archivo es muy pesado.";
+                    color = "color: red";
                 } else {
                     mensajeError = "El archivo no pudo ser procesado. Contacte al administador del sistema.";
+                    color = "color: red";
                 }
             }
             bandera = file == null;
@@ -81,35 +85,38 @@ public class PopUpCambiarAvatar {
     public void modificarAvatar() {
         if (file != null) {
             if (cuenta.actualizarAvatarUsuario(usuario)) {
-                mensajeError = "Correcto";
+                mensajeError = "La imagen se modificó con éxito.";
+                 color = "color: green";
                 ParametroCache.inicializarUsuarios();
                 ManejadorSesiones.modificarAvatar(ParametroCache.obtenerUsuarioTOPorId(usuario.getId()).getAvatar());
                 file = null;
                 bandera = file == null;
             } else {
-                mensajeError = "Incorrecto";
+                mensajeError = "Su avatar no se pudo modificar.";
+                color = "color: red";
             }
-        } 
+        }
     }
 
     private void convertirFileABytes() {
         try {
-            FileInputStream fileInputStream = new FileInputStream(file);
-            fileInputStream.read(usuario.getAvatar());
-            fileInputStream.close();
-            System.out.println(Util.debugImprimirContenidoObjecto(usuario));
+            try (FileInputStream fileInputStream = new FileInputStream(file)) {
+                fileInputStream.read(usuario.getAvatar());
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-
     }
 
     public void abrirPopUp() {
-        System.out.println("Se abre el popUp");
+        mensajeError = "";
+        color = "color: green";
+        inicializar();
         popUp = true;
     }
 
     public void cerrarPopUp() {
+        System.out.println("Cerrar");
         popUp = false;
     }
 
@@ -126,11 +133,10 @@ public class PopUpCambiarAvatar {
     }
 
     public int getTAMANIO_ARCHIVO() {
-        return TAMANIO_ARCHIVO;
+        return Constantes.TAMANIO_ARCHIVO;
     }
 
     public boolean isBandera() {
         return bandera;
     }
-
 }

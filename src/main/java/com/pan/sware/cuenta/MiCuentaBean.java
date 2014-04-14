@@ -31,17 +31,8 @@ public class MiCuentaBean implements Serializable {
 
     }
 
-    public void limpiar() {
-        inicializar();
-    }
-
     public PopUpCambiarAvatar getCambiarAvatar() {
         return cambiarAvatar;
-    }
-
-    public void modificarDatosUsuario() {
-        System.out.println("Se modifico el usuario");
-
     }
 
     public UsuarioTO getUsuario() {

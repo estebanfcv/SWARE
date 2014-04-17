@@ -1,7 +1,6 @@
 package com.pan.sware.TO;
 
 import com.pan.sware.db.DBConnectionManager;
-import java.io.InputStream;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.util.Calendar;
@@ -14,6 +13,10 @@ import java.util.Date;
 public class UsuarioTO implements Serializable, Cloneable {
 
     private Connection conexion;
+    
+    // TO
+    
+    PerfilTO perfil;
 
     private int id;
     private String username;
@@ -214,6 +217,12 @@ public class UsuarioTO implements Serializable, Cloneable {
     public void setTelefonoCelular(String telefonoCelular) {
         this.telefonoCelular = telefonoCelular;
     }
-    
-    
+
+    public PerfilTO getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(PerfilTO perfil) {
+        this.perfil = perfil;
+    }
 }

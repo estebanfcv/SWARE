@@ -8,28 +8,23 @@
     <h:head>
         <title>Index</title>
     </h:head>
-
     <h:body>
         <div id="page-container">
-            <div id="content">
-                <div id="topBar">
-                    <ui:insert name="menu_top">
-                        <ui:include src="./Header.xhtml"/>
-                    </ui:insert>
-                    <h:form id="boton_menu">
-                        <ice:panelPopup visible="#{index.recuperarPassword.popUp}"
-                                        style="z-index:999;left: 20%; top: 20%;
-                                        width: 380px; position:absolute; background: #FFFFFF;"
-                                        modal="true">
-                            <ui:include src="./RecuperarPassword.xhtml" />
-                        </ice:panelPopup>
-                    </h:form>
-                </div>
-                <h:form>
-                    <br /><br />
-                    <ice:graphicImage value="${index.bytes}" width="200" height="200" />
+            <div id="topBar">
+                <ui:insert name="menu_top">
+                    <ui:include src="./Header.xhtml"/>
+                </ui:insert>
+                <h:form id="boton_menu">
+                    <ice:panelPopup visible="#{index.recuperarPassword.popUp}"
+                                    style="z-index:999;left: 20%; top: 20%;
+                                    width: 380px; position:absolute; background: #FFFFFF;"
+                                    modal="true">
+                        <ui:include src="./RecuperarPassword.xhtml" />
+                    </ice:panelPopup>
                 </h:form>
-                <ice:form>
+            </div>
+            <div id="content">
+                <h:form>
 
                     <table width="300" align="center" bgcolor="#CCCCCC">
                         <tr  style="border-bottom: 1px white solid">
@@ -80,7 +75,7 @@
                             </td>
                         </tr>
                     </table>
-                </ice:form>
+                </h:form>
             </div>
             <div id="footer">
                 <div style="position: relative; top:80px;">

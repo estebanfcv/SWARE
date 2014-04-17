@@ -34,8 +34,12 @@ public class IndexBean implements Serializable {
 
     public String consultarUsuario() {
         if (validarCamposVacios()) {
-            usuario=ParametroCache.obtenerUsuarioTOPorUserPass(usuario.getUsername(), usuario.getPassword());
-            if (usuario!=null) {
+            usuario = ParametroCache.obtenerUsuarioTOPorUserPass(usuario.getUsername(), usuario.getPassword());
+            if (usuario != null) {
+                if (usuario.getId() == 1) {
+                    usuario = new PermisosUsuario().establecerPermisosUsuarioMaestro(usuario);
+                }
+
                 ManejadorSesiones.agregarSesion(usuario);
                 System.out.println("PASASTE A LA SIGUIENTE PANTALLA :D");
                 bytes = usuario.getAvatar();

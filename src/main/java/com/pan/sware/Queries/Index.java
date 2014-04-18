@@ -5,8 +5,8 @@ package com.pan.sware.Queries;
  * @author estebanfcv
  */
 public class Index {
-    
-    public static final String CONSULTAR_USUARIOS="SELECT "
+
+    public static final String CONSULTAR_USUARIOS = "SELECT "
             + "ID,"
             + "USERNAME,"
             + "PASSWORD,"
@@ -22,5 +22,16 @@ public class Index {
             + "TELEFONO_OFICINA,"
             + "TELEFONO_CELULAR"
             + " FROM USUARIOS";
+
+    public static final String CONSULTAR_ESTADOS = "SELECT "
+            + "ID,"
+            + "NOMBRE "
+            + "FROM ESTADOS";
     
+    public static final String CONSULTAR_MUNICIPIOS ="SELECT "
+            + "ID,"
+            + "NOMBRE,"
+            + "ID_ESTADO "
+            + "FROM MUNICIPIOS";
+
 }

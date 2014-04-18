@@ -3,7 +3,6 @@ package com.pan.sware.cuenta;
 import com.pan.sware.Queries.MiCuenta;
 import com.pan.sware.TO.UsuarioTO;
 import com.pan.sware.db.ConnectionUtil;
-import com.pan.sware.db.DBConnectionManager;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,7 +22,6 @@ public class MiCuentaDAO {
     public boolean actualizarAvatarUsuario(UsuarioTO usuario){
         boolean exito=false;
         PreparedStatement ps =null;
-        ResultSet rs =null;
         try {
             ps=conexion.prepareStatement(MiCuenta.ACTUALIZAR_AVATAR);
             ps.setBytes(1, usuario.getAvatar());
@@ -34,7 +32,7 @@ public class MiCuentaDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }finally{
-             ConnectionUtil.cerrarConexiones(rs, ps);
+             ConnectionUtil.cerrarConexiones(null, ps);
         }
         return exito;
     }

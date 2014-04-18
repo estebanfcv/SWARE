@@ -20,12 +20,14 @@ public class MainBean implements Serializable {
 
     private Collection menuSuperior;
     private Collection menu;
+    private Collection regresarMain;
     private UsuarioTO usuario;
 
     public MainBean() {
         usuario = ManejadorSesiones.getUsuario();
         mostrarMenuSuperior();
         mostrarMenu();
+        mostrarMenuRegresarMain();
 
     }
 
@@ -40,6 +42,11 @@ public class MainBean implements Serializable {
         menu = new ArrayList();
         menuCoordinaciones();
 
+    }
+    
+    private void mostrarMenuRegresarMain(){
+        regresarMain = new ArrayList();
+        regresar();
     }
 
     private void menuMiCuenta() {
@@ -69,9 +76,16 @@ public class MainBean implements Serializable {
         if (usuario.getPerfil().isCoordinaciones()) {
             MenuItem coordinaciones = new MenuItem();
             coordinaciones.setValue("Coordinaciones");
-            coordinaciones.setLink("/SWARE-1/Coordinaciones/Coordinaciones.xhtml");
+            coordinaciones.setLink("/SWARE-1/Catalogos/Coordinaciones.xhtml");
             menu.add(coordinaciones);
         }
+    }
+    
+    private void regresar(){
+        MenuItem regresar = new MenuItem();
+        regresar.setValue("Regresar a la página principal");
+        regresar.setLink("/SWARE-1/Main.xhtml");
+        regresarMain.add(regresar);
     }
 
     public Collection getMenu() {
@@ -81,5 +95,11 @@ public class MainBean implements Serializable {
     public Collection getMenuSuperior() {
         return menuSuperior;
     }
+
+    public Collection getRegresarMain() {
+        return regresarMain;
+    }
+    
+    
 
 }

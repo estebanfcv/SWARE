@@ -13,7 +13,7 @@
 }
 
 .iceInpTxtArea{
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
 }
 
 
@@ -389,7 +389,7 @@
 }
 
 .iceMnuBarItem a:hover { /* was iceMenu */
-    background-color: #006633;
+    background-color: #2672A1;
     color: #FFFFFF;
     border-right: 1px solid #FFFFFF;
 }
@@ -537,7 +537,7 @@ td.celda{
 /* ICE Input Text*/
 
 .iceInpTxt{
-    text-transform:uppercase;
+    /*text-transform:uppercase;*/
     /*height: 25px;
     width: 190px;
     font-family: Helvetica;
@@ -757,7 +757,7 @@ ice:selectInputDate  	iceCal  	iceCalOutline  	iceSelInpDate  	iceSelInpDate
 .iceSelInpDateWeek {
     /* the days of the week row */
     font-weight: normal;
-    color: #006633;
+    color: #2672A1;
     text-align: center;
     padding-left: 5px;
     padding-right: 5px;
@@ -800,7 +800,7 @@ ice:selectInputDate  	iceCal  	iceCalOutline  	iceSelInpDate  	iceSelInpDate
     /* the day text */
     text-decoration: none;
     background-color: #FFFFFF;
-    color: #006633;
+    color: #2672A1;
 }
 
 /*
@@ -817,7 +817,7 @@ ice:selectInputDate  	iceCal  	iceCalOutline  	iceSelInpDate  	iceSelInpDate
 }
 
 .iceOutProgFill {
-    background-color: #006633;
+    background-color: #2672A1;
     background-position: top left;
     background-repeat: repeat-x;
     display: block;
@@ -873,7 +873,7 @@ ice:selectInputDate  	iceCal  	iceCalOutline  	iceSelInpDate  	iceSelInpDate
 }
 
 .icePnlPopHdr {
-    background-color: #006633;
+    background-color: #2672A1;
     height: 2.0em;
 }
 
@@ -1034,23 +1034,23 @@ ice:selectInputDate  	iceCal  	iceCalOutline  	iceSelInpDate  	iceSelInpDate
 }
 
 .iceDtdPgrScrCol a:hover{
-    background-color:#006633;
+    background-color:#2672A1;
     color:white;
     cursor:pointer;
 }
 
 .iceDtdPgrCol a:hover {
-    background-color:#006633;
+    background-color:#2672A1;
     color:white;
 
-    border: 1px solid #006633;
+    border: 1px solid #2672A1;
 
 }
 /* override the attributes for the currently selected page */
 .iceDtdPgrScrCol a {
     color: #FFFFFF;
-    border: 1px solid #006633;
-    background-color: #006633;
+    border: 1px solid #2672A1;
+    background-color: #2672A1;
 }
 
 * html .iceDtdPgrScrCol a {
@@ -1498,7 +1498,7 @@ ice:selectInputDate  	iceCal  	iceCalOutline  	iceSelInpDate  	iceSelInpDate
 }
 
 .iceMenu a:hover {
-    background-color: #006633;
+    background-color: #2672A1;
     color: #FFFFFF;
     border-right: 1px solid #FFFFFF;
 }
@@ -1544,7 +1544,7 @@ ice:selectInputDate  	iceCal  	iceCalOutline  	iceSelInpDate  	iceSelInpDate
 }
 
 .iceSubMenuRow a:hover {
-    background-color: #006633;
+    background-color: #2672A1;
     color: #FFFFFF;
 }
 
@@ -1711,7 +1711,7 @@ td.celda{
 .iceCalWeek {
     /* the days of the week row */
     font-weight: normal;
-    color: #006633;
+    color: #2672A1;
     text-align: center;
     padding-left: 5px;
     padding-right: 5px;
@@ -1753,7 +1753,7 @@ td.celda{
 .iceCalDay a:hover {
     /* the day text */
     text-decoration: none;
-    color: #006633;
+    color: #2672A1;
 }
 
 /*
@@ -1770,7 +1770,7 @@ td.celda{
 }
 
 .iceOutputProgressFill {
-    background-color: #006633;
+    background-color: #2672A1;
     background-position: top left;
     background-repeat: repeat-x;
     display: block;
@@ -1827,7 +1827,7 @@ td.celda{
 }
 
 .icePanelPopupHeader {
-    background-color: #006633;
+    background-color: #2672A1;
     height: 2.0em;
 }
 
@@ -1979,23 +1979,23 @@ td.celda{
 }
 
 .iceDtdPgrScrCol a:hover{
-    background-color:#006633;
+    background-color:#2672A1;
     color:white;
     cursor:pointer;
 }
 
 .iceDtdPgrCol a:hover {
-    background-color:#006633;
+    background-color:#2672A1;
     color:white;
 
-    border: 1px solid #006633;
+    border: 1px solid #2672A1;
 
 }
 /* override the attributes for the currently selected page */
 .iceDtdPgrScrCol a {
     color: #FFFFFF;
-    border: 1px solid #006633;
-    background-color: #006633;
+    border: 1px solid #2672A1;
+    background-color: #2672A1;
 }
 
 * html .iceDtdPgrScrCol a {
@@ -2071,7 +2071,7 @@ td.celda{
 }
 .grayRow:hover 
 {
-    background-color: #006633;
+    background-color: #2672A1;
     color: #FFFFFF !important;
 }
 .whiteRow{
@@ -2081,11 +2081,11 @@ td.celda{
 .whiteRow:hover 
 {
     /*background-color: #063;*/
-    background-color: #006633;
+    background-color: #2672A1;
     color: #FFFFFF !important;
 }
 .overRow
 {
-    background-color: #006633;
+    background-color: #2672A1;
     color: #fff;
 }

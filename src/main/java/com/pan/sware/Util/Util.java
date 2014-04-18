@@ -3,6 +3,8 @@ package com.pan.sware.Util;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.faces.event.PhaseId;
 import javax.faces.event.ValueChangeEvent;
 
@@ -80,5 +82,12 @@ public class Util {
             e.printStackTrace();
         }
         return sb.toString();
+    }
+    
+    public static boolean validarEmail(String email){
+        Pattern patternEmail;
+        patternEmail = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+        Matcher matcher = patternEmail.matcher(email);
+        return matcher.matches();
     }
 }

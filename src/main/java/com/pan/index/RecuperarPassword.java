@@ -82,9 +82,7 @@ public class RecuperarPassword {
         }
 
         if (opcionUserEmail == 2) {
-            Pattern patternEmail = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
-            Matcher matcher = patternEmail.matcher(usernameEmail);
-            if (!matcher.matches()) {
+            if (!Util.validarEmail(usernameEmail)) {
                 mensaje = "El e-mail no es valido";
                 color = "color: red";
                 return false;
@@ -98,6 +96,7 @@ public class RecuperarPassword {
     }
 
     public void cerrarPopUp() {
+        mensaje="";
         popUp = false;
     }
 

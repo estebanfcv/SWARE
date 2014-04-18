@@ -22,6 +22,8 @@ public class ContextListener implements ServletContextListener {
         String jndiBD = servletContextEvent.getServletContext().getInitParameter("JNDI_BD");
         String debug = servletContextEvent.getServletContext().getInitParameter("debugBD");
         DBConnectionManager.initInstance( jndiBD, "true".equals(debug));
+        ParametroCache.inicializarEstados();
+        ParametroCache.inicializarMunicipios();
         inicializarParametroCache();
         //
         hiloSesiones.start();

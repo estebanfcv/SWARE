@@ -1,30 +1,45 @@
 package com.pan.sware.TO;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 /**
  *
  * @author estebanfcv
  */
 public class CoordinacionTO {
     
-    private int idCordinacion;
-    private String nombre;
-    private String calle;
-    private String numeroInterior;
-    private String numeroExterior;
-    private String colonia;
+    private List<CoordinacionMunicipioTO> listaMunicipios = new ArrayList<CoordinacionMunicipioTO>();
+    private int id;
+    private String nombre="";
+    private String nombreResponsable="";
+    private String apellidoPaterno="";
+    private String apellidoMaterno="";
+    private String calle="";
+    private String numeroExterior="";
+    private String numeroInterior="";
+    private String colonia="";
     private int codigoPostal;
-    private String telefono;
-    // SE MANEJARA MAS DE UN TELEFONO ???
-    private String email;
-    private String username;
-    private String passwod;
+    private String telefono="";
+    private String email="";
+    private Date fechaAlta;
+    private byte[] avatar;
 
-    public int getIdCordinacion() {
-        return idCordinacion;
+    public List<CoordinacionMunicipioTO> getListaMunicipios() {
+        return listaMunicipios;
     }
 
-    public void setIdCordinacion(int idCordinacion) {
-        this.idCordinacion = idCordinacion;
+    public void setListaMunicipios(List<CoordinacionMunicipioTO> listaMunicipios) {
+        this.listaMunicipios = listaMunicipios;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -35,6 +50,30 @@ public class CoordinacionTO {
         this.nombre = nombre;
     }
 
+    public String getNombreResponsable() {
+        return nombreResponsable;
+    }
+
+    public void setNombreResponsable(String nombreResponsable) {
+        this.nombreResponsable = nombreResponsable;
+    }
+
+    public String getApellidoPaterno() {
+        return apellidoPaterno;
+    }
+
+    public void setApellidoPaterno(String apellidoPaterno) {
+        this.apellidoPaterno = apellidoPaterno;
+    }
+
+    public String getApellidoMaterno() {
+        return apellidoMaterno;
+    }
+
+    public void setApellidoMaterno(String apellidoMaterno) {
+        this.apellidoMaterno = apellidoMaterno;
+    }
+
     public String getCalle() {
         return calle;
     }
@@ -43,20 +82,20 @@ public class CoordinacionTO {
         this.calle = calle;
     }
 
-    public String getNumeroInterior() {
-        return numeroInterior;
-    }
-
-    public void setNumeroInterior(String numeroInterior) {
-        this.numeroInterior = numeroInterior;
-    }
-
     public String getNumeroExterior() {
         return numeroExterior;
     }
 
     public void setNumeroExterior(String numeroExterior) {
         this.numeroExterior = numeroExterior;
+    }
+
+    public String getNumeroInterior() {
+        return numeroInterior;
+    }
+
+    public void setNumeroInterior(String numeroInterior) {
+        this.numeroInterior = numeroInterior;
     }
 
     public String getColonia() {
@@ -91,20 +130,19 @@ public class CoordinacionTO {
         this.email = email;
     }
 
-    public String getUsername() {
-        return username;
+    public Date getFechaAlta() {
+        return fechaAlta;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setFechaAlta(Date fechaAlta) {
+        this.fechaAlta = fechaAlta;
     }
 
-    public String getPasswod() {
-        return passwod;
+    public byte[] getAvatar() {
+        return avatar;
     }
 
-    public void setPasswod(String passwod) {
-        this.passwod = passwod;
+    public void setAvatar(byte[] avatar) {
+        this.avatar = avatar;
     }
-    
 }

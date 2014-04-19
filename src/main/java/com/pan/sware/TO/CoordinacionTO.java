@@ -1,5 +1,6 @@
 package com.pan.sware.TO;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.List;
  *
  * @author estebanfcv
  */
-public class CoordinacionTO {
+public class CoordinacionTO implements Cloneable, Serializable {
     
     private List<CoordinacionMunicipioTO> listaMunicipios = new ArrayList<CoordinacionMunicipioTO>();
     private int id;
@@ -24,7 +25,18 @@ public class CoordinacionTO {
     private String telefono="";
     private String email="";
     private Date fechaAlta;
-    private byte[] avatar;
+    private byte[] avatar = new byte[1];
+    
+    @Override
+    public CoordinacionTO clone() {
+        CoordinacionTO clon = null;
+        try {
+            clon = (CoordinacionTO) super.clone();
+        } catch (Exception e) {
+            System.out.println("No se puede duplicar");
+        }
+        return clon;
+    }
 
     public List<CoordinacionMunicipioTO> getListaMunicipios() {
         return listaMunicipios;

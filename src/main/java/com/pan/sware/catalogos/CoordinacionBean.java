@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.event.ActionEvent;
 
 /**
  *
@@ -17,13 +18,15 @@ import javax.faces.bean.ViewScoped;
 public class CoordinacionBean implements Serializable {
 
     private CoordinacionTO coordinacion;
-    private CoordinacionDAO coor;
+    private CoordinacionDAO DaoCoor;
     private String mensajeError;
     private String color;
     private List<CoordinacionTO> listaCoordinaciones;
     private boolean tablaVisible;
     private String mensajeBoton;
     private CoordinacionPopUpMunicipios popUpMunicipio;
+    private byte filas;
+    private boolean popUpEliminar;
 
     public CoordinacionBean() {
         mensajeError = "";
@@ -32,18 +35,19 @@ public class CoordinacionBean implements Serializable {
     }
 
     private void inicializar() {
-
         coordinacion = new CoordinacionTO();
-        popUpMunicipio= new CoordinacionPopUpMunicipios(coordinacion);
-        coor = new CoordinacionDAO();
+        popUpMunicipio = new CoordinacionPopUpMunicipios(coordinacion);
+        DaoCoor = new CoordinacionDAO();
         tablaVisible = false;
-        mensajeBoton = Constantes.AGREGAR;
+        mensajeBoton = Constantes.BOTON_AGREGAR;
+        filas = 20;
+        popUpEliminar = false;
         consultar();
 
     }
 
     private void consultar() {
-        listaCoordinaciones = coor.obtenerListaCoordinaciones();
+        listaCoordinaciones = DaoCoor.obtenerListaCoordinaciones();
         if (!listaCoordinaciones.isEmpty()) {
             tablaVisible = true;
         } else {
@@ -56,11 +60,30 @@ public class CoordinacionBean implements Serializable {
 
     public void actionAgregarModificar() {
         if (validarCamposObligatorios()) {
-            if (mensajeBoton.equals(Constantes.AGREGAR)) {
+            if (mensajeBoton.equals(Constantes.BOTON_AGREGAR)) {
                 if (validarDatos()) {
-
+                    if (DaoCoor.insertarCoordinacion(coordinacion)) {
+                        mensajeError = "Inserción Exitosa";
+                        color = "color: green";
+                        inicializar();
+                        // parametro cache inicializar coordinaciones 
+                    } else {
+                        mensajeError = "La inserción no se pudo realizar";
+                        color = "color: green";
+                    }
                 }
-
+            } else {
+                if (validarModificaciones()) {
+                    if (DaoCoor.modificarCoordinacion(coordinacion)) {
+                        mensajeError = "La coordinacion se modificó exitosamente";
+                        color = "color: green";
+                        // parametro cache inicializar coordinaciones 
+                        inicializar();
+                    } else {
+                        mensajeError = "La coordinacion no se pudo modificar";
+                        color = "color: red";
+                    }
+                }
             }
         }
     }
@@ -117,8 +140,8 @@ public class CoordinacionBean implements Serializable {
             color = "color: red";
             return false;
         }
-        
-        if(coordinacion.getListaMunicipios().isEmpty()){
+
+        if (coordinacion.getListaMunicipios().isEmpty()) {
             mensajeError = "Favor de asignar al menos un municipio";
             color = "color: red";
             return false;
@@ -126,7 +149,7 @@ public class CoordinacionBean implements Serializable {
         return true;
     }
 
-    public boolean validarDatos() {
+    private boolean validarDatos() {
         for (CoordinacionTO c : listaCoordinaciones) {
             if (c.getNombre().equals(coordinacion.getNombre())) {
                 mensajeError = "El nombre de la coordinacion ya existe";
@@ -142,10 +165,57 @@ public class CoordinacionBean implements Serializable {
         return true;
     }
 
+    private boolean validarModificaciones() {
+        for (CoordinacionTO c : listaCoordinaciones) {
+            if (c.getId() == coordinacion.getId()) {
+                continue;
+            }
+            if (c.getNombre().equals(coordinacion.getNombre())) {
+                mensajeError = "El nombre de la coordinacion ya existe";
+                return false;
+            }
+
+            if (c.getEmail().equals(coordinacion.getEmail())) {
+                mensajeError = "El email ya existe";
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public void actionListenerModificar(ActionEvent event) {
+        coordinacion = ((CoordinacionTO) event.getComponent().getAttributes().get("coordinacion")).clone();
+        popUpMunicipio = new CoordinacionPopUpMunicipios(coordinacion);
+        mensajeError = "";
+        mensajeBoton = Constantes.BOTON_MODIFICAR;
+    }
+
     public void limpiar() {
         mensajeError = "";
         color = "color: green";
         inicializar();
+    }
+
+    public void abrirPopUpEliminar(ActionEvent event) {
+        coordinacion = (CoordinacionTO) event.getComponent().getAttributes().get("coordinacion");
+        popUpEliminar = true;
+    }
+
+    public void confirmarEliminarCoordinacion() {
+        if (DaoCoor.eliminarCoordinacion(coordinacion)) {
+            mensajeError = "La coordinación se eliminó con éxito";
+            color = "color: green";
+            // parametro cache inicializar coordinaciones    
+        } else {
+            mensajeError = "La coordinación no se pudo eliminar";
+            color = "color: red";
+        }
+        popUpEliminar = false;
+    }
+
+    public void cerrarPopUpEliminar() {
+        popUpEliminar = false;
     }
 
     public CoordinacionTO getCoordinacion() {
@@ -171,7 +241,24 @@ public class CoordinacionBean implements Serializable {
     public String getMensajeBoton() {
         return mensajeBoton;
     }
-    
-    
 
+    public boolean isTablaVisible() {
+        return tablaVisible;
+    }
+
+    public byte getFilas() {
+        return filas;
+    }
+
+    public void setFilas(byte filas) {
+        this.filas = filas;
+    }
+
+    public List<CoordinacionTO> getListaCoordinaciones() {
+        return listaCoordinaciones;
+    }
+
+    public boolean isPopUpEliminar() {
+        return popUpEliminar;
+    }
 }

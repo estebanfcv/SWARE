@@ -65,7 +65,6 @@ public class ParametroCache {
                 m.setIdEstado(rs.getByte("ID_ESTADO"));
                 municipios.put(m.getId(), m);
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

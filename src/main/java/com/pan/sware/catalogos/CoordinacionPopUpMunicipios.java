@@ -19,6 +19,7 @@ import javax.faces.model.SelectItem;
  */
 public class CoordinacionPopUpMunicipios {
 //http://www.microrregiones.gob.mx/catloc/
+
     private boolean visible;
     private boolean mostrar;
     private String error;
@@ -38,7 +39,7 @@ public class CoordinacionPopUpMunicipios {
 
     private void inicializar() {
         coorMun = new CoordinacionMunicipioTO();
-//        coorMun.setIdCoordinacion(coordinacion.getId());
+        coorMun.setIdCoordinacion(coordinacion.getId());
         visible = false;
         armarComboEstados();
         coorMun.setIdEstado((Byte) comboEstados.get(0).getValue());
@@ -52,14 +53,11 @@ public class CoordinacionPopUpMunicipios {
     private void consultar() {
         if (!coordinacion.getListaMunicipios().isEmpty()) {
             mostrar = true;
-            System.out.println("1");
         } else {
-            System.out.println("2");
             error = "No hay municipios Asignados";
             colorMensaje = "color: red";
             mostrar = false;
         }
-        System.out.println("mostrar vale " + mostrar);
     }
 
     private void armarComboEstados() {
@@ -68,25 +66,26 @@ public class CoordinacionPopUpMunicipios {
             comboEstados.add(new SelectItem(e.getId(), e.getNombre()));
         }
         if (comboEstados.isEmpty()) {
-            comboEstados.add(new SelectItem(((byte) -1)));
+            comboEstados.add(new SelectItem((byte) Constantes.VALOR_LISTA_VACIA, "No hay Estados"));
         }
     }
 
     private void armarComboMunicipios() {
         comboMunicipios = new ArrayList<>();
         for (MunicipioTO m : ParametroCache.getMunicipios().values()) {
-            System.out.println("idEstado::::: " + m.getIdEstado());
             if (m.getIdEstado() == coorMun.getIdEstado()) {
                 comboMunicipios.add(new SelectItem(m.getId(), m.getNombre()));
             }
         }
         if (comboMunicipios.isEmpty()) {
-            comboMunicipios.add(new SelectItem((short) -1));
+            comboMunicipios.add(new SelectItem((short) Constantes.VALOR_LISTA_VACIA, "No hay municipios"));
         }
     }
 
     public void valueChangeListenerEstados(ValueChangeEvent event) {
-        coorMun = new CoordinacionMunicipioTO();
+        error = "";
+//        coorMun = new CoordinacionMunicipioTO();
+        coorMun = coorMun.clone();
         if (Util.isUpdatePhase(event)) {
             coorMun.setIdEstado((Byte) event.getNewValue());
             armarComboMunicipios();
@@ -95,7 +94,8 @@ public class CoordinacionPopUpMunicipios {
     }
 
     public void valueChangeListenerMunicipio(ValueChangeEvent event) {
-        coorMun=coorMun.clone();
+        error = "";
+        coorMun = coorMun.clone();
         if (Util.isUpdatePhase(event)) {
             coorMun.setIdMunicipio((Short) event.getNewValue());
         }
@@ -128,10 +128,15 @@ public class CoordinacionPopUpMunicipios {
         coorMun = (CoordinacionMunicipioTO) event.getComponent().getAttributes().get("muni");
         error = coordinacion.getListaMunicipios().remove(coorMun) ? "El municipio se eliminó con éxito." : "no se pudo eliminar";
         colorMensaje = error.contains("municipio") ? "color: green" : "color: red";
+        consultar();
     }
-    
-    public String obtenerNombreEstado(byte id){
+
+    public String obtenerNombreEstado(byte id) {
         return ParametroCache.getEstados().get(id).getNombre();
+    }
+
+    public String obtenerNombreMunicipio(short id) {
+        return ParametroCache.getMunicipios().get(id).getNombre();
     }
 
     public void abrirPopUp() {

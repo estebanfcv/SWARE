@@ -27,9 +27,10 @@ public class MiCuentaDAO {
             ps.setBytes(1, usuario.getAvatar());
             ps.setInt(2, usuario.getId());
             ps.executeUpdate();
+            conexion.commit();
             exito=true;
-            
         } catch (Exception e) {
+            ConnectionUtil.rollBack(conexion, "MiCuentaDAO.actualizarAvatarUsuario");
             e.printStackTrace();
         }finally{
              ConnectionUtil.cerrarConexiones(null, ps);

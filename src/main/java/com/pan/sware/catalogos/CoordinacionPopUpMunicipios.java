@@ -34,6 +34,7 @@ public class CoordinacionPopUpMunicipios {
         this.coordinacion = coordinacion;
         error = "";
         colorMensaje = "color: green";
+        inicializar();
 
     }
 
@@ -83,6 +84,7 @@ public class CoordinacionPopUpMunicipios {
     }
 
     public void valueChangeListenerEstados(ValueChangeEvent event) {
+        System.out.println("A");
         error = "";
 //        coorMun = new CoordinacionMunicipioTO();
         coorMun = coorMun.clone();
@@ -94,6 +96,7 @@ public class CoordinacionPopUpMunicipios {
     }
 
     public void valueChangeListenerMunicipio(ValueChangeEvent event) {
+        System.out.println("B");
         error = "";
         coorMun = coorMun.clone();
         if (Util.isUpdatePhase(event)) {
@@ -140,7 +143,7 @@ public class CoordinacionPopUpMunicipios {
     }
 
     public void abrirPopUp() {
-        inicializar();
+
         visible = true;
     }
 

@@ -69,7 +69,7 @@ public class CoordinacionBean implements Serializable {
                         // parametro cache inicializar coordinaciones 
                     } else {
                         mensajeError = "La inserción no se pudo realizar";
-                        color = "color: green";
+                        color = "color: red";
                     }
                 }
             } else {
@@ -101,6 +101,11 @@ public class CoordinacionBean implements Serializable {
         }
         if (coordinacion.getApellidoPaterno().isEmpty()) {
             mensajeError = "Favor de escribir el apellido paterno.";
+            color = "color: red";
+            return false;
+        }
+        if (coordinacion.getUsername().isEmpty()) {
+            mensajeError = "Favor de escribir su username";
             color = "color: red";
             return false;
         }
@@ -151,6 +156,11 @@ public class CoordinacionBean implements Serializable {
 
     private boolean validarDatos() {
         for (CoordinacionTO c : listaCoordinaciones) {
+            if (c.getUsername().equals(coordinacion.getUsername())) {
+                mensajeError = "El username ya existe";
+                color = "color: red";
+                return false;
+            }
             if (c.getNombre().equals(coordinacion.getNombre())) {
                 mensajeError = "El nombre de la coordinacion ya existe";
                 color = "color: red";
@@ -170,17 +180,22 @@ public class CoordinacionBean implements Serializable {
             if (c.getId() == coordinacion.getId()) {
                 continue;
             }
-            if (c.getNombre().equals(coordinacion.getNombre())) {
-                mensajeError = "El nombre de la coordinacion ya existe";
+            if (c.getUsername().equals(coordinacion.getUsername())) {
+                mensajeError = "El username ya existe";
+                color = "color: red";
                 return false;
             }
-
+            if (c.getNombre().equals(coordinacion.getNombre())) {
+                mensajeError = "El nombre de la coordinacion ya existe";
+                color = "color: red";
+                return false;
+            }
             if (c.getEmail().equals(coordinacion.getEmail())) {
                 mensajeError = "El email ya existe";
+                color = "color: red";
                 return false;
             }
         }
-
         return true;
     }
 
@@ -198,16 +213,22 @@ public class CoordinacionBean implements Serializable {
     }
 
     public void abrirPopUpEliminar(ActionEvent event) {
+        System.out.println("1");
         coordinacion = (CoordinacionTO) event.getComponent().getAttributes().get("coordinacion");
+        System.out.println("2");
         popUpEliminar = true;
     }
 
     public void confirmarEliminarCoordinacion() {
+        System.out.println("3");
         if (DaoCoor.eliminarCoordinacion(coordinacion)) {
+            System.out.println("4");
             mensajeError = "La coordinación se eliminó con éxito";
             color = "color: green";
-            // parametro cache inicializar coordinaciones    
+            // parametro cache inicializar coordinaciones
+            inicializar();
         } else {
+            System.out.println("5");
             mensajeError = "La coordinación no se pudo eliminar";
             color = "color: red";
         }

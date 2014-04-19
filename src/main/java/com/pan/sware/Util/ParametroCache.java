@@ -34,6 +34,7 @@ public class ParametroCache {
         ResultSet rs = null;
         try {
             con = DBConnectionManager.getInstance().getConnection(DBConnectionManager.BD);
+            System.out.println("el comit de con es::: " + con.getAutoCommit());
             ps = con.prepareStatement(Index.CONSULTAR_ESTADOS);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -151,6 +152,5 @@ public class ParametroCache {
     public static Map<Short, MunicipioTO> getMunicipios() {
         return municipios;
     }
-    
-    
+
 }

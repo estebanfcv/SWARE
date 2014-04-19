@@ -1,8 +1,13 @@
 package com.pan.sware.Util;
 
+import java.math.BigInteger;
+import java.nio.ByteBuffer;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.faces.event.PhaseId;
@@ -89,5 +94,32 @@ public class Util {
         patternEmail = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
         Matcher matcher = patternEmail.matcher(email);
         return matcher.matches();
+    }
+    
+    public static String generarPasswordAleatorio() {
+        StringBuilder sb = new StringBuilder();
+        Random rnd = new Random();
+        for (int i = 0; i < 8; i++) {
+            if (rnd.nextBoolean()) {
+                // Numeros
+                int caracterAscii = rnd.nextInt(10) + 48;
+                sb.append((char) caracterAscii);
+            } else {
+                // Letras
+                int caracterAscii = rnd.nextInt(26) + 65;
+                sb.append((char) caracterAscii);
+            }
+        }
+        return sb.toString();
+    }
+    
+    public static String encryptMD5(String fuente) throws NoSuchAlgorithmException, CloneNotSupportedException {
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        ByteBuffer input = ByteBuffer.wrap(fuente.getBytes());
+        md.update(input);
+        MessageDigest tc1 = (MessageDigest) md.clone();
+        byte[] convertido = tc1.digest();
+        BigInteger b = new BigInteger(1, convertido);
+        return String.format("%1$032X", b);
     }
 }

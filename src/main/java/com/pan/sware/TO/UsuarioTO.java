@@ -3,8 +3,11 @@ package com.pan.sware.TO;
 import com.pan.sware.db.DBConnectionManager;
 import java.io.Serializable;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -13,9 +16,8 @@ import java.util.Date;
 public class UsuarioTO implements Serializable, Cloneable {
 
     private Connection conexion;
-    
+
     // TO
-    
     PerfilTO perfil;
 
     private int id;
@@ -32,7 +34,6 @@ public class UsuarioTO implements Serializable, Cloneable {
     private String telefonoCasa;
     private String telefonoOficina;
     private String telefonoCelular;
-    
 
     private Date fechaIngreso;
     private Date fechaFinSesion;
@@ -54,6 +55,12 @@ public class UsuarioTO implements Serializable, Cloneable {
     public void crearConexion() {
         conexion = null;
         conexion = DBConnectionManager.getInstance().getConnection(DBConnectionManager.BD);
+        try {
+            conexion.setAutoCommit(false);
+            System.out.println("la conexion es::::::::: " + conexion.getAutoCommit());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void asignarfechasSesion() {
@@ -123,6 +130,11 @@ public class UsuarioTO implements Serializable, Cloneable {
     }
 
     public Connection getConexion() {
+        try {
+            conexion.setAutoCommit(false);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return conexion;
     }
 

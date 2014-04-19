@@ -44,7 +44,7 @@
                             <table width="240" style="border: 1px">
                                 <tr>
                                     <td align="center">
-                                        <ice:outputText value='¿Desea eliminar el banco?'/>
+                                        <ice:outputText value='¿Desea eliminar la coordinacion?'/>
                                     </td>
                                 </tr>
                                 <tr>
@@ -113,26 +113,42 @@
                         </tr>
                     </table>
                     <table width="820" align="center" bgcolor="#CCCCCC">
-                        <td width="10"/>
-                        <td width="100">
-                            <ice:outputText value="Nombre" style="width: 100px"/>
-                        </td>
-                        <td width="180">
-                            <ice:inputText value="#{catCoor.coordinacion.nombreResponsable}" style="width: 180px" maxlength="20"/>
-                        </td>
-                        <td width="100">
-                            <ice:outputText value="Apellido P." style="width: 100px"/>
-                        </td>
-                        <td width="150">
-                            <ice:inputText value="#{catCoor.coordinacion.apellidoPaterno}" style="width: 150px" maxlength="15"/>
-                        </td>
-                        <td width="120">
-                            <ice:outputText value="Apellido M." style="width: 120px"/>
-                        </td>
-                        <td width="150">
-                            <ice:inputText value="#{catCoor.coordinacion.apellidoMaterno}" style="width: 150px" maxlength="15"/>
-                        </td>
-                        <td width="10"/>
+                        <tr>
+                            <td width="10"/>
+                            <td width="100">
+                                <ice:outputText value="Nombre" style="width: 100px"/>
+                            </td>
+                            <td width="180">
+                                <ice:inputText value="#{catCoor.coordinacion.nombreResponsable}" style="width: 180px" maxlength="20"/>
+                            </td>
+                            <td width="100">
+                                <ice:outputText value="Apellido P." style="width: 100px"/>
+                            </td>
+                            <td width="150">
+                                <ice:inputText value="#{catCoor.coordinacion.apellidoPaterno}" style="width: 150px" maxlength="15"/>
+                            </td>
+                            <td width="120">
+                                <ice:outputText value="Apellido M." style="width: 120px"/>
+                            </td>
+                            <td width="150">
+                                <ice:inputText value="#{catCoor.coordinacion.apellidoMaterno}" style="width: 150px" maxlength="15"/>
+                            </td>
+                            <td width="10"/>
+                        </tr>
+                        <tr>
+                            <td width="10"/>
+                            <td width="100">
+                                <ice:outputText value="Username" style="width: 100px"/>
+                            </td>
+                            <td width="180">
+                                <ice:inputText value="#{catCoor.coordinacion.username}" style="width: 180px" maxlength="15"/>
+                            </td>
+                            <td width="100"/>
+                            <td width="150"/>
+                            <td width="120"/>
+                            <td width="150"/>
+                            <td width="10"/>
+                        </tr>
                     </table>
                     <table width="820" align="center" bgcolor="#CCCCCC">
                         <tr  style="border-bottom: 1px white solid">

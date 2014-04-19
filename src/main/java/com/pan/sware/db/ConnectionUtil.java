@@ -10,14 +10,14 @@ import java.sql.ResultSet;
  * @author estebanfcv
  */
 public class ConnectionUtil {
-    
+
     public static void endConnection(UsuarioTO usuario) {
         try {
 
             if (null != usuario.getConexion()) {
                 usuario.getConexion().close();
                 DBConnectionManager.conexionesTotalesAbiertasLectura--;
-                System.out.println("Cerrar conexiones lectura..." 
+                System.out.println("Cerrar conexiones lectura..."
                         + DBConnectionManager.conexionesTotalesAbiertasLectura + " : " + usuario.getUsername());
             }
         } catch (Exception e) {
@@ -44,6 +44,16 @@ public class ConnectionUtil {
             if (con != null) {
                 con.close();
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void rollBack(Connection con, String nombreMetodo) {
+        try {
+            System.out.println("se deshacen los cambios: " + nombreMetodo);
+            con.rollback();
+
         } catch (Exception e) {
             e.printStackTrace();
         }

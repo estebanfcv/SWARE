@@ -14,7 +14,7 @@ import java.sql.ResultSet;
  */
 public class IndexDAO {
 
-    public UsuarioTO obtenerUusuarioPorUsernameOEmail(String busqueda, int tipoBusqueda) {
+    public UsuarioTO obtenerUsuarioPorUsernameOEmail(String busqueda, int tipoBusqueda) {
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;

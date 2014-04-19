@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class CoordinacionTO implements Cloneable, Serializable {
     
-    private List<CoordinacionMunicipioTO> listaMunicipios = new ArrayList<CoordinacionMunicipioTO>();
+    private List<CoordinacionMunicipioTO> listaMunicipios = new ArrayList<>();
     private int id;
     private String nombre="";
     private String nombreResponsable="";
@@ -26,6 +26,8 @@ public class CoordinacionTO implements Cloneable, Serializable {
     private String email="";
     private Date fechaAlta;
     private byte[] avatar = new byte[1];
+    private String password="";
+    private String username="";
     
     @Override
     public CoordinacionTO clone() {
@@ -157,4 +159,22 @@ public class CoordinacionTO implements Cloneable, Serializable {
     public void setAvatar(byte[] avatar) {
         this.avatar = avatar;
     }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    
+    
 }

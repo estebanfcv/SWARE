@@ -20,7 +20,9 @@ public class CatCoordinaciones {
             + "TELEFONO,"
             + "EMAIL,"
             + "FECHA_ALTA,"
-            + "AVATAR "
+            + "AVATAR,"
+            + "USERNAME,"
+            + "PASSWORD "
             + "FROM COORDINACIONES WHERE BORRADO_LOGICO=0";
 
     public static final String INSERTAR_COORDINACION = "INSERT INTO COORDINACIONES ("
@@ -36,10 +38,12 @@ public class CatCoordinaciones {
             + "TELEFONO,"
             + "EMAIL,"
             + "FECHA_ALTA,"
-            + "AVATAR) "
+            + "AVATAR,"
+            + "USERNAME,"
+            + "PASSWORD) "
             + "VALUES("
             + "?,?,?,?,?,?,?,?,?,?,"
-            + "?,?,?)";
+            + "?,?,?,?,?)";
 
     public static final String MODIFICAR_COORDINACION = "UPDATE COORDINACIONES SET "
             + "NOMBRE=?,"
@@ -52,7 +56,6 @@ public class CatCoordinaciones {
             + "COLONIA=?,"
             + "CODIGO_POSTAL=?,"
             + "TELEFONO=?,"
-            + "EMAIL=?,"
             + "AVATAR=? "
             + "WHERE ID=?";
     

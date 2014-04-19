@@ -58,7 +58,7 @@ public class RecuperarPassword {
 
     public void botonAceptar() {
         if (validarCamposVacios()) {
-            usuario = ind.obtenerUusuarioPorUsernameOEmail(usernameEmail, opcionUserEmail);
+            usuario = ind.obtenerUsuarioPorUsernameOEmail(usernameEmail, opcionUserEmail);
             if (usuario != null) {
                 // enviar correo
                 CuerpoCorreos.enviarCorreoAltaUsuario(usuario);

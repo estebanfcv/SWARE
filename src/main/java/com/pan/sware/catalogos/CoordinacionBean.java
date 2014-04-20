@@ -18,6 +18,7 @@ import javax.faces.event.ActionEvent;
 public class CoordinacionBean implements Serializable {
 
     private CoordinacionTO coordinacion;
+    private CoordinacionPopUpAvatar popUpAsignarAvatar;
     private CoordinacionDAO DaoCoor;
     private String mensajeError;
     private String color;
@@ -27,6 +28,7 @@ public class CoordinacionBean implements Serializable {
     private CoordinacionPopUpMunicipios popUpMunicipio;
     private byte filas;
     private boolean popUpEliminar;
+    private final String imagenDefault="/imagenes/sinImagen.jpg";
 
     public CoordinacionBean() {
         mensajeError = "";
@@ -37,10 +39,11 @@ public class CoordinacionBean implements Serializable {
     private void inicializar() {
         coordinacion = new CoordinacionTO();
         popUpMunicipio = new CoordinacionPopUpMunicipios(coordinacion);
+        popUpAsignarAvatar= new CoordinacionPopUpAvatar(coordinacion);
         DaoCoor = new CoordinacionDAO();
         tablaVisible = false;
         mensajeBoton = Constantes.BOTON_AGREGAR;
-        filas = 20;
+        filas = 10;
         popUpEliminar = false;
         consultar();
 
@@ -89,11 +92,18 @@ public class CoordinacionBean implements Serializable {
     }
 
     private boolean validarCamposObligatorios() {
+        if(coordinacion.getAvatar().length==0){
+            mensajeError = "Favor de elegir su imagen";
+            color = "color: red";
+            return false;
+        }
+        
         if (coordinacion.getNombre().isEmpty()) {
             mensajeError = "Favor de escribir el nombre de la coordinacion.";
             color = "color: red";
             return false;
         }
+        
         if (coordinacion.getNombreResponsable().isEmpty()) {
             mensajeError = "Favor de escribir el nombre del responsable.";
             color = "color: red";
@@ -124,7 +134,7 @@ public class CoordinacionBean implements Serializable {
             color = "color: red";
             return false;
         }
-        if (coordinacion.getCodigoPostal() == 0) {
+        if (coordinacion.getCodigoPostal().isEmpty()) {
             mensajeError = "Favor de escribir el código postal.";
             color = "color: red";
             return false;
@@ -201,7 +211,9 @@ public class CoordinacionBean implements Serializable {
 
     public void actionListenerModificar(ActionEvent event) {
         coordinacion = ((CoordinacionTO) event.getComponent().getAttributes().get("coordinacion")).clone();
+        System.out.println("que hay en la posicion 1::::: "+coordinacion.getAvatar()[0]);
         popUpMunicipio = new CoordinacionPopUpMunicipios(coordinacion);
+        popUpAsignarAvatar = new CoordinacionPopUpAvatar(coordinacion);
         mensajeError = "";
         mensajeBoton = Constantes.BOTON_MODIFICAR;
     }
@@ -213,16 +225,12 @@ public class CoordinacionBean implements Serializable {
     }
 
     public void abrirPopUpEliminar(ActionEvent event) {
-        System.out.println("1");
         coordinacion = (CoordinacionTO) event.getComponent().getAttributes().get("coordinacion");
-        System.out.println("2");
         popUpEliminar = true;
     }
 
     public void confirmarEliminarCoordinacion() {
-        System.out.println("3");
         if (DaoCoor.eliminarCoordinacion(coordinacion)) {
-            System.out.println("4");
             mensajeError = "La coordinación se eliminó con éxito";
             color = "color: green";
             // parametro cache inicializar coordinaciones
@@ -281,5 +289,13 @@ public class CoordinacionBean implements Serializable {
 
     public boolean isPopUpEliminar() {
         return popUpEliminar;
+    }
+
+    public CoordinacionPopUpAvatar getPopUpAsignarAvatar() {
+        return popUpAsignarAvatar;
+    }
+
+    public String getImagenDefault() {
+        return imagenDefault;
     }
 }

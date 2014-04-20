@@ -858,7 +858,7 @@ ice:selectInputDate  	iceCal  	iceCalOutline  	iceSelInpDate  	iceSelInpDate
  } */
 
 .icePnlPop {
-    color: #666666;
+    color: #000000;
     border-right: 2px solid #ABABAB;
     border-top: 1px solid #ABABAB;
     border-left: 1px solid #ABABAB;

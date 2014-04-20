@@ -46,7 +46,7 @@ public class CoordinacionDAO {
                 c.setNumeroExterior(rs.getString("NUMERO_EXTERIOR"));
                 c.setNumeroInterior(rs.getString("NUMERO_INTERIOR"));
                 c.setColonia(rs.getString("COLONIA"));
-                c.setCodigoPostal(rs.getInt("CODIGO_POSTAL"));
+                c.setCodigoPostal(rs.getString("CODIGO_POSTAL"));
                 c.setTelefono(rs.getString("TELEFONO"));
                 c.setEmail(rs.getString("EMAIL"));
                 c.setFechaAlta(rs.getTimestamp("FECHA_ALTA"));
@@ -103,7 +103,7 @@ public class CoordinacionDAO {
             ps.setString(6, coordinacion.getNumeroExterior());
             ps.setString(7, coordinacion.getNumeroInterior());
             ps.setString(8, coordinacion.getColonia());
-            ps.setInt(9, coordinacion.getCodigoPostal());
+            ps.setString(9, coordinacion.getCodigoPostal());
             ps.setString(10, coordinacion.getTelefono());
             ps.setString(11, coordinacion.getEmail());
             ps.setTimestamp(12, new Timestamp(new Date().getTime()));
@@ -144,13 +144,15 @@ public class CoordinacionDAO {
             if (operacion.equals(Constantes.BOTON_AGREGAR)) {
                 if (CuerpoCorreos.enviarCorreoAltaCoordinacion(coordinacion)) {
                     conexion.commit();
+                     exito = true;
                 } else {
                     ConnectionUtil.rollBack(conexion, "CoordinacionDAO.enviarCorreoAltaCoordinacion()");
                 }
             } else {
                 conexion.commit();
+                 exito = true;
             }
-            exito = true;
+           
         } catch (Exception e) {
             ConnectionUtil.rollBack(conexion, "CoordinacionDAO.insertarCoordinacionMunicipio()");
             e.printStackTrace();
@@ -161,6 +163,7 @@ public class CoordinacionDAO {
     }
 
     public boolean modificarCoordinacion(CoordinacionTO coordinacion) {
+        System.out.println("AVATAR::::::::::::::::::::: "+coordinacion.getAvatar().length);
         boolean exito = false;
         PreparedStatement ps = null;
         try {
@@ -175,7 +178,7 @@ public class CoordinacionDAO {
                 ps.setString(6, coordinacion.getNumeroExterior());
                 ps.setString(7, coordinacion.getNumeroInterior());
                 ps.setString(8, coordinacion.getColonia());
-                ps.setInt(9, coordinacion.getCodigoPostal());
+                ps.setString(9, coordinacion.getCodigoPostal());
                 ps.setString(10, coordinacion.getTelefono());
                 ps.setBytes(11, coordinacion.getAvatar());
                 ps.setInt(12, coordinacion.getId());

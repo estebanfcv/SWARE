@@ -1,8 +1,6 @@
 package com.pan.sware.cuenta;
 
 import com.pan.sware.TO.UsuarioTO;
-import com.pan.sware.Util.ParametroCache;
-import com.pan.sware.Util.Util;
 import com.pan.sware.sesiones.ManejadorSesiones;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;

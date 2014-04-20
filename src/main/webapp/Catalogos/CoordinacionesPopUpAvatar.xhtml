@@ -18,70 +18,58 @@
                     <td width="20px" align="center">
                         <ice:commandButton style="width:20px"
                                            styleClass="button"
-                                           action="#{cuenta.cambiarAvatar.cerrarPopUp}"
+                                           action="#{catCoor.popUpAsignarAvatar.cerrarPopUp}"
                                            value="X" partialSubmit="true"/>
                     </td>
                 </tr>
             </table>        
         </f:facet>
         <f:facet name="body" >
-            <table align="center" width="600"  style="border: 1px black solid" bgcolor="#CCCCCC">
+            <table align="center" width="540" bgcolor="#CCCCCC">
                 <tr>
                     <td>
-                        <ice:outputText value="Instrucciones"/>
+                        <ice:outputText value="Seleccione una imagen (png, jpg, jpeg o gif)" style="width: 540px"/>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <ice:outputText value="1. Elija una imagen dando clic en el botón examinar"/>
+                        <ice:outputText value="Tamaño máximo #{catCoor.popUpAsignarAvatar.TAMANIO_ARCHIVO/1024 } kb" style="width: 540px"/>
                     </td>
-                </tr>
-                <tr>
-                    <td>
-                        <ice:outputText value="2. Cuando haya elegido la imagen de clic al botón Upload"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <ice:outputText value="3. Por últmimo de clic en el botón modificar"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td height="1" bgcolor="#FFFFFF" colspan="0"/>
                 </tr>
                 <tr>
                     <td>
                         <ace:fileEntry id="file-entry" 
                                        maxFileCount="1" 
-                                       fileEntryListener="#{cuenta.cambiarAvatar.sampleListener}" 
-                                       maxFileSize="#{cuenta.cambiarAvatar.TAMANIO_ARCHIVO}" 
-                                       maxTotalSize="#{cuenta.cambiarAvatar.TAMANIO_ARCHIVO}" 
+                                       fileEntryListener="#{catCoor.popUpAsignarAvatar.sampleListener}" 
+                                       maxFileSize="#{catCoor.popUpAsignarAvatar.TAMANIO_ARCHIVO}" 
+                                       maxTotalSize="#{catCoor.popUpAsignarAvatar.TAMANIO_ARCHIVO}" 
                                        useSessionSubdir="true" 
                                        style="width: 280px"/>
                     </td>
                 </tr>
                 <tr>
                     <td align="center"> 
-                        <h:commandLink value="Upload" onclick="var form = document.getElementById('boton_menu');
+                        <h:commandLink value="Seleccionar" onclick="var form = document.getElementById('boton_menu');
                                 form.onsubmit();
                                 form.submit();"/>
                     </td>    
                 </tr>
                 <tr>
+                    <td align="center">
+                        <ice:outputText value="#{catCoor.popUpAsignarAvatar.mensajeError}" style="#{catCoor.popUpAsignarAvatar.color}"/>
+                    </td>
+                </tr>
+                <tr>
                     <td height="1" bgcolor="#FFFFFF" colspan="0"/>   
                 </tr>
-                <tr>
-                    <td align="center">
-                        <ice:commandButton value="Modificar" action="#{cuenta.cambiarAvatar.modificarAvatar}"
-                                           disabled="#{cuenta.cambiarAvatar.bandera}"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td align="center">
-                        <ice:outputText value="#{cuenta.cambiarAvatar.mensajeError}" style="#{cuenta.cambiarAvatar.color}"/>
-                    </td>
-                </tr>
 
+            </table>
+            <table align="center" width="540" bgcolor="#CCCCCC">
+                <tr>
+                    <td align="center">
+                        <ice:graphicImage value="#{catCoor.coordinacion.avatar}" width="300" height="250"/>
+                    </td>
+                </tr>
             </table>
         </f:facet>
     </f:view>

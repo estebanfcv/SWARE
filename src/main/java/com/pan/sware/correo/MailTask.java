@@ -30,6 +30,7 @@ public class MailTask implements Runnable {
     private String tls = "0";
     private int port;
     private ByteArrayDataSource attachment;
+    private boolean envioExitoso;
 
     /**
      *
@@ -53,6 +54,7 @@ public class MailTask implements Runnable {
         this.user = datosCorreo[0];
         this.password = datosCorreo[1];
         inicializaTask(to, cc, subject, text, datosCorreo, attachment);
+        mandarCorreo();
     }
 
     private void inicializaTask(String to,
@@ -111,8 +113,24 @@ public class MailTask implements Runnable {
         this.attachment = attachment;
     }
 
+    private void mandarCorreo() {
+        envioExitoso = false;
+        try {
+            if (attachment == null) {
+                enviaCorreo();
+            } else {
+                enviaCorreoConAttachment();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
     @Override
     public void run() {
+        envioExitoso = false;
         if (attachment == null) {
             enviaCorreo();
         } else {
@@ -153,6 +171,7 @@ public class MailTask implements Runnable {
             Transport transport = getSession().getTransport("smtp");
             transport.send(message);
         } catch (MessagingException ex) {
+            System.out.println("Exception 2");
             ex.printStackTrace();
         }
     }
@@ -168,8 +187,9 @@ public class MailTask implements Runnable {
             message.saveChanges();
             Transport transport = getSession().getTransport("smtp");
             transport.send(message);
-//            Transport.send(message);
+            envioExitoso = true;
         } catch (Exception e) {
+            envioExitoso = false;
             e.printStackTrace();
         }
     }
@@ -181,7 +201,6 @@ public class MailTask implements Runnable {
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.host", mailServer);
         properties.put("mail.smtp.port", port);
-//        properties.put("mail.debug", "true");
         properties.put("mail.smtp.EnableSSL.enable", "true");
         properties.setProperty("mail.smtp.ssl.trust", "smtpserver");
         properties.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
@@ -208,5 +227,9 @@ public class MailTask implements Runnable {
         protected PasswordAuthentication getPasswordAuthentication() {
             return authentication;
         }
+    }
+
+    public boolean isEnvioExitoso() {
+        return envioExitoso;
     }
 }

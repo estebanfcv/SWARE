@@ -37,7 +37,6 @@ public  class  ConnectionManager {
      public Connection getConexion() {
         try {
             Context ctxContexto = new InitialContext();
-            System.out.println("El contexto es:::::"+ctxContexto.lookup(jndiUrl));
             DataSource dsOrigenDatos = (DataSource) ctxContexto.lookup(jndiUrl);
             ctxContexto.close();
             return dsOrigenDatos.getConnection();

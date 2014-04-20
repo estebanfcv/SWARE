@@ -84,7 +84,6 @@ public class CoordinacionPopUpMunicipios {
     }
 
     public void valueChangeListenerEstados(ValueChangeEvent event) {
-        System.out.println("A");
         error = "";
 //        coorMun = new CoordinacionMunicipioTO();
         coorMun = coorMun.clone();
@@ -96,7 +95,6 @@ public class CoordinacionPopUpMunicipios {
     }
 
     public void valueChangeListenerMunicipio(ValueChangeEvent event) {
-        System.out.println("B");
         error = "";
         coorMun = coorMun.clone();
         if (Util.isUpdatePhase(event)) {
@@ -131,7 +129,8 @@ public class CoordinacionPopUpMunicipios {
         coorMun = (CoordinacionMunicipioTO) event.getComponent().getAttributes().get("muni");
         error = coordinacion.getListaMunicipios().remove(coorMun) ? "El municipio se eliminó con éxito." : "no se pudo eliminar";
         colorMensaje = error.contains("municipio") ? "color: green" : "color: red";
-        consultar();
+        inicializar();
+        visible=true;
     }
 
     public String obtenerNombreEstado(byte id) {

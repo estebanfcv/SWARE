@@ -21,11 +21,11 @@ public class CoordinacionTO implements Cloneable, Serializable {
     private String numeroExterior="";
     private String numeroInterior="";
     private String colonia="";
-    private int codigoPostal;
+    private String codigoPostal="";
     private String telefono="";
     private String email="";
     private Date fechaAlta;
-    private byte[] avatar = new byte[1];
+    private byte[] avatar = new byte[0];
     private String password="";
     private String username="";
     
@@ -57,7 +57,7 @@ public class CoordinacionTO implements Cloneable, Serializable {
     }
 
     public String getNombre() {
-        return nombre;
+        return nombre.trim();
     }
 
     public void setNombre(String nombre) {
@@ -65,7 +65,7 @@ public class CoordinacionTO implements Cloneable, Serializable {
     }
 
     public String getNombreResponsable() {
-        return nombreResponsable;
+        return nombreResponsable.trim();
     }
 
     public void setNombreResponsable(String nombreResponsable) {
@@ -73,7 +73,7 @@ public class CoordinacionTO implements Cloneable, Serializable {
     }
 
     public String getApellidoPaterno() {
-        return apellidoPaterno;
+        return apellidoPaterno.trim();
     }
 
     public void setApellidoPaterno(String apellidoPaterno) {
@@ -81,7 +81,7 @@ public class CoordinacionTO implements Cloneable, Serializable {
     }
 
     public String getApellidoMaterno() {
-        return apellidoMaterno;
+        return apellidoMaterno.trim();
     }
 
     public void setApellidoMaterno(String apellidoMaterno) {
@@ -89,7 +89,7 @@ public class CoordinacionTO implements Cloneable, Serializable {
     }
 
     public String getCalle() {
-        return calle;
+        return calle.trim();
     }
 
     public void setCalle(String calle) {
@@ -97,7 +97,7 @@ public class CoordinacionTO implements Cloneable, Serializable {
     }
 
     public String getNumeroExterior() {
-        return numeroExterior;
+        return numeroExterior.trim();
     }
 
     public void setNumeroExterior(String numeroExterior) {
@@ -105,7 +105,7 @@ public class CoordinacionTO implements Cloneable, Serializable {
     }
 
     public String getNumeroInterior() {
-        return numeroInterior;
+        return numeroInterior.trim();
     }
 
     public void setNumeroInterior(String numeroInterior) {
@@ -113,23 +113,23 @@ public class CoordinacionTO implements Cloneable, Serializable {
     }
 
     public String getColonia() {
-        return colonia;
+        return colonia.trim();
     }
 
     public void setColonia(String colonia) {
         this.colonia = colonia;
     }
 
-    public int getCodigoPostal() {
-        return codigoPostal;
+    public String getCodigoPostal() {
+        return codigoPostal.trim();
     }
 
-    public void setCodigoPostal(int codigoPostal) {
+    public void setCodigoPostal(String codigoPostal) {
         this.codigoPostal = codigoPostal;
     }
 
     public String getTelefono() {
-        return telefono;
+        return telefono.trim();
     }
 
     public void setTelefono(String telefono) {
@@ -137,7 +137,7 @@ public class CoordinacionTO implements Cloneable, Serializable {
     }
 
     public String getEmail() {
-        return email;
+        return email.trim();
     }
 
     public void setEmail(String email) {
@@ -161,7 +161,7 @@ public class CoordinacionTO implements Cloneable, Serializable {
     }
 
     public String getPassword() {
-        return password;
+        return password.trim();
     }
 
     public void setPassword(String password) {
@@ -169,7 +169,7 @@ public class CoordinacionTO implements Cloneable, Serializable {
     }
 
     public String getUsername() {
-        return username;
+        return username.trim();
     }
 
     public void setUsername(String username) {

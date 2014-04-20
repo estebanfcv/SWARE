@@ -46,7 +46,7 @@ public class CuerpoCorreos {
             MailTask task = null;
             String[] datosCorreo = new String[5];
             datosCorreo[0] = "estebanfcv@gmail.com";
-            datosCorreo[1] = "estebanfcv090";
+            datosCorreo[1] = "estebanfcv090.";
             datosCorreo[2] = "smtp.gmail.com";
             datosCorreo[3] = "587";
             datosCorreo[4] = "1";
@@ -58,10 +58,9 @@ public class CuerpoCorreos {
                     texto, //String text
                     datosCorreo, //String[] datosCorreo
                     null);  //attachment
-            new Thread(task).start();
-            envioExitoso = true;
+//            new Thread(task).start();
+            envioExitoso = task.isEnvioExitoso();
         } catch (Exception e) {
-            envioExitoso = false;
             e.printStackTrace();
         }
         return envioExitoso;

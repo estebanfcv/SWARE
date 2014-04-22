@@ -691,7 +691,7 @@ ice:selectInputDate  	iceCal  	iceCalOutline  	iceSelInpDate  	iceSelInpDate
     display: block;
     text-decoration: none;
     background-color: transparent;
-    background-image: url( "./imagenes/cal_button.gif" );
+    background-image: url( "/imagenes/iconos/calendario.png" );
     background-repeat: no-repeat;
     text-align: center;
     border: none;
@@ -702,7 +702,7 @@ ice:selectInputDate  	iceCal  	iceCalOutline  	iceSelInpDate  	iceSelInpDate
 .iceCalClosePopup {
     display: block;
     text-decoration: none;background-color: transparent;
-    background-image: url( "./imagenes/cal_off.gif" );
+    background-image: url( "/imagenes/iconos/calendario.png" );
     background-repeat: no-repeat;
     text-align: center;
     border: none;

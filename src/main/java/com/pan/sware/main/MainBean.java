@@ -41,6 +41,7 @@ public class MainBean implements Serializable {
     private void mostrarMenu() {
         menu = new ArrayList();
         menuCoordinaciones();
+        menuAgenda();
 
     }
     
@@ -78,6 +79,15 @@ public class MainBean implements Serializable {
             coordinaciones.setValue("Coordinaciones");
             coordinaciones.setLink("/SWARE-1/Catalogos/Coordinaciones.xhtml");
             menu.add(coordinaciones);
+        }
+    }
+    
+    private void menuAgenda(){
+        if(usuario.getPerfil().isAgenda()){
+            MenuItem agenda = new MenuItem();
+            agenda.setValue("Agenda");
+            agenda.setLink("/SWARE-1/Agenda/Agenda.xhtml");
+            menu.add(agenda);
         }
     }
     

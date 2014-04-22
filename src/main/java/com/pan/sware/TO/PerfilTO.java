@@ -10,6 +10,7 @@ public class PerfilTO {
     private boolean miCuenta = false;
     private boolean coordinaciones = false;
     private boolean parametrosGlobales = false;
+    private boolean agenda =false;
     private long tiempoSesion = 60000;
 
     public long getTiempoSesion() {
@@ -75,5 +76,13 @@ public class PerfilTO {
 
     public void setParametrosGlobales(int parametrosGlobales) {
         this.parametrosGlobales = parametrosGlobales == 1;
+    }
+
+    public boolean isAgenda() {
+        return agenda;
+    }
+
+    public void setAgenda(int agenda) {
+        this.agenda = agenda  == 1;
     }
 }

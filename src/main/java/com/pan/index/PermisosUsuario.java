@@ -16,7 +16,22 @@ public class PermisosUsuario {
         p.setMiCuenta(1);
         p.setCoordinaciones(1);
         p.setParametrosGlobales(1);
+        p.setAgenda(1);
         u.setPerfil(p);
+        return u;
+    }
+    
+    public UsuarioTO establecerPermisosCoordinacion(UsuarioTO u){
+         PerfilTO p = new PerfilTO();
+         p.setNombre("Coordinacion");
+          p.setTiempoSesion(86400000L);
+          p.setMiCuenta(1);
+        p.setCoordinaciones(1);
+        p.setParametrosGlobales(1);
+        p.setAgenda(1);
+        u.setPerfil(p);
+         
+        
         return u;
     }
 }

@@ -2,6 +2,7 @@ package com.pan.index;
 
 import com.pan.sware.TO.UsuarioTO;
 import com.pan.sware.Util.ParametroCache;
+import com.pan.sware.Util.Util;
 import com.pan.sware.sesiones.ManejadorSesiones;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
@@ -18,7 +19,6 @@ public class IndexBean implements Serializable {
     private UsuarioTO usuario;
     private String mensajeError;
     private String color;
-    private byte[] bytes = new byte[0];
     private RecuperarPassword recuperarPassword;
 
     public IndexBean() {
@@ -33,21 +33,28 @@ public class IndexBean implements Serializable {
     }
 
     public String consultarUsuario() {
-        if (validarCamposVacios()) {
-            usuario = ParametroCache.obtenerUsuarioTOPorUserPass(usuario.getUsername(), usuario.getPassword());
-            if (usuario != null) {
-                if (usuario.getId() == 1) {
-                    usuario = new PermisosUsuario().establecerPermisosUsuarioMaestro(usuario);
+        try {
+            if (validarCamposVacios()) {
+                usuario = ParametroCache.obtenerUsuarioTOPorUserPass(usuario.getUsername(), Util.encryptMD5(usuario.getPassword()));
+                if (usuario != null) {
+                    if (usuario.getId() == 1) {
+                        usuario = new PermisosUsuario().establecerPermisosUsuarioMaestro(usuario);
+                    }
+                    ManejadorSesiones.agregarSesion(usuario);
+                    return "cuenta";
+                } else {
+                    if (ParametroCache.isUsuarioCoordinacion(usuario.getUsername(), Util.encryptMD5(usuario.getPassword())) != null) {
+                        usuario = new PermisosUsuario().establecerPermisosCoordinacion(usuario);
+                        ManejadorSesiones.agregarSesion(usuario);
+                    } else {
+                        mensajeError = "El username y/o el password son incorrectos.";
+                        color = "color: red";
+                    }
                 }
-
-                ManejadorSesiones.agregarSesion(usuario);
-                System.out.println("PASASTE A LA SIGUIENTE PANTALLA :D");
-                bytes = usuario.getAvatar();
-                return "cuenta";
-            } else {
-                mensajeError = "El username y/o el password son incorrectos.";
-                color = "color: red";
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
         }
         return "";
     }
@@ -88,14 +95,6 @@ public class IndexBean implements Serializable {
 
     public String getColor() {
         return color;
-    }
-
-    public byte[] getBytes() {
-        return bytes;
-    }
-
-    public void setBytes(byte[] bytes) {
-        this.bytes = bytes;
     }
 
     public RecuperarPassword getRecuperarPassword() {

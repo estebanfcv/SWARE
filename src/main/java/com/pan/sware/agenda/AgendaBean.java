@@ -2,10 +2,16 @@ package com.pan.sware.agenda;
 
 import com.pan.sware.TO.AgendaTO;
 import com.pan.sware.Util.Constantes;
+import com.pan.sware.Util.Util;
+import com.pan.sware.sesiones.ManejadorSesiones;
 import java.io.Serializable;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.event.ActionEvent;
+import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
 
 /**
@@ -22,28 +28,11 @@ public class AgendaBean implements Serializable {
     private String mensajeBoton;
     private List<SelectItem> listaHoras;
     private List<SelectItem> listaMinutos;
-    private String prueba
-            = "<p>\n"
-            + "	<strong>DSADAS</strong></p>\n"
-            + "<p>\n"
-            + "	&nbsp;</p>\n"
-            + "<p>\n"
-            + "	<em>SDASD</em></p>\n"
-            + "<p>\n"
-            + "	&nbsp;</p>\n"
-            + "<ol>\n"
-            + "	<li>\n"
-            + "		D</li>\n"
-            + "	<li>\n"
-            + "		F</li>\n"
-            + "	<li>\n"
-            + "		G</li>\n"
-            + "</ol>\n"
-            + "<ul>\n"
-            + "	<li>\n"
-            + "		DS</li>\n"
-            + "</ul>\n"
-            + "";
+    private List<AgendaTO> listaAgenda;
+    private AgendaDAO daoAgenda;
+    private boolean tablaVisible;
+    private int filas;
+    private boolean popUpEliminar;
 
     public AgendaBean() {
         mensajeError = "";
@@ -52,17 +41,187 @@ public class AgendaBean implements Serializable {
     }
 
     private void inicializar() {
+        daoAgenda = new AgendaDAO();
         agendaEventos = new AgendaTO();
         listaHoras = Constantes.ArmarListaHoras();
-        agendaEventos.setHora(listaHoras.get(0).getValue().toString());
+        agendaEventos.setHoras(listaHoras.get(0).getValue().toString());
         listaMinutos = Constantes.ArmarListaMinutos();
         agendaEventos.setMinutos(listaMinutos.get(0).getValue().toString());
         mensajeBoton = Constantes.BOTON_AGREGAR;
+        tablaVisible = false;
+        filas = 20;
+        popUpEliminar=false;
+        consultar();
+    }
 
+    private void consultar() {
+        listaAgenda = daoAgenda.obtenerAgenda(agendaEventos);
+        if (!listaAgenda.isEmpty()) {
+            tablaVisible = true;
+        } else {
+            tablaVisible = false;
+            mensajeError = "No hay nada Agendado para hoy.";
+            color = "color: red";
+        }
+    }
+    
+    public void valueChangeFecha(ValueChangeEvent event){
+        if(Util.isUpdatePhase(event)){
+            consultar();
+        }
+        
     }
 
     public void actionAgregarModificar() {
-        System.out.println(" mensaje  " + agendaEventos.getMensaje());
+        if (validarCamposObligatorios()) {
+            if (mensajeBoton.equals(Constantes.BOTON_AGREGAR)) {
+                if (validarDatos()) {
+                    if (daoAgenda.insertarAgenda(agendaEventos)) {
+                        mensajeError = "Inserción Exitosa";
+                        color = "color: green";
+                        inicializar();
+                    } else {
+                        mensajeError = "La inserción no se pudo realizar";
+                        color = "color: red";
+                    }
+                }
+            } else {
+                if (validarModificaciones()) {
+                    if (daoAgenda.modificarAgenda(agendaEventos)) {
+                        mensajeError = "La agenda se modificó exitosamente";
+                        color = "color: green";
+                        // parametro cache inicializar coordinaciones 
+                        inicializar();
+                    } else {
+                        mensajeError = "La agenda no se pudo modificar";
+                        color = "color: red";
+                    }
+                }
+            }
+        }
+    }
+
+    private boolean validarCamposObligatorios() {
+        if (agendaEventos.getTitulo().isEmpty()) {
+            mensajeError = "Favor de escribir el titulo";
+            color = "color: red";
+            return false;
+        }
+        if (agendaEventos.getMensaje().isEmpty()) {
+            mensajeError = "Favor de escribir el mensaje";
+            color = "color: red";
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean validarDatos() {
+        
+        Calendar fechaAux = Calendar.getInstance();
+        Calendar fechaAux2 = Calendar.getInstance();
+        fechaAux.setTime(agendaEventos.getFecha());
+        fechaAux.set(Calendar.HOUR_OF_DAY, 0);
+        fechaAux.set(Calendar.MINUTE, 0);
+        fechaAux.set(Calendar.SECOND, 0);
+        fechaAux.set(Calendar.MILLISECOND, 0);
+        fechaAux2.setTime(agendaEventos.getFecha());
+        fechaAux2.set(Calendar.HOUR_OF_DAY, 0);
+        fechaAux2.set(Calendar.MINUTE, 0);
+        fechaAux2.set(Calendar.SECOND, 0);
+        fechaAux2.set(Calendar.MILLISECOND, 0);
+        System.out.println("f1 "+fechaAux.getTime());
+        System.out.println("f2 "+fechaAux2.getTime());
+        if (fechaAux.getTime().compareTo(fechaAux2.getTime()) < 0) {
+            mensajeError = "No se pueden seleccionar dias anteriores a hoy";
+            color = "color: red";
+            return false;
+        }
+
+        for (AgendaTO a : listaAgenda) {
+            if (a.getTitulo().equals(agendaEventos.getTitulo())) {
+                mensajeError = "El titulo ya existe";
+                color = "color: red";
+                return false;
+            }
+            if (a.getMensaje().equals(agendaEventos.getMensaje())) {
+                mensajeError = "El mensaje ya existe";
+                color = "color: red";
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean validarModificaciones() {
+        if (agendaEventos.getIdUsuario() != ManejadorSesiones.getUsuario().getId()) {
+            mensajeError = "No se pueden modificar mensajes ajenos";
+            color = "color: red";
+            return false;
+        }
+       Calendar fechaAux = Calendar.getInstance();
+        Calendar fechaAux2 = Calendar.getInstance();
+        fechaAux.setTime(agendaEventos.getFecha());
+        fechaAux.set(Calendar.HOUR_OF_DAY, 0);
+        fechaAux.set(Calendar.MINUTE, 0);
+        fechaAux.set(Calendar.SECOND, 0);
+        fechaAux.set(Calendar.MILLISECOND, 0);
+        fechaAux2.setTime(agendaEventos.getFecha());
+        fechaAux2.set(Calendar.HOUR_OF_DAY, 0);
+        fechaAux2.set(Calendar.MINUTE, 0);
+        fechaAux2.set(Calendar.SECOND, 0);
+        fechaAux2.set(Calendar.MILLISECOND, 0);
+        if (fechaAux.getTime().compareTo(fechaAux2.getTime()) < 0) {
+            mensajeError = "No se pueden seleccionar dias anteriores a hoy";
+            color = "color: red";
+            return false;
+        }
+        for (AgendaTO a : listaAgenda) {
+            if (a.getId() == agendaEventos.getId()) {
+                continue;
+            }
+            if (a.getTitulo().equals(agendaEventos.getTitulo())) {
+                mensajeError = "El titulo ya existe";
+                color = "color: red";
+                return false;
+            }
+            if (a.getMensaje().equals(agendaEventos.getMensaje())) {
+                mensajeError = "El mensaje ya existe";
+                color = "color: red";
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public void actionListenerModificar(ActionEvent event) {
+        agendaEventos = ((AgendaTO) event.getComponent().getAttributes().get("ag")).clone();
+        System.out.println("21 "+agendaEventos.getFecha());
+        mensajeError = "";
+        mensajeBoton = Constantes.BOTON_MODIFICAR;
+    }
+
+    public void abrirPopUpEliminar(ActionEvent event) {
+        agendaEventos = (AgendaTO) event.getComponent().getAttributes().get("ag");
+        popUpEliminar=true;
+
+    }
+    
+    public void confirmarEliminarEvento(){
+        if(daoAgenda.eliminarAgenda(agendaEventos)){
+            mensajeError = "EL evento se eliminó con éxito";
+            color = "color: green";
+            inicializar();
+        }else{
+            mensajeError = "El evento no se pudo eliminar";
+            color = "color: red";
+        }
+         popUpEliminar = false;
+    }
+    
+    public void cerrarPopUpEliminar(){
+        popUpEliminar=false;
     }
 
     public void limpiar() {
@@ -95,9 +254,24 @@ public class AgendaBean implements Serializable {
         return mensajeBoton;
     }
 
-    public String getPrueba() {
-        return prueba;
+    public List<AgendaTO> getListaAgenda() {
+        return listaAgenda;
     }
-    
-    
+
+    public boolean isTablaVisible() {
+        return tablaVisible;
+    }
+
+    public int getFilas() {
+        return filas;
+    }
+
+    public void setFilas(int filas) {
+        this.filas = filas;
+    }
+
+    public boolean isPopUpEliminar() {
+        return popUpEliminar;
+    }
+
 }

@@ -25,7 +25,7 @@ public class CoordinacionDAO {
     Connection conexion;
 
     public CoordinacionDAO() {
-        this.conexion = ManejadorSesiones.getUsuario().getConexion();
+        conexion = ManejadorSesiones.getUsuario().getConexion();
     }
 
     public List<CoordinacionTO> obtenerListaCoordinaciones() {

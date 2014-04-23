@@ -236,7 +236,6 @@ public class CoordinacionBean implements Serializable {
             // parametro cache inicializar coordinaciones
             inicializar();
         } else {
-            System.out.println("5");
             mensajeError = "La coordinación no se pudo eliminar";
             color = "color: red";
         }

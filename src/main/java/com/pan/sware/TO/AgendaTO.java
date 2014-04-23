@@ -1,23 +1,34 @@
 package com.pan.sware.TO;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  *
  * @author estebanfcv
  */
-public class AgendaTO {
-    
+public class AgendaTO implements Cloneable, Serializable {
+
     private int id;
-    private String titulo="";
-    private String mensaje="";
-    private Date fecha;
-    private String hora="";
-    private String horas="";
-    private String minutos="";
+    private String titulo = "";
+    private String mensaje = "";
+    private Date fecha = new Date();
+    private String horas = "";
+    private String minutos = "";
     private Date fechaAlta;
     private int idUsuario;
     private int idCoordinacion;
+
+    @Override
+    public AgendaTO clone() {
+        AgendaTO clon = null;
+        try {
+            clon = (AgendaTO) super.clone();
+        } catch (Exception e) {
+            System.out.println("No se puede duplicar");
+        }
+        return clon;
+    }
 
     public int getId() {
         return id;
@@ -49,14 +60,6 @@ public class AgendaTO {
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
-    }
-
-    public String getHora() {
-        return hora;
-    }
-
-    public void setHora(String hora) {
-        this.hora = hora;
     }
 
     public String getHoras() {
@@ -98,7 +101,5 @@ public class AgendaTO {
     public void setIdCoordinacion(int idCoordinacion) {
         this.idCoordinacion = idCoordinacion;
     }
-    
-    
-    
+
 }

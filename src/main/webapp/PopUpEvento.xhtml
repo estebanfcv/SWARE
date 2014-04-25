@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:ace="http://www.icefaces.org/icefaces/components">
+    <f:view>
+        <f:facet name="header">
+            <table align="center" width="680px" bgcolor="#2672A1" >
+                <tr>
+                    <td width="660px" align="center" bgcolor="#2672A1">
+                        <ice:outputText style="color: #FFFFFF;"
+                                        value="#{main.evento.agenda.titulo}"/>
+                    </td>
+                    <td width="20px" align="center">
+                        <ice:commandButton style="width:20px"
+                                           styleClass="button"
+                                           action="#{main.evento.cerrarPopUp}"
+                                           value="X"/>
+                    </td>
+                </tr>
+            </table>        
+        </f:facet>
+        <f:facet name="body" >
+            <table align="center" width="620" bgcolor="#CCCCCC">
+                <tr>
+                    <td>
+                        <table align="center" width="620" bgcolor="#CCCCCC">
+                            <tr>
+                                <td width="10"/>
+                                <td width="100">
+                                    <ice:outputText value="Fecha" style="width: 100px"/>
+                                </td>
+                                <td width="150">
+                                    <ice:inputText value="#{main.evento.agenda.fecha}" readonly="true">
+                                        <f:convertDateTime pattern="dd-MM-yyyy" timeZone="GMT-5:00"/>
+                                    </ice:inputText>
+                                </td>
+                                <td width="100">
+                                    <ice:outputText value="Hora" style="width: 100px"/>
+                                </td>
+                                <td width="150">
+                                    <ice:inputText value="#{main.evento.agenda.fecha}" readonly="true">
+                                        <f:convertDateTime pattern="HH:mm" timeZone="GMT-5:00" />
+                                    </ice:inputText>
+                                </td>
+                                <td width="10"/>
+                            </tr>
+                        </table>
+                        <table width="620" align="center" bgcolor="#CCCCCC">
+                        <tr>
+                            <td width="10"/>
+                            <td width="600">
+                                <ice:inputRichText value="#{main.evento.agenda.mensaje}" 
+                                                   customConfigPath="./config.js"
+                                                   language="en"
+                                                   skin="kama"
+                                                   toolbar="Texto"
+                                                   height="150" 
+                                                   width="600"
+                                                   />
+                            </td>
+                            <td width="10"/>
+                        </tr>
+                    </table>
+                    </td>
+                </tr>
+            </table>
+
+        </f:facet>
+    </f:view>
+</html>

@@ -2,6 +2,7 @@ package com.pan.sware.agenda;
 
 import com.pan.sware.TO.AgendaTO;
 import com.pan.sware.Util.Constantes;
+import com.pan.sware.Util.ParametroCache;
 import com.pan.sware.Util.Util;
 import com.pan.sware.sesiones.ManejadorSesiones;
 import java.io.Serializable;
@@ -33,6 +34,7 @@ public class AgendaBean implements Serializable {
     private boolean tablaVisible;
     private int filas;
     private boolean popUpEliminar;
+    private Date fechaFiltro;
 
     public AgendaBean() {
         mensajeError = "";
@@ -51,11 +53,12 @@ public class AgendaBean implements Serializable {
         tablaVisible = false;
         filas = 20;
         popUpEliminar=false;
+        fechaFiltro = new Date();
         consultar();
     }
 
     private void consultar() {
-        listaAgenda = daoAgenda.obtenerAgenda(agendaEventos);
+        listaAgenda = daoAgenda.obtenerAgenda(fechaFiltro);
         if (!listaAgenda.isEmpty()) {
             tablaVisible = true;
         } else {
@@ -118,21 +121,7 @@ public class AgendaBean implements Serializable {
 
     private boolean validarDatos() {
         
-        Calendar fechaAux = Calendar.getInstance();
-        Calendar fechaAux2 = Calendar.getInstance();
-        fechaAux.setTime(agendaEventos.getFecha());
-        fechaAux.set(Calendar.HOUR_OF_DAY, 0);
-        fechaAux.set(Calendar.MINUTE, 0);
-        fechaAux.set(Calendar.SECOND, 0);
-        fechaAux.set(Calendar.MILLISECOND, 0);
-        fechaAux2.setTime(agendaEventos.getFecha());
-        fechaAux2.set(Calendar.HOUR_OF_DAY, 0);
-        fechaAux2.set(Calendar.MINUTE, 0);
-        fechaAux2.set(Calendar.SECOND, 0);
-        fechaAux2.set(Calendar.MILLISECOND, 0);
-        System.out.println("f1 "+fechaAux.getTime());
-        System.out.println("f2 "+fechaAux2.getTime());
-        if (fechaAux.getTime().compareTo(fechaAux2.getTime()) < 0) {
+        if (Util.obtenerSoloFecha(agendaEventos.getFecha()).compareTo(Util.obtenerSoloFecha(new Date())) < 0) {
             mensajeError = "No se pueden seleccionar dias anteriores a hoy";
             color = "color: red";
             return false;
@@ -159,19 +148,7 @@ public class AgendaBean implements Serializable {
             color = "color: red";
             return false;
         }
-       Calendar fechaAux = Calendar.getInstance();
-        Calendar fechaAux2 = Calendar.getInstance();
-        fechaAux.setTime(agendaEventos.getFecha());
-        fechaAux.set(Calendar.HOUR_OF_DAY, 0);
-        fechaAux.set(Calendar.MINUTE, 0);
-        fechaAux.set(Calendar.SECOND, 0);
-        fechaAux.set(Calendar.MILLISECOND, 0);
-        fechaAux2.setTime(agendaEventos.getFecha());
-        fechaAux2.set(Calendar.HOUR_OF_DAY, 0);
-        fechaAux2.set(Calendar.MINUTE, 0);
-        fechaAux2.set(Calendar.SECOND, 0);
-        fechaAux2.set(Calendar.MILLISECOND, 0);
-        if (fechaAux.getTime().compareTo(fechaAux2.getTime()) < 0) {
+      if (Util.obtenerSoloFecha(agendaEventos.getFecha()).compareTo(Util.obtenerSoloFecha(new Date())) < 0) {
             mensajeError = "No se pueden seleccionar dias anteriores a hoy";
             color = "color: red";
             return false;
@@ -272,6 +249,18 @@ public class AgendaBean implements Serializable {
 
     public boolean isPopUpEliminar() {
         return popUpEliminar;
+    }
+
+    public Date getFechaFiltro() {
+        return fechaFiltro;
+    }
+
+    public void setFechaFiltro(Date fechaFiltro) {
+        this.fechaFiltro = fechaFiltro;
+    }
+    
+    public String obtenerNombreAutor(int id){
+        return ParametroCache.obtenerUsuarioTOPorId(id).getNombre();
     }
 
 }

@@ -1,29 +1,28 @@
-package com.pan.sware.catalogos;
+package com.pan.sware.catalogos.campania;
 
-import com.pan.sware.TO.CoordinacionTO;
+import com.pan.sware.TO.CampaniaTO;
 import com.pan.sware.Util.Constantes;
 import com.pan.sware.Util.Util;
 import java.io.File;
-import java.io.FileInputStream;
 import java.util.StringTokenizer;
-import javax.faces.context.FacesContext;
 import org.icefaces.ace.component.fileentry.*;
+import javax.faces.context.FacesContext;
 
 /**
  *
  * @author estebanfcv
  */
-public class CoordinacionPopUpAvatar {
+public class PopUpAvatar {
 
-    private CoordinacionTO coordinacion;
+    private CampaniaTO campania;
     private boolean popUp;
     private File file;
     private String extension;
     private String mensajeError;
     private String color;
 
-    public CoordinacionPopUpAvatar(CoordinacionTO coordinacion) {
-        this.coordinacion = coordinacion;
+    public PopUpAvatar(CampaniaTO campania) {
+        this.campania = campania;
         mensajeError = "";
         color = "color: green";
         inicializar();
@@ -48,7 +47,7 @@ public class CoordinacionPopUpAvatar {
             if (results.getFiles().get(0).isSaved()) {
                 if (Util.archivosPermitidos(extension)) {
                     file = results.getFiles().get(0).getFile();
-                    coordinacion.setAvatar(Util.convertirFileABytes(file));
+                    campania.setAvatar(Util.convertirFileABytes(file));
                     mensajeError = "La imagen se seleccionó correctamente";
                     color = "color: green";
                     System.out.println("File ::::: " + file.getPath());
@@ -71,8 +70,6 @@ public class CoordinacionPopUpAvatar {
             ex.printStackTrace();
         }
     }
-
-  
 
     public void abrirPopUp() {
         mensajeError = "";
@@ -100,4 +97,5 @@ public class CoordinacionPopUpAvatar {
     public int getTAMANIO_ARCHIVO() {
         return Constantes.TAMANIO_ARCHIVO;
     }
+
 }

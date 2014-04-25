@@ -11,7 +11,6 @@ import java.util.List;
  */
 public class CoordinacionTO implements Cloneable, Serializable {
     
-    private List<CoordinacionMunicipioTO> listaMunicipios = new ArrayList<>();
     private int id;
     private String nombre="";
     private String nombreResponsable="";
@@ -38,14 +37,6 @@ public class CoordinacionTO implements Cloneable, Serializable {
             System.out.println("No se puede duplicar");
         }
         return clon;
-    }
-
-    public List<CoordinacionMunicipioTO> getListaMunicipios() {
-        return listaMunicipios;
-    }
-
-    public void setListaMunicipios(List<CoordinacionMunicipioTO> listaMunicipios) {
-        this.listaMunicipios = listaMunicipios;
     }
 
     public int getId() {

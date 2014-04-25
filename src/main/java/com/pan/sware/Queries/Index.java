@@ -25,11 +25,12 @@ public class Index {
             + "USERNAME "
             + "FROM COORDINACIONES WHERE BORRADO_LOGICO=0";
     
-    public static final String CONSULTAR_MUNICIPIOS_COORDINACION = "SELECT "
+    public static final String CONSULTAR_MUNICIPIOS_CAMPANIA = "SELECT "
             + "ID_COORDINACION,"
             + "ID_ESTADO,"
-            + "ID_MUNICIPIO"
-            + " FROM COORDINACION_MUNICIPIOS WHERE ID_COORDINACION =?";
+            + "ID_MUNICIPIO,"
+            + "ID_CAMPANIA "
+            + " FROM CAMPANIA_MUNICIPIOS WHERE ID_COORDINACION =?";
 
     public static final String CONSULTAR_USUARIOS = "SELECT "
             + "ID,"

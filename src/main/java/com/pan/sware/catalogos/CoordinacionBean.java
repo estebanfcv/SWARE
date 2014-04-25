@@ -16,7 +16,7 @@ import javax.faces.event.ActionEvent;
 @ManagedBean(name = "catCoor")
 @ViewScoped
 public class CoordinacionBean implements Serializable {
-
+//http://www.microrregiones.gob.mx/catloc/
     private CoordinacionTO coordinacion;
     private CoordinacionPopUpAvatar popUpAsignarAvatar;
     private CoordinacionDAO DaoCoor;
@@ -25,7 +25,6 @@ public class CoordinacionBean implements Serializable {
     private List<CoordinacionTO> listaCoordinaciones;
     private boolean tablaVisible;
     private String mensajeBoton;
-    private CoordinacionPopUpMunicipios popUpMunicipio;
     private byte filas;
     private boolean popUpEliminar;
     private final String imagenDefault="/imagenes/sinImagen.jpg";
@@ -38,7 +37,6 @@ public class CoordinacionBean implements Serializable {
 
     private void inicializar() {
         coordinacion = new CoordinacionTO();
-        popUpMunicipio = new CoordinacionPopUpMunicipios(coordinacion);
         popUpAsignarAvatar= new CoordinacionPopUpAvatar(coordinacion);
         DaoCoor = new CoordinacionDAO();
         tablaVisible = false;
@@ -155,12 +153,6 @@ public class CoordinacionBean implements Serializable {
             color = "color: red";
             return false;
         }
-
-        if (coordinacion.getListaMunicipios().isEmpty()) {
-            mensajeError = "Favor de asignar al menos un municipio";
-            color = "color: red";
-            return false;
-        }
         return true;
     }
 
@@ -211,8 +203,6 @@ public class CoordinacionBean implements Serializable {
 
     public void actionListenerModificar(ActionEvent event) {
         coordinacion = ((CoordinacionTO) event.getComponent().getAttributes().get("coordinacion")).clone();
-        System.out.println("que hay en la posicion 1::::: "+coordinacion.getAvatar()[0]);
-        popUpMunicipio = new CoordinacionPopUpMunicipios(coordinacion);
         popUpAsignarAvatar = new CoordinacionPopUpAvatar(coordinacion);
         mensajeError = "";
         mensajeBoton = Constantes.BOTON_MODIFICAR;
@@ -254,9 +244,6 @@ public class CoordinacionBean implements Serializable {
         this.coordinacion = coordinacion;
     }
 
-    public CoordinacionPopUpMunicipios getPopUpMunicipio() {
-        return popUpMunicipio;
-    }
 
     public String getMensajeError() {
         return mensajeError;

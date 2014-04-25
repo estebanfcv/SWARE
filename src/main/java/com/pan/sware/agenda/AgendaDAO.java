@@ -28,12 +28,12 @@ public class AgendaDAO {
 
     }
 
-    public List<AgendaTO> obtenerAgenda(AgendaTO agenda) {
+    public List<AgendaTO> obtenerAgenda(Date fechaFiltro) {
         List<AgendaTO> listaAgenda = new ArrayList<>();
         PreparedStatement ps = null;
         ResultSet rs = null;
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String fechaString = sdf.format(agenda.getFecha());
+        String fechaString = sdf.format(fechaFiltro);
         try {
             ps = conexion.prepareStatement(Agenda.CONSULTAR_AGENDA);
 

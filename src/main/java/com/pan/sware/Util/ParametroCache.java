@@ -1,7 +1,7 @@
 package com.pan.sware.Util;
 
 import com.pan.sware.Queries.Index;
-import com.pan.sware.TO.CoordinacionMunicipioTO;
+import com.pan.sware.TO.CampaniaMunicipioTO;
 import com.pan.sware.TO.CoordinacionTO;
 import com.pan.sware.TO.EstadoTO;
 import com.pan.sware.TO.MunicipioTO;
@@ -106,7 +106,6 @@ public class ParametroCache {
                 c.setAvatar(rs.getBytes("AVATAR"));
                 c.setPassword(rs.getString("PASSWORD"));
                 c.setUsername(rs.getString("USERNAME"));
-                c.setListaMunicipios(consultarListaCoordinacionMunicipios(con, c.getId()));
                 mapB.put(c.getId(), c);
             }
             coordinaciones.putAll(mapB);
@@ -133,19 +132,20 @@ public class ParametroCache {
         }
     }
     
-    private static List<CoordinacionMunicipioTO> consultarListaCoordinacionMunicipios(Connection con,int id) {
+    private static List<CampaniaMunicipioTO> consultarListaCoordinacionMunicipios(Connection con,int id) {
         PreparedStatement ps = null;
         ResultSet rs = null;
-        List<CoordinacionMunicipioTO> listaCoordinacionMunicipio = new ArrayList<>();
+        List<CampaniaMunicipioTO> listaCoordinacionMunicipio = new ArrayList<>();
         try {
-            ps = con.prepareStatement(Index.CONSULTAR_MUNICIPIOS_COORDINACION);
+            ps = con.prepareStatement(Index.CONSULTAR_MUNICIPIOS_CAMPANIA);
             ps.setInt(1, id);
             rs = ps.executeQuery();
             while (rs.next()) {
-                CoordinacionMunicipioTO cm = new CoordinacionMunicipioTO();
+                CampaniaMunicipioTO cm = new CampaniaMunicipioTO();
                 cm.setIdCoordinacion(rs.getInt("ID_COORDINACION"));
                 cm.setIdEstado(rs.getByte("ID_ESTADO"));
                 cm.setIdMunicipio(rs.getShort("ID_MUNICIPIO"));
+                cm.setIdCampania(rs.getInt("ID_CAMPANIA"));
                 listaCoordinacionMunicipio.add(cm);
             }
         } catch (Exception e) {

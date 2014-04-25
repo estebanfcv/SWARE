@@ -53,7 +53,6 @@ public class ConnectionUtil {
         try {
             System.out.println("se deshacen los cambios: " + nombreMetodo);
             con.rollback();
-
         } catch (Exception e) {
             e.printStackTrace();
         }

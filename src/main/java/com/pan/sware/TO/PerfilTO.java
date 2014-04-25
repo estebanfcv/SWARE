@@ -10,7 +10,8 @@ public class PerfilTO {
     private boolean miCuenta = false;
     private boolean coordinaciones = false;
     private boolean parametrosGlobales = false;
-    private boolean agenda =false;
+    private boolean agenda = false;
+    private boolean campania = false;
     private long tiempoSesion = 60000;
 
     public long getTiempoSesion() {
@@ -83,6 +84,15 @@ public class PerfilTO {
     }
 
     public void setAgenda(int agenda) {
-        this.agenda = agenda  == 1;
+        this.agenda = agenda == 1;
     }
+
+    public boolean isCampania() {
+        return campania;
+    }
+
+    public void setCampania(int campania) {
+        this.campania = campania == 1;
+    }
+
 }

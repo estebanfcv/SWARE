@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:ace="http://www.icefaces.org/icefaces/components">
+    <f:view>
+        <f:facet name="header">
+            <table align="center" width="600px" bgcolor="#2672A1" >
+                <tr>
+                    <td width="580px" align="center" bgcolor="#2672A1">
+                        <ice:outputText style="color: #FFFFFF;"
+                                        value="Cambiar Avatar"/>
+                    </td>
+                    <td width="20px" align="center">
+                        <ice:commandButton style="width:20px"
+                                           styleClass="button"
+                                           action="#{catCamp.popUpAvatar.cerrarPopUp}"
+                                           value="X" partialSubmit="true"/>
+                    </td>
+                </tr>
+            </table>        
+        </f:facet>
+        <f:facet name="body" >
+            <table align="center" width="540" bgcolor="#CCCCCC">
+                <tr>
+                    <td>
+                        <ice:outputText value="Seleccione una imagen (png, jpg, jpeg o gif)" style="width: 540px"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <ice:outputText value="Tamaño máximo #{catCamp.popUpAvatar.TAMANIO_ARCHIVO/1024 } kb" style="width: 540px"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <ace:fileEntry id="file-entry" 
+                                       maxFileCount="1" 
+                                       fileEntryListener="#{catCamp.popUpAvatar.sampleListener}" 
+                                       maxFileSize="#{catCamp.popUpAvatar.TAMANIO_ARCHIVO}" 
+                                       maxTotalSize="#{catCamp.popUpAvatar.TAMANIO_ARCHIVO}" 
+                                       useSessionSubdir="true" 
+                                       style="width: 280px"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center"> 
+                        <h:commandLink value="Seleccionar" onclick="var form = document.getElementById('boton_menu');
+                                form.onsubmit();
+                                form.submit();"/>
+                    </td>    
+                </tr>
+                <tr>
+                    <td align="center">
+                        <ice:outputText value="#{catCamp.popUpAvatar.mensajeError}" style="#{catCamp.popUpAvatar.color}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td height="1" bgcolor="#FFFFFF" colspan="0"/>   
+                </tr>
+
+            </table>
+            <table align="center" width="540" bgcolor="#CCCCCC">
+                <tr>
+                    <td align="center">
+                        <ice:graphicImage value="#{catCamp.campania.avatar}" width="300" height="250"/>
+                    </td>
+                </tr>
+            </table>
+        </f:facet>
+    </f:view>
+</html>

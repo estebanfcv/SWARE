@@ -6,17 +6,18 @@ import java.io.Serializable;
  *
  * @author estebanfcv
  */
-public class CoordinacionMunicipioTO implements Cloneable, Serializable {
+public class CampaniaMunicipioTO implements Cloneable, Serializable {
     
     private int idCoordinacion;
     private byte idEstado;
     private short idMunicipio;
+    private int idCampania;
     
     @Override
-    public CoordinacionMunicipioTO clone() {
-        CoordinacionMunicipioTO clon = null;
+    public CampaniaMunicipioTO clone() {
+        CampaniaMunicipioTO clon = null;
         try {
-            clon = (CoordinacionMunicipioTO) super.clone();
+            clon = (CampaniaMunicipioTO) super.clone();
         } catch (Exception e) {
             System.out.println("No se puede duplicar");
         }
@@ -46,4 +47,14 @@ public class CoordinacionMunicipioTO implements Cloneable, Serializable {
     public void setIdMunicipio(short idMunicipio) {
         this.idMunicipio = idMunicipio;
     }
+
+    public int getIdCampania() {
+        return idCampania;
+    }
+
+    public void setIdCampania(int idCampania) {
+        this.idCampania = idCampania;
+    }
+    
+    
 }

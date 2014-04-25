@@ -1,11 +1,16 @@
 package com.pan.sware.Util;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import java.util.regex.Matcher;
@@ -121,5 +126,43 @@ public class Util {
         byte[] convertido = tc1.digest();
         BigInteger b = new BigInteger(1, convertido);
         return String.format("%1$032X", b);
+    }
+    
+    public static Date obtenerSoloFecha(Date fecha){
+        Calendar calendar  = Calendar.getInstance();
+        calendar.setTime(fecha);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        return calendar.getTime();
+    }
+    
+    public static Date cambiarFecha(Date fecha){
+        Calendar calendar  = Calendar.getInstance();
+        calendar.setTime(fecha);
+        calendar.set(Calendar.DATE, 1);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+        return calendar.getTime();
+        
+    }
+    
+    public static byte[] convertirFileABytes(File file) {
+        byte[] bytes= new byte[0];
+        try {
+            try (FileInputStream fi = new FileInputStream(file); ByteArrayOutputStream bos = new ByteArrayOutputStream()) {
+                byte[] buf = new byte[1024];
+                for (int readNum; (readNum = fi.read(buf)) != -1;) {
+                    bos.write(buf, 0, readNum);
+                }
+                bytes=bos.toByteArray();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } 
+        return bytes;
     }
 }

@@ -61,19 +61,6 @@ public class CatCoordinaciones {
     
     public static final String ELIMINAR_COORDINACION = "UPDATE COORDINACIONES SET BORRADO_LOGICO=1 WHERE ID=?";
 
-    public static final String CONSULTAR_MUNICIPIOS_COORDINACION = "SELECT "
-            + "ID_COORDINACION,"
-            + "ID_ESTADO,"
-            + "ID_MUNICIPIO"
-            + " FROM COORDINACION_MUNICIPIOS WHERE ID_COORDINACION =?";
 
-    public static final String INSERTAR_COORDINACION_MUNICIPIOS = "INSERT INTO COORDINACION_MUNICIPIOS ("
-            + "ID_COORDINACION,"
-            + "ID_ESTADO,"
-            + "ID_MUNICIPIO) "
-            + "VALUES("
-            + "?,?,?)";
-
-    public static final String ELIMINAR_MUNICIPIOS_COORDINACION = "DELETE FROM COORDINACION_MUNICIPIOS WHERE ID_COORDINACION =?";
 
 }

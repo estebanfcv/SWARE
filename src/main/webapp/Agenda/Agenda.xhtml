@@ -82,7 +82,6 @@
                         </tr>
                     </table>
                     <br/>
-
                     <table width="720" align="center" bgcolor="#CCCCCC">
                         <tr  style="border-bottom: 1px white solid">
                             <td align="center"  bgcolor="#999999">
@@ -106,7 +105,7 @@
                                     renderMonthAsDropdown="true"
                                     renderYearAsDropdown="true"
                                     onkeydown="javascript:return false;" style="width: 275px">
-                                    <f:convertDateTime   timeZone="GMT-5:00"/>
+                                    <f:convertDateTime   timeZone="Mexico/General"/>
                                 </ice:selectInputDate>
                             </td>
                             <td width="275"/>
@@ -117,10 +116,10 @@
                         <tr>
                             <td width="10"/>
                             <td width="100">
-                                <ice:outputText value="Titulo" style="width: 100px"/>
+                                <ice:outputText value="Título" style="width: 100px"/>
                             </td>
                             <td width="600">
-                                <ice:inputText value="#{agenda.agendaEventos.titulo}" style="width: 600px"/>
+                                <ice:inputText value="#{agenda.agendaEventos.titulo}" style="width: 600px" maxlength="30"/>
                             </td>
                             <td width="10"/>
                         </tr>
@@ -128,10 +127,10 @@
                     <table width="720" align="center" bgcolor="#CCCCCC">
                         <tr>
                             <td width="10"/>
-                            <td width="100">
-                                <ice:outputText value="Mensaje" style="width: 100px"/>
+                            <td width="75">
+                                <ice:outputText value="Mensaje" style="width: 75px"/>
                             </td>
-                            <td width="600">
+                            <td width="620">
                                 <ice:inputRichText value="#{agenda.agendaEventos.mensaje}" 
                                                    saveOnSubmit="true"
                                                    customConfigPath="/toolBar.js"
@@ -139,7 +138,7 @@
                                                    skin="kama"
                                                    toolbar="Texto"
                                                    height="150" 
-                                                   width="600" />
+                                                   width="625" />
                             </td>
                             <td width="10"/>
                         </tr>
@@ -163,7 +162,7 @@
                                     renderMonthAsDropdown="true"
                                     renderYearAsDropdown="true"
                                     onkeydown="javascript:return false;" style="width: 275px">
-                                    <f:convertDateTime   timeZone="GMT-5:00"/>
+                                    <f:convertDateTime   timeZone="Mexico/General"/>
                                 </ice:selectInputDate>
                             </td>
                             <td width="50">
@@ -246,7 +245,7 @@
                                             </f:facet>
                                             <div align="center" style="width: 50px">
                                                 <ice:outputText value="#{ag.fecha}">
-                                                    <f:convertDateTime pattern="HH:mm" timeZone="GMT-5:00" />
+                                                    <f:convertDateTime pattern="HH:mm" timeZone="Mexico/General" />
                                                 </ice:outputText>
                                             </div>
                                         </ice:column>

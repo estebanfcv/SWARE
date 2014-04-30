@@ -9,9 +9,9 @@
       xmlns:ace="http://www.icefaces.org/icefaces/components">
     <f:view>
         <f:facet name="header">
-            <table align="center" width="600px" bgcolor="#2672A1" >
+            <table align="center" width="660px" bgcolor="#2672A1" >
                 <tr>
-                    <td width="580px" align="center" bgcolor="#2672A1">
+                    <td width="640px" align="center" bgcolor="#2672A1">
                         <ice:outputText style="color: #FFFFFF;"
                                         value="Cambiar Avatar"/>
                     </td>
@@ -25,29 +25,16 @@
             </table>        
         </f:facet>
         <f:facet name="body" >
-            <table align="center" width="600"  style="border: 1px black solid" bgcolor="#CCCCCC">
+            <table align="center" width="600"  bgcolor="#CCCCCC">
                 <tr>
                     <td>
-                        <ice:outputText value="Instrucciones"/>
+                        <ice:outputText value="Seleccione una imagen (png, jpg, jpeg o gif)" style="width: 600px"/>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <ice:outputText value="1. Elija una imagen dando clic en el botón examinar"/>
+                        <ice:outputText value="Tamaño máximo #{cuenta.cambiarAvatar.TAMANIO_ARCHIVO/1024 } kb" style="width: 600px"/>
                     </td>
-                </tr>
-                <tr>
-                    <td>
-                        <ice:outputText value="2. Cuando haya elegido la imagen de clic al botón Upload"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <ice:outputText value="3. Por últmimo de clic en el botón modificar"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td height="1" bgcolor="#FFFFFF" colspan="0"/>
                 </tr>
                 <tr>
                     <td>
@@ -62,26 +49,19 @@
                 </tr>
                 <tr>
                     <td align="center"> 
-                        <h:commandLink value="Upload" onclick="var form = document.getElementById('boton_menu');
+                        <h:commandLink id="zelda"  value="Subir" onclick="var form = document.getElementById('boton_menu');
                                 form.onsubmit();
-                                form.submit();"/>
+                                form.submit();
+                                       " />
+                        
+                        <h:messages for="file-entry" style="display:none;"/> 
                     </td>    
-                </tr>
-                <tr>
-                    <td height="1" bgcolor="#FFFFFF" colspan="0"/>   
-                </tr>
-                <tr>
-                    <td align="center">
-                        <ice:commandButton value="Modificar" action="#{cuenta.cambiarAvatar.modificarAvatar}"
-                                           disabled="#{cuenta.cambiarAvatar.bandera}"/>
-                    </td>
                 </tr>
                 <tr>
                     <td align="center">
                         <ice:outputText value="#{cuenta.cambiarAvatar.mensajeError}" style="#{cuenta.cambiarAvatar.color}"/>
                     </td>
                 </tr>
-
             </table>
         </f:facet>
     </f:view>

@@ -27,7 +27,6 @@ public class CoordinacionBean implements Serializable {
     private String mensajeBoton;
     private byte filas;
     private boolean popUpEliminar;
-    private final String imagenDefault="/imagenes/sinImagen.jpg";
 
     public CoordinacionBean() {
         mensajeError = "";
@@ -282,6 +281,6 @@ public class CoordinacionBean implements Serializable {
     }
 
     public String getImagenDefault() {
-        return imagenDefault;
+        return Constantes.IMAGEN_DEFAULT;
     }
 }

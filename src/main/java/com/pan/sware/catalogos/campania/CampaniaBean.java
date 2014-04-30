@@ -2,15 +2,11 @@ package com.pan.sware.catalogos.campania;
 
 import com.pan.sware.TO.CampaniaTO;
 import com.pan.sware.Util.Constantes;
-import com.pan.sware.Util.Util;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
-import javax.faces.event.ValueChangeEvent;
-import org.joda.time.DateTime;
 
 /**
  *
@@ -31,7 +27,7 @@ public class CampaniaBean implements Serializable {
     private CampaniaDAO daoCampania;
     private int filas;
     private boolean popUpEliminar;
-    private final String imagenDefault = "/imagenes/sinImagen.jpg";
+  
 
     public CampaniaBean() {
         mensajeError = "";
@@ -57,22 +53,12 @@ public class CampaniaBean implements Serializable {
             tablaVisible = true;
         } else {
             tablaVisible = false;
-            mensajeError = "No hay coordinaciones.";
+            mensajeError = "No hay campañas.";
             color = "color: red";
         }
     }
 
-//    public void valueChangeFecha(ValueChangeEvent event) {
-//        if (Util.isUpdatePhase(event)) {
-//            campania.setFecha((Date) event.getNewValue());
-//        }
-//
-//    }
-
     public void actionAgregarModificar() {
-        DateTime dt = new DateTime(campania.getFecha());
-        System.out.println("dt es:::: "+dt.toString());
- System.out.println("la fecha boton:::: "+campania.getFecha());
         if (validarCamposObligatorios()) {
             if (mensajeBoton.equals(Constantes.BOTON_AGREGAR)) {
                 if (validarDatos()) {
@@ -179,7 +165,6 @@ public class CampaniaBean implements Serializable {
         mensajeError = "";
         color = "color: green";
         inicializar();
-
     }
 
     public void abrirPopUpEliminar(ActionEvent event) {
@@ -249,7 +234,7 @@ public class CampaniaBean implements Serializable {
     }
 
     public String getImagenDefault() {
-        return imagenDefault;
+        return Constantes.IMAGEN_DEFAULT;
     }
 
 }

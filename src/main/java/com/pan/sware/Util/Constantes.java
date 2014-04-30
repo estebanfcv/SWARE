@@ -10,12 +10,13 @@ import javax.faces.model.SelectItem;
  */
 public class Constantes {
 
-    public static final int TAMANIO_ARCHIVO = 921600;
     public static final String BOTON_AGREGAR = "Agregar";
     public static final String BOTON_MODIFICAR = "Modificar";
+    public static final String IMAGEN_DEFAULT = "/imagenes/sinImagen.jpg";
+    public static final int TAMANIO_ARCHIVO = 921600;
     public static final byte VALOR_LISTA_VACIA = -1;
 
-    public static List<SelectItem> ArmarListaHoras() {
+    public static List<SelectItem> armarListaHoras() {
         List<SelectItem> listaHoras = new ArrayList<>();
         listaHoras.add(new SelectItem("0"));
         listaHoras.add(new SelectItem("1"));
@@ -42,6 +43,14 @@ public class Constantes {
         listaHoras.add(new SelectItem("22"));
         listaHoras.add(new SelectItem("23"));
         return listaHoras;
+    }
+
+    public static List<SelectItem> armarListaTiempoSesion() {
+        List<SelectItem> tiempo = new ArrayList<>();
+        tiempo.add(new SelectItem(7200000L));
+        tiempo.add(new SelectItem(14400000L));
+        tiempo.add(new SelectItem(28800000L));
+        return tiempo;
     }
 
     public static List<SelectItem> ArmarListaMinutos() {

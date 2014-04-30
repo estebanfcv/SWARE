@@ -3,11 +3,8 @@ package com.pan.sware.TO;
 import com.pan.sware.db.DBConnectionManager;
 import java.io.Serializable;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -21,24 +18,24 @@ public class UsuarioTO implements Serializable, Cloneable {
     PerfilTO perfil;
 
     private int id;
-    private String username;
-    private String password;
-    private String email;
-    private byte[] avatar;
-    private String nombre;
-    private String apellidoPaterno;
-    private String apellidoMaterno;
+    private String username="";
+    private String password="";
+    private String email="";
+    private byte[] avatar = new byte[0];
+    private String nombre="";
+    private String apellidoPaterno="";
+    private String apellidoMaterno="";
     private int idCoordinacion;
     private int idPerfil;
     private Date fechaAlta;
-    private String telefonoCasa;
-    private String telefonoOficina;
-    private String telefonoCelular;
+    private String telefonoCasa="";
+    private String telefonoOficina="";
+    private String telefonoCelular="";
 
     private Date fechaIngreso;
     private Date fechaFinSesion;
-    private String idSesion;
-    private String ubicacion;
+    private String idSesion="";
+    private String ubicacion="";
 
     @Override
     public UsuarioTO clone() {
@@ -82,7 +79,7 @@ public class UsuarioTO implements Serializable, Cloneable {
     }
 
     public String getUsername() {
-        return username;
+        return username.trim();
     }
 
     public void setUsername(String username) {
@@ -90,7 +87,7 @@ public class UsuarioTO implements Serializable, Cloneable {
     }
 
     public String getPassword() {
-        return password;
+        return password.trim();
     }
 
     public void setPassword(String password) {
@@ -114,7 +111,7 @@ public class UsuarioTO implements Serializable, Cloneable {
     }
 
     public String getIdSesion() {
-        return idSesion;
+        return idSesion.trim();
     }
 
     public void setIdSesion(String idSesion) {
@@ -122,7 +119,7 @@ public class UsuarioTO implements Serializable, Cloneable {
     }
 
     public String getUbicacion() {
-        return ubicacion;
+        return ubicacion.trim();
     }
 
     public void setUbicacion(String ubicacion) {
@@ -143,7 +140,7 @@ public class UsuarioTO implements Serializable, Cloneable {
     }
 
     public String getEmail() {
-        return email;
+        return email.trim();
     }
 
     public void setEmail(String email) {
@@ -159,7 +156,7 @@ public class UsuarioTO implements Serializable, Cloneable {
     }
 
     public String getNombre() {
-        return nombre;
+        return nombre.trim();
     }
 
     public void setNombre(String nombre) {
@@ -167,7 +164,7 @@ public class UsuarioTO implements Serializable, Cloneable {
     }
 
     public String getApellidoPaterno() {
-        return apellidoPaterno;
+        return apellidoPaterno.trim();
     }
 
     public void setApellidoPaterno(String apellidoPaterno) {
@@ -175,7 +172,7 @@ public class UsuarioTO implements Serializable, Cloneable {
     }
 
     public String getApellidoMaterno() {
-        return apellidoMaterno;
+        return apellidoMaterno.trim();
     }
 
     public void setApellidoMaterno(String apellidoMaterno) {
@@ -207,7 +204,7 @@ public class UsuarioTO implements Serializable, Cloneable {
     }
 
     public String getTelefonoCasa() {
-        return telefonoCasa;
+        return telefonoCasa.trim();
     }
 
     public void setTelefonoCasa(String telefonoCasa) {
@@ -215,7 +212,7 @@ public class UsuarioTO implements Serializable, Cloneable {
     }
 
     public String getTelefonoOficina() {
-        return telefonoOficina;
+        return telefonoOficina.trim();
     }
 
     public void setTelefonoOficina(String telefonoOficina) {
@@ -223,7 +220,7 @@ public class UsuarioTO implements Serializable, Cloneable {
     }
 
     public String getTelefonoCelular() {
-        return telefonoCelular;
+        return telefonoCelular.trim();
     }
 
     public void setTelefonoCelular(String telefonoCelular) {

@@ -6,10 +6,9 @@ import com.pan.sware.Util.ParametroCache;
 import com.pan.sware.Util.Util;
 import com.pan.sware.sesiones.ManejadorSesiones;
 import java.io.File;
-import java.io.FileInputStream;
 import java.util.StringTokenizer;
-import javax.faces.context.FacesContext;
 import org.icefaces.ace.component.fileentry.*;
+import org.icefaces.ace.component.fileentry.FileEntryResults.FileInfo;
 
 /**
  *
@@ -24,7 +23,6 @@ public class PopUpCambiarAvatar {
     private String color;
     private UsuarioTO usuario;
     private MiCuentaDAO cuenta;
-    private boolean bandera;
 
     public PopUpCambiarAvatar(UsuarioTO usuario, MiCuentaDAO cuenta) {
         this.usuario = usuario;
@@ -37,75 +35,51 @@ public class PopUpCambiarAvatar {
     private void inicializar() {
         file = null;
         popUp = false;
-        bandera = file == null;
-
     }
 
     public void sampleListener(FileEntryEvent e) {
         try {
             file = null;
-            FileEntry fe = (FileEntry) e.getComponent();
-            FileEntryResults results = fe.getResults();
+            FileInfo fileInfo = ((FileEntry) e.getComponent()).getResults().getFiles().get(0);
             extension = ".";
-            System.out.println("EL contentType() es:::::::: " + results.getFiles().get(0).getContentType());
-            StringTokenizer token = new StringTokenizer(results.getFiles().get(0).getContentType(), "/");
+            StringTokenizer token = new StringTokenizer(fileInfo.getContentType(), "/");
             while (token.hasMoreTokens()) {
                 token.nextToken();
                 extension += token.nextToken();
             }
-            System.out.println("La extension del archivo es::::: " + extension);
-            if (results.getFiles().get(0).isSaved()) {
+            if (fileInfo.isSaved()) {
                 if (Util.archivosPermitidos(extension)) {
-                    file = results.getFiles().get(0).getFile();
-                    convertirFileABytes();
-                    mensajeError = "Archivo Correcto";
-                    color = "color: green";
-                    System.out.println("File ::::: " + file.getPath());
+                    file = fileInfo.getFile();
+                    usuario.setAvatar(Util.convertirFileABytes(file));
+                    fileInfo = null;
+                    modificarAvatar();
                 } else {
-                    mensajeError = "Archivo no valido";
+                    mensajeError = "Archivo no válido";
                     color = "color: red";
                 }
             } else {
-                if (results.getFiles().get(0).getStatus().getFacesMessage(
-                        FacesContext.getCurrentInstance(), fe, results.getFiles().get(0)).getSummary().
-                        contains("exceeds the maximum file size")) {
-                    mensajeError = "El Archivo es muy pesado.";
-                    color = "color: red";
+                if (fileInfo.getSize() > Constantes.TAMANIO_ARCHIVO) {
+                    mensajeError = "El archivo pesa mas de el límite establecido.";
                 } else {
                     mensajeError = "El archivo no pudo ser procesado. Contacte al administador del sistema.";
-                    color = "color: red";
                 }
-            }
-            bandera = file == null;
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    public void modificarAvatar() {
-        if (file != null) {
-            if (cuenta.actualizarAvatarUsuario(usuario)) {
-                mensajeError = "La imagen se modificó con éxito.";
-                 color = "color: green";
-                ParametroCache.inicializarUsuarios();
-                ManejadorSesiones.modificarAvatar(ParametroCache.obtenerUsuarioTOPorId(usuario.getId()).getAvatar());
-                file = null;
-                bandera = file == null;
-            } else {
-                mensajeError = "Su avatar no se pudo modificar.";
                 color = "color: red";
             }
-        }
-    }
-
-    private void convertirFileABytes() {
-        try {
-            try (FileInputStream fileInputStream = new FileInputStream(file)) {
-                fileInputStream.read(usuario.getAvatar());
-            }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    private void modificarAvatar() {
+        if (cuenta.actualizarAvatarUsuario(usuario)) {
+            mensajeError = "Su avatar se modificó con éxito.";
+            ParametroCache.inicializarUsuarios();
+            ManejadorSesiones.modificarAvatar(ParametroCache.obtenerUsuarioTOPorId(usuario.getId()).getAvatar());
+            file = null;
+        } else {
+            mensajeError = "Su avatar no se pudo modificar.";
+        }
+        color = mensajeError.contains("éxito") ? "color: green" : "color: red";
     }
 
     public void abrirPopUp() {
@@ -134,9 +108,5 @@ public class PopUpCambiarAvatar {
 
     public int getTAMANIO_ARCHIVO() {
         return Constantes.TAMANIO_ARCHIVO;
-    }
-
-    public boolean isBandera() {
-        return bandera;
     }
 }

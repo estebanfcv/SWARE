@@ -45,14 +45,14 @@ public class AgendaBean implements Serializable {
     private void inicializar() {
         daoAgenda = new AgendaDAO();
         agendaEventos = new AgendaTO();
-        listaHoras = Constantes.ArmarListaHoras();
+        listaHoras = Constantes.armarListaHoras();
         agendaEventos.setHoras(listaHoras.get(0).getValue().toString());
         listaMinutos = Constantes.ArmarListaMinutos();
         agendaEventos.setMinutos(listaMinutos.get(0).getValue().toString());
         mensajeBoton = Constantes.BOTON_AGREGAR;
         tablaVisible = false;
         filas = 20;
-        popUpEliminar=false;
+        popUpEliminar = false;
         fechaFiltro = new Date();
         consultar();
     }
@@ -67,12 +67,13 @@ public class AgendaBean implements Serializable {
             color = "color: red";
         }
     }
-    
-    public void valueChangeFecha(ValueChangeEvent event){
-        if(Util.isUpdatePhase(event)){
+
+    public void valueChangeFecha(ValueChangeEvent event) {
+        if (Util.isUpdatePhase(event)) {
+            mensajeError = "";
+            color = "color: green";
             consultar();
         }
-        
     }
 
     public void actionAgregarModificar() {
@@ -120,7 +121,7 @@ public class AgendaBean implements Serializable {
     }
 
     private boolean validarDatos() {
-        
+
         if (Util.obtenerSoloFecha(agendaEventos.getFecha()).compareTo(Util.obtenerSoloFecha(new Date())) < 0) {
             mensajeError = "No se pueden seleccionar dias anteriores a hoy";
             color = "color: red";
@@ -148,7 +149,7 @@ public class AgendaBean implements Serializable {
             color = "color: red";
             return false;
         }
-      if (Util.obtenerSoloFecha(agendaEventos.getFecha()).compareTo(Util.obtenerSoloFecha(new Date())) < 0) {
+        if (Util.obtenerSoloFecha(agendaEventos.getFecha()).compareTo(Util.obtenerSoloFecha(new Date())) < 0) {
             mensajeError = "No se pueden seleccionar dias anteriores a hoy";
             color = "color: red";
             return false;
@@ -174,31 +175,31 @@ public class AgendaBean implements Serializable {
 
     public void actionListenerModificar(ActionEvent event) {
         agendaEventos = ((AgendaTO) event.getComponent().getAttributes().get("ag")).clone();
-        System.out.println("21 "+agendaEventos.getFecha());
+        System.out.println("21 " + agendaEventos.getFecha());
         mensajeError = "";
         mensajeBoton = Constantes.BOTON_MODIFICAR;
     }
 
     public void abrirPopUpEliminar(ActionEvent event) {
         agendaEventos = (AgendaTO) event.getComponent().getAttributes().get("ag");
-        popUpEliminar=true;
+        popUpEliminar = true;
 
     }
-    
-    public void confirmarEliminarEvento(){
-        if(daoAgenda.eliminarAgenda(agendaEventos)){
+
+    public void confirmarEliminarEvento() {
+        if (daoAgenda.eliminarAgenda(agendaEventos)) {
             mensajeError = "EL evento se eliminó con éxito";
             color = "color: green";
             inicializar();
-        }else{
+        } else {
             mensajeError = "El evento no se pudo eliminar";
             color = "color: red";
         }
-         popUpEliminar = false;
+        popUpEliminar = false;
     }
-    
-    public void cerrarPopUpEliminar(){
-        popUpEliminar=false;
+
+    public void cerrarPopUpEliminar() {
+        popUpEliminar = false;
     }
 
     public void limpiar() {
@@ -258,8 +259,8 @@ public class AgendaBean implements Serializable {
     public void setFechaFiltro(Date fechaFiltro) {
         this.fechaFiltro = fechaFiltro;
     }
-    
-    public String obtenerNombreAutor(int id){
+
+    public String obtenerNombreAutor(int id) {
         return ParametroCache.obtenerUsuarioTOPorId(id).getNombre();
     }
 

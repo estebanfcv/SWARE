@@ -103,11 +103,11 @@
             <version>3.1-b01</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
+<!--        <dependency>
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
             <version>2.1</version>
-        </dependency>
+        </dependency>-->
         <!-- Traído desde el repositorio de CarlosHdezSica en GitHub-->
         <dependency>
             <groupId>net.sf.jsfcomp.ext</groupId>

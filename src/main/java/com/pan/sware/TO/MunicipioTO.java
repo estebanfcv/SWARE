@@ -7,7 +7,7 @@ package com.pan.sware.TO;
 public class MunicipioTO {
     
     private short id;
-    private String nombre;
+    private String nombre="";
     private byte idEstado;
 
     public short getId() {
@@ -19,7 +19,7 @@ public class MunicipioTO {
     }
 
     public String getNombre() {
-        return nombre;
+        return nombre.trim();
     }
 
     public void setNombre(String nombre) {

@@ -30,9 +30,9 @@ public class MainBean implements Serializable {
     private Collection menu;
     private Collection regresarMain;
     private UsuarioTO usuario;
+    private List<Boolean> listaPermisosCatalogos;
     //
     private PopUpEvento evento;
-    private AgendaTO agendaEventos;
     private String mensajeError;
     private String color;
     private List<AgendaTO> listaAgenda;
@@ -42,8 +42,8 @@ public class MainBean implements Serializable {
     private Date fechaFiltro;
 
     public MainBean() {
-        System.out.println(TimeZone.getDefault().getDisplayName());
         usuario = ManejadorSesiones.getUsuario();
+        armarListasPermisos();
         ArmarMenus();
         mensajeError = "";
         color = "color: green";
@@ -53,7 +53,6 @@ public class MainBean implements Serializable {
     private void inicializar() {
         evento = new PopUpEvento();
         daoAgenda = new AgendaDAO();
-        agendaEventos = new AgendaTO();
         filas = 20;
         fechaFiltro = new Date();
         tablaVisible = false;
@@ -118,7 +117,14 @@ public class MainBean implements Serializable {
     public PopUpEvento getEvento() {
         return evento;
     }
-    //
+    //##########################################################################
+
+    private void armarListasPermisos() {
+        listaPermisosCatalogos = new ArrayList<>();
+        listaPermisosCatalogos.add(usuario.getPerfil().isCoordinaciones());
+        listaPermisosCatalogos.add(usuario.getPerfil().isPerfiles());
+        listaPermisosCatalogos.add(usuario.getPerfil().isCampania());
+    }
 
     private void ArmarMenus() {
         mostrarMenuSuperior();
@@ -171,7 +177,7 @@ public class MainBean implements Serializable {
     }
 
     private void menuCatalogos() {
-        if (usuario.getPerfil().isCoordinaciones() || usuario.getPerfil().isCampania()) {
+        if (listaPermisosCatalogos.contains(true)) {
             MenuItem catalogos = new MenuItem();
             catalogos.setValue("Catálogos");
             if (usuario.getPerfil().isCoordinaciones()) {
@@ -185,8 +191,17 @@ public class MainBean implements Serializable {
                 MenuItem campania = new MenuItem();
                 campania.setValue("Campañas");
                 campania.setLink("/SWARE-1/Catalogos/Campania.xhtml");
+                campania.setIcon("");
                 catalogos.getChildren().add(campania);
-                
+
+            }
+
+            if (usuario.getPerfil().isPerfiles()) {
+                MenuItem perfiles = new MenuItem();
+                perfiles.setValue("Perfiles");
+                perfiles.setLink("/SWARE-1/Catalogos/Perfiles.xhtml");
+                perfiles.setIcon("");
+                catalogos.getChildren().add(perfiles);
             }
             menu.add(catalogos);
         }

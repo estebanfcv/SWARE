@@ -24,21 +24,16 @@ public class AgendaDAO {
 
     public AgendaDAO() {
         conexion = ManejadorSesiones.getUsuario().getConexion();
-        
-
     }
 
     public List<AgendaTO> obtenerAgenda(Date fechaFiltro) {
         List<AgendaTO> listaAgenda = new ArrayList<>();
         PreparedStatement ps = null;
         ResultSet rs = null;
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String fechaString = sdf.format(fechaFiltro);
         try {
             ps = conexion.prepareStatement(Agenda.CONSULTAR_AGENDA);
-
-            ps.setString(1, fechaString + " 00:00:00");
-            ps.setString(2, fechaString + " 23:59:00");
+            ps.setString(1, new SimpleDateFormat("yyyy-MM-dd").format(fechaFiltro) + " 00:00:00");
+            ps.setString(2, new SimpleDateFormat("yyyy-MM-dd").format(fechaFiltro) + " 23:59:00");
             ps.setInt(3, ManejadorSesiones.getUsuario().getIdCoordinacion());
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -134,5 +129,4 @@ public class AgendaDAO {
 
         return exito;
     }
-
 }

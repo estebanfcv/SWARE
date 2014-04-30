@@ -6,34 +6,24 @@ package com.pan.sware.TO;
  */
 public class PerfilTO {
 
-    private String nombre;
+    private String nombre = "";
     private boolean miCuenta = false;
     private boolean coordinaciones = false;
     private boolean parametrosGlobales = false;
     private boolean agenda = false;
     private boolean campania = false;
+    private boolean perfiles = false;
     private long tiempoSesion = 60000;
 
     public long getTiempoSesion() {
         return tiempoSesion;
     }
 
-    public void setTiempoSesion(Long tiempoSesion) {
-        switch (tiempoSesion.intValue()) {
-            case 7200000:
-                this.tiempoSesion = 2;
-                break;
-            case 14400000:
-                this.tiempoSesion = 4;
-                break;
-            case 28800000:
-                this.tiempoSesion = 8;
-                break;
-            default:
-                this.tiempoSesion = tiempoSesion;
-                break;
-        }
+    public void setTiempoSesion(long tiempoSesion) {
+        this.tiempoSesion = tiempoSesion;
     }
+
+    
 
     public boolean isMiCuenta() {
         return miCuenta;
@@ -48,7 +38,7 @@ public class PerfilTO {
     }
 
     public String getNombre() {
-        return nombre;
+        return nombre.trim();
     }
 
     public void setNombre(String nombre) {
@@ -93,6 +83,14 @@ public class PerfilTO {
 
     public void setCampania(int campania) {
         this.campania = campania == 1;
+    }
+
+    public boolean isPerfiles() {
+        return perfiles;
+    }
+
+    public void setPerfiles(int perfiles) {
+        this.perfiles = perfiles == 1;
     }
 
 }

@@ -12,8 +12,8 @@ import java.util.List;
 public class CampaniaTO implements Cloneable, Serializable {
     private List<CampaniaMunicipioTO> listaMunicipios = new ArrayList<>();
     private int id;
-    private String nombre;
-    private String Comentario;
+    private String nombre="";
+    private String Comentario="";
     private Date fecha;
     private Date fechaAlta;
     private int idCoordinacion;
@@ -47,7 +47,7 @@ public class CampaniaTO implements Cloneable, Serializable {
     }
 
     public String getNombre() {
-        return nombre;
+        return nombre.trim();
     }
 
     public void setNombre(String nombre) {
@@ -55,7 +55,7 @@ public class CampaniaTO implements Cloneable, Serializable {
     }
 
     public String getComentario() {
-        return Comentario;
+        return Comentario.trim();
     }
 
     public void setComentario(String Comentario) {

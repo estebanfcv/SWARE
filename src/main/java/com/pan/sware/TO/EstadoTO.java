@@ -7,7 +7,7 @@ package com.pan.sware.TO;
 public class EstadoTO {
     
     private byte id;
-    private String nombre;
+    private String nombre="";
 
     public byte getId() {
         return id;
@@ -18,7 +18,7 @@ public class EstadoTO {
     }
 
     public String getNombre() {
-        return nombre;
+        return nombre.trim();
     }
 
     public void setNombre(String nombre) {

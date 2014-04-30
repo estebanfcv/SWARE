@@ -39,7 +39,7 @@ public class AgendaTO implements Cloneable, Serializable {
     }
 
     public String getTitulo() {
-        return titulo;
+        return titulo.trim();
     }
 
     public void setTitulo(String titulo) {
@@ -47,7 +47,7 @@ public class AgendaTO implements Cloneable, Serializable {
     }
 
     public String getMensaje() {
-        return mensaje;
+        return mensaje.trim();
     }
 
     public void setMensaje(String mensaje) {
@@ -63,7 +63,7 @@ public class AgendaTO implements Cloneable, Serializable {
     }
 
     public String getHoras() {
-        return horas;
+        return horas.trim();
     }
 
     public void setHoras(String horas) {
@@ -71,7 +71,7 @@ public class AgendaTO implements Cloneable, Serializable {
     }
 
     public String getMinutos() {
-        return minutos;
+        return minutos.trim();
     }
 
     public void setMinutos(String minutos) {

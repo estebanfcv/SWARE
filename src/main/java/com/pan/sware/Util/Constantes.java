@@ -13,6 +13,7 @@ public class Constantes {
     public static final String BOTON_AGREGAR = "Agregar";
     public static final String BOTON_MODIFICAR = "Modificar";
     public static final String IMAGEN_DEFAULT = "/imagenes/sinImagen.jpg";
+    public static final String IMAGEN_DEFAULT_USUARIO = "/imagenes/user-photo.png";
     public static final int TAMANIO_ARCHIVO = 921600;
     public static final byte VALOR_LISTA_VACIA = -1;
 

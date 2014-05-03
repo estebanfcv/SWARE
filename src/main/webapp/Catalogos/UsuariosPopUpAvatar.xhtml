@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:ace="http://www.icefaces.org/icefaces/components">
+    <f:view>
+        <f:facet name="header">
+            <table align="center" width="600px" bgcolor="#2672A1" >
+                <tr>
+                    <td width="580px" align="center" bgcolor="#2672A1">
+                        <ice:outputText style="color: #FFFFFF;"
+                                        value="Avatar"/>
+                    </td>
+                    <td width="20px" align="center">
+                        <ice:commandButton style="width:20px"
+                                           styleClass="button"
+                                           action="#{catUser.cerrarPopUpAvatar}"
+                                           value="X" partialSubmit="true"/>
+                    </td>
+                </tr>
+            </table>        
+        </f:facet>
+        <f:facet name="body" >
+            <table align="center" width="540" bgcolor="#CCCCCC">
+                <tr>
+                    <td align="center">
+                        <ice:graphicImage value="#{catUser.usuario.avatar[0] eq null ? catUser.imagenDefault :catUser.usuario.avatar}" width="300" height="250" />
+                    </td>
+                </tr>
+            </table>
+        </f:facet>
+    </f:view>
+</html>

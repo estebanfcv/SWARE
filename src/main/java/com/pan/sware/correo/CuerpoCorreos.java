@@ -20,10 +20,10 @@ public class CuerpoCorreos {
                 + "<hr>"
                 + "<br> Emitida el " + new Date();
         String contenido = "<html><body><b>" + coordinacion.getNombre() + ":</b><br/><br>" + texto + "</body> </html>";
-        return enviarCorreo(subject,contenido,coordinacion.getEmail(),null);
+        return enviarCorreo(subject, contenido, coordinacion.getEmail(), null);
     }
 
-    public static void enviarCorreoAltaUsuario(UsuarioTO usuario) {
+    public static boolean enviarCorreoRecuperarPassword(UsuarioTO usuario) {
         String subject = "Recuperar password - " + usuario.getUsername();
         String texto = "A continuacion tiene sus credenciales:"
                 + "<br>"
@@ -34,10 +34,19 @@ public class CuerpoCorreos {
                 + "<br> Emitida el " + new Date();
 
         String contenido = "<html><body><b>" + usuario.getNombre() + ":</b><br/><br>" + texto + "</body> </html>";
-        enviarCorreo(subject,
-                contenido,
-                usuario.getEmail(), //to 
-                null); //cc   
+       return enviarCorreo(subject, contenido, usuario.getEmail(), null);
+    }
+    public static boolean enviarCorreoAltaUsuario(UsuarioTO usuario) {
+        String subject = "Bienvenido al sistema - " + usuario.getUsername();
+        String texto = "A continuacion tiene sus credenciales:"
+                + "<br>"
+                + "<hr>"
+                + "Nombre de usuario:  " + usuario.getUsername() + "<br> "
+                + "Contrasena: " + usuario.getPassword() + "<br> "
+                + "<hr>"
+                + "<br> Emitida el " + new Date();
+        String contenido = "<html><body><b>" + usuario.getNombre() + ":</b><br/><br>" + texto + "</body> </html>";
+       return enviarCorreo(subject, contenido, usuario.getEmail(), null);
     }
 
     public static boolean enviarCorreo(String asunto, String texto, String to, String cc) {
@@ -45,8 +54,8 @@ public class CuerpoCorreos {
         try {
             MailTask task = null;
             String[] datosCorreo = new String[5];
-            datosCorreo[0] = "estebanfcv@gmail.com";
-            datosCorreo[1] = "estebanfcv090.";
+            datosCorreo[0] = "estebanfcv.sware@gmail.com";
+            datosCorreo[1] = "SwareAdminSupremo";
             datosCorreo[2] = "smtp.gmail.com";
             datosCorreo[3] = "587";
             datosCorreo[4] = "1";

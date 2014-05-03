@@ -1,12 +1,12 @@
 package com.pan.index;
 
 import com.pan.sware.TO.UsuarioTO;
+import com.pan.sware.Util.ParametroCache;
 import com.pan.sware.Util.Util;
 import com.pan.sware.correo.CuerpoCorreos;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
 
@@ -56,21 +56,26 @@ public class RecuperarPassword {
         }
     }
 
-    public void botonAceptar() {
+    public void botonAceptar() throws NoSuchAlgorithmException, CloneNotSupportedException {
         if (validarCamposVacios()) {
             usuario = ind.obtenerUsuarioPorUsernameOEmail(usernameEmail, opcionUserEmail);
             if (usuario != null) {
-                // enviar correo
-                CuerpoCorreos.enviarCorreoAltaUsuario(usuario);
-                mensaje = "se enviara un correo a " + usuario.getEmail() + " con los datos para poder accesar";
-                color = "color: green";
-                inicializar();
+                usuario.setPassword(Util.generarPasswordAleatorio());
+                System.out.println("el password es::::: "+usuario.getPassword());
+                if (ind.modificarPassword(usuario)) {
+                    mensaje = "se enviará un correo a " + usuario.getEmail() + " con los datos para poder accesar";
+                    color = "color: green";
+                    ParametroCache.inicializarUsuarios();
+                    inicializar();
+                }else{
+                  mensaje = "Hubo un error";
+                color = "color: red";  
+                }
             } else {
                 mensaje = "no exite un usuario con esos datos";
                 color = "color: red";
             }
         }
-
     }
 
     public boolean validarCamposVacios() {
@@ -96,7 +101,7 @@ public class RecuperarPassword {
     }
 
     public void cerrarPopUp() {
-        mensaje="";
+        mensaje = "";
         popUp = false;
     }
 

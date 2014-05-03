@@ -182,8 +182,10 @@ public class ParametroCache {
                 u.setIdPerfil(rs.getInt("ID_PERFIL"));
                 u.setIdCoordinacion(rs.getInt("ID_COORDINACION"));
                 u.setTelefonoCasa(rs.getString("TELEFONO_CASA"));
-                u.setTelefonoOficina(rs.getString("TELEFONO_OFICINA"));
+                u.setTelefonoTrabajo(rs.getString("TELEFONO_TRABAJO"));
                 u.setTelefonoCelular(rs.getString("TELEFONO_CELULAR"));
+                u.setPasswordRandom(rs.getByte("PASSWORD_RANDOM"));
+                u.setBloqueado(rs.getInt("BLOQUEADO")==1);
                 mapB.put(new StringBuilder(u.getUsername()).append('|').append(u.getPassword()).toString(), u);
             }
 

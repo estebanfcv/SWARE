@@ -45,9 +45,11 @@ public class Index {
             + "ID_PERFIL,"
             + "ID_COORDINACION,"
             + "TELEFONO_CASA,"
-            + "TELEFONO_OFICINA,"
-            + "TELEFONO_CELULAR"
-            + " FROM USUARIOS";
+            + "TELEFONO_TRABAJO,"
+            + "TELEFONO_CELULAR,"
+            + "PASSWORD_RANDOM,"
+            + "BLOQUEADO "
+            + "FROM USUARIOS";
 
     public static final String CONSULTAR_ESTADOS = "SELECT "
             + "ID,"
@@ -59,5 +61,7 @@ public class Index {
             + "NOMBRE,"
             + "ID_ESTADO "
             + "FROM MUNICIPIOS";
+    
+        public static final String MODIFICAR_PASSWORD = "UPDATE USUARIOS SET PASSWORD=?, PASSWORD_RANDOM=1 WHERE ID=?";
 
 }

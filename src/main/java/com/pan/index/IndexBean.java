@@ -37,9 +37,14 @@ public class IndexBean implements Serializable {
             if (validarCamposVacios()) {
                 usuario = ParametroCache.obtenerUsuarioTOPorUserPass(usuario.getUsername(), Util.encryptMD5(usuario.getPassword()));
                 if (usuario != null) {
-                    if (usuario.getId() == 1) {
-                        usuario = new PermisosUsuario().establecerPermisosUsuarioMaestro(usuario);
+                    if(usuario.isBloqueado()){
+                        mensajeError = "Su usuario fue bloqueado contacte a su coordinador";
+                        color = "color: red";
+                        return "";
                     }
+//                    if (usuario.getId() == 1) {
+                        usuario = new PermisosUsuario().establecerPermisosUsuarioMaestro(usuario);
+//                    }
                     ManejadorSesiones.agregarSesion(usuario);
                     return "cuenta";
                 } else {

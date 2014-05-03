@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -33,6 +32,7 @@ public class MainBean implements Serializable {
     private List<Boolean> listaPermisosCatalogos;
     //
     private PopUpEvento evento;
+    private popUpCambioPassword password;
     private String mensajeError;
     private String color;
     private List<AgendaTO> listaAgenda;
@@ -51,6 +51,7 @@ public class MainBean implements Serializable {
     }
 
     private void inicializar() {
+        password = new popUpCambioPassword(usuario);
         evento = new PopUpEvento();
         daoAgenda = new AgendaDAO();
         filas = 20;
@@ -117,6 +118,10 @@ public class MainBean implements Serializable {
     public PopUpEvento getEvento() {
         return evento;
     }
+
+    public popUpCambioPassword getPassword() {
+        return password;
+    }
     //##########################################################################
 
     private void armarListasPermisos() {
@@ -124,6 +129,7 @@ public class MainBean implements Serializable {
         listaPermisosCatalogos.add(usuario.getPerfil().isCoordinaciones());
         listaPermisosCatalogos.add(usuario.getPerfil().isPerfiles());
         listaPermisosCatalogos.add(usuario.getPerfil().isCampania());
+        listaPermisosCatalogos.add(usuario.getPerfil().isUsuarios());
     }
 
     private void ArmarMenus() {
@@ -195,13 +201,19 @@ public class MainBean implements Serializable {
                 catalogos.getChildren().add(campania);
 
             }
-
             if (usuario.getPerfil().isPerfiles()) {
                 MenuItem perfiles = new MenuItem();
                 perfiles.setValue("Perfiles");
                 perfiles.setLink("/SWARE-1/Catalogos/Perfiles.xhtml");
                 perfiles.setIcon("");
                 catalogos.getChildren().add(perfiles);
+            }
+            if (usuario.getPerfil().isUsuarios()) {
+                MenuItem usuarios = new MenuItem();
+                usuarios.setValue("Usuarios");
+                usuarios.setLink("/SWARE-1/Catalogos/Usuarios.xhtml");
+                usuarios.setIcon("");
+                catalogos.getChildren().add(usuarios);
             }
             menu.add(catalogos);
         }

@@ -13,6 +13,7 @@ public class PerfilTO {
     private boolean agenda = false;
     private boolean campania = false;
     private boolean perfiles = false;
+    private boolean usuarios = false;
     private long tiempoSesion = 60000;
 
     public long getTiempoSesion() {
@@ -22,8 +23,6 @@ public class PerfilTO {
     public void setTiempoSesion(long tiempoSesion) {
         this.tiempoSesion = tiempoSesion;
     }
-
-    
 
     public boolean isMiCuenta() {
         return miCuenta;
@@ -91,6 +90,14 @@ public class PerfilTO {
 
     public void setPerfiles(int perfiles) {
         this.perfiles = perfiles == 1;
+    }
+
+    public boolean isUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(int usuarios) {
+        this.usuarios = usuarios == 1;
     }
 
 }

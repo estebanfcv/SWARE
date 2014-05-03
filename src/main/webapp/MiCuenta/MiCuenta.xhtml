@@ -56,7 +56,7 @@
                     <table width="500" align="center" bgcolor="#CCCCCC">
                         <tr>
                             <td align="center">
-                                <ice:graphicImage value="#{cuenta.usuario.avatar}" width="300" height="200"/>
+                                <ice:graphicImage value="#{cuenta.usuario.avatar[0] eq null ? cuenta.imagenDefault :cuenta.usuario.avatar}" width="300" height="200" />
                             </td>
                         </tr>
                         <tr>
@@ -104,10 +104,10 @@
                         </tr>
                         <tr>
                             <td width="200">
-                                <ice:outputText value="Teléfono oficina" style="width: 200px"/>
+                                <ice:outputText value="Teléfono trabajo" style="width: 200px"/>
                             </td>
                             <td width="300">
-                                <ice:inputText value="#{cuenta.usuario.telefonoOficina}" style="width: 300px" readonly="true"/>
+                                <ice:inputText value="#{cuenta.usuario.telefonoTrabajo}" style="width: 300px" readonly="true"/>
                             </td>
                         </tr>
                         <tr>

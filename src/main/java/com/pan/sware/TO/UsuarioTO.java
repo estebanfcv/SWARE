@@ -29,13 +29,15 @@ public class UsuarioTO implements Serializable, Cloneable {
     private int idPerfil;
     private Date fechaAlta;
     private String telefonoCasa="";
-    private String telefonoOficina="";
+    private String telefonoTrabajo="";
     private String telefonoCelular="";
 
     private Date fechaIngreso;
     private Date fechaFinSesion;
     private String idSesion="";
     private String ubicacion="";
+    private boolean bloqueado;
+    private byte passwordRandom;
 
     @Override
     public UsuarioTO clone() {
@@ -211,13 +213,15 @@ public class UsuarioTO implements Serializable, Cloneable {
         this.telefonoCasa = telefonoCasa;
     }
 
-    public String getTelefonoOficina() {
-        return telefonoOficina.trim();
+    public String getTelefonoTrabajo() {
+        return telefonoTrabajo;
     }
 
-    public void setTelefonoOficina(String telefonoOficina) {
-        this.telefonoOficina = telefonoOficina;
+    public void setTelefonoTrabajo(String telefonoTrabajo) {
+        this.telefonoTrabajo = telefonoTrabajo;
     }
+
+   
 
     public String getTelefonoCelular() {
         return telefonoCelular.trim();
@@ -234,4 +238,22 @@ public class UsuarioTO implements Serializable, Cloneable {
     public void setPerfil(PerfilTO perfil) {
         this.perfil = perfil;
     }
+
+    public boolean isBloqueado() {
+        return bloqueado;
+    }
+
+    public void setBloqueado(boolean bloqueado) {
+        this.bloqueado = bloqueado;
+    }
+
+    public byte getPasswordRandom() {
+        return passwordRandom;
+    }
+
+    public void setPasswordRandom(byte passwordRandom) {
+        this.passwordRandom = passwordRandom;
+    }
+    
+    
 }

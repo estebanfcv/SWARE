@@ -19,6 +19,7 @@ public class PermisosUsuario {
         p.setAgenda(1);
         p.setCampania(1);
         p.setPerfiles(1);
+        p.setUsuarios(1);
         u.setPerfil(p);
         return u;
     }
@@ -32,7 +33,8 @@ public class PermisosUsuario {
         p.setParametrosGlobales(1);
         p.setAgenda(1);
         p.setCampania(1);
-         p.setPerfiles(1);
+        p.setPerfiles(1);
+        p.setUsuarios(1);
         u.setPerfil(p);
         return u;
     }

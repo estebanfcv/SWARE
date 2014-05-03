@@ -75,14 +75,13 @@ public class CoordinacionBean implements Serializable {
             } else {
                 if (validarModificaciones()) {
                     if (DaoCoor.modificarCoordinacion(coordinacion)) {
-                        mensajeError = "La coordinacion se modificó exitosamente";
-                        color = "color: green";
+                        mensajeError = "La coordinacion se modificó con éxito.";
                         // parametro cache inicializar coordinaciones 
                         inicializar();
                     } else {
-                        mensajeError = "La coordinacion no se pudo modificar";
-                        color = "color: red";
+                        mensajeError = "La coordinacion no se pudo modificar.";
                     }
+                    color = mensajeError.contains("éxito") ? "color: green" : "color: red";
                 }
             }
         }
@@ -142,7 +141,7 @@ public class CoordinacionBean implements Serializable {
             return false;
         } else {
             if (!Util.validarEmail(coordinacion.getEmail())) {
-                mensajeError = "El email no es valido";
+                mensajeError = "El email no es válido";
                 color = "color: red";
                 return false;
             }

@@ -1,6 +1,7 @@
 package com.pan.sware.cuenta;
 
 import com.pan.sware.TO.UsuarioTO;
+import com.pan.sware.Util.Constantes;
 import com.pan.sware.sesiones.ManejadorSesiones;
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
@@ -35,6 +36,10 @@ public class MiCuentaBean implements Serializable {
 
     public UsuarioTO getUsuario() {
         return usuario;
+    }
+
+    public String getImagenDefault() {
+        return Constantes.IMAGEN_DEFAULT_USUARIO;
     }
 
 }

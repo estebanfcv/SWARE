@@ -21,7 +21,7 @@ import java.util.List;
  */
 public class CoordinacionDAO {
 
-    Connection conexion;
+    private Connection conexion;
 
     public CoordinacionDAO() {
         conexion = ManejadorSesiones.getUsuario().getConexion();
@@ -90,7 +90,7 @@ public class CoordinacionDAO {
             if (rs.next()) {
                 coordinacion.setId(rs.getInt(1));
             }
-            exito = mandarCorreo(coordinacion, Constantes.BOTON_AGREGAR);
+            exito = mandarCorreo(coordinacion);
         } catch (Exception e) {
             ConnectionUtil.rollBack(conexion, "CoordinacionDAO.insertarCoordinacion()");
             e.printStackTrace();
@@ -100,19 +100,14 @@ public class CoordinacionDAO {
         return exito;
     }
 
-    private boolean mandarCorreo(CoordinacionTO coordinacion, String operacion) {
+    private boolean mandarCorreo(CoordinacionTO coordinacion) {
         boolean exito = false;
         try {
-            if (operacion.equals(Constantes.BOTON_AGREGAR)) {
-                if (CuerpoCorreos.enviarCorreoAltaCoordinacion(coordinacion)) {
-                    conexion.commit();
-                    exito = true;
-                } else {
-                    ConnectionUtil.rollBack(conexion, "CoordinacionDAO.enviarCorreoAltaCoordinacion()");
-                }
-            } else {
+            if (CuerpoCorreos.enviarCorreoAltaCoordinacion(coordinacion)) {
                 conexion.commit();
                 exito = true;
+            } else {
+                ConnectionUtil.rollBack(conexion, "CoordinacionDAO.mandarCorreo()");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -139,7 +134,8 @@ public class CoordinacionDAO {
             ps.setBytes(11, coordinacion.getAvatar());
             ps.setInt(12, coordinacion.getId());
             ps.executeUpdate();
-            exito = mandarCorreo(coordinacion, Constantes.BOTON_MODIFICAR);
+             conexion.commit();
+            exito = true;
         } catch (Exception e) {
             ConnectionUtil.rollBack(conexion, "CoordinacionDAO.modificarCoordinacion()");
             e.printStackTrace();
@@ -158,6 +154,7 @@ public class CoordinacionDAO {
             ps.setInt(1, coordinacion.getId());
             ps.executeUpdate();
             exito = true;
+            conexion.commit();
         } catch (Exception e) {
             ConnectionUtil.rollBack(conexion, "CoordinacionDAO.eliminarCoordinacion()");
             e.printStackTrace();

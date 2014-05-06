@@ -38,6 +38,7 @@ public class UsuarioTO implements Serializable, Cloneable {
     private String ubicacion="";
     private boolean bloqueado;
     private byte passwordRandom;
+    private boolean mandarEmail=false;
 
     @Override
     public UsuarioTO clone() {
@@ -254,6 +255,12 @@ public class UsuarioTO implements Serializable, Cloneable {
     public void setPasswordRandom(byte passwordRandom) {
         this.passwordRandom = passwordRandom;
     }
-    
-    
+
+    public boolean isMandarEmail() {
+        return mandarEmail;
+    }
+
+    public void setMandarEmail(boolean mandarEmail) {
+        this.mandarEmail = mandarEmail;
+    }
 }

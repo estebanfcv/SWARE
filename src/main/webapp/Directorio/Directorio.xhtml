@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Directorio</title>
+        <link type="text/css" rel="stylesheet" href="../css/icefaces.css"/>
+    </h:head>
+    <h:body>
+        <div id="page-container">
+            <div id="topBar">
+                <ui:insert name="menu_top">
+                    <ui:include src="/Header.xhtml"/>
+                </ui:insert>  
+
+            </div>
+            <div id="content">
+                <h:form>
+                    <table align="center" width="820">
+                        <tr>
+                            <td>
+                                <ice:panelTabSet >
+                                    <ice:panelTab label="Usuarios">
+                                        <ui:include src="./DirUsuarios.xhtml"/>
+                                    </ice:panelTab>
+                                </ice:panelTabSet>
+                            </td>
+                        </tr>
+                    </table>
+                </h:form>
+            </div>
+            <div id="footer">
+                <div style="position: relative; top:80px;">
+                    <ui:insert name="menu_back">
+                        <ui:include src="/Header.xhtml"/>
+                    </ui:insert>
+                </div>
+            </div>
+        </div>
+    </h:body>
+</html>

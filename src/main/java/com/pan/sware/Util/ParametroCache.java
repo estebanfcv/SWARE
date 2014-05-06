@@ -1,7 +1,9 @@
 package com.pan.sware.Util;
 
 import com.pan.sware.Queries.Index;
+import com.pan.sware.TO.AgendaTO;
 import com.pan.sware.TO.CampaniaMunicipioTO;
+import com.pan.sware.TO.CampaniaTO;
 import com.pan.sware.TO.CoordinacionTO;
 import com.pan.sware.TO.EstadoTO;
 import com.pan.sware.TO.MunicipioTO;
@@ -32,6 +34,8 @@ public class ParametroCache {
     private static Map<String, UsuarioTO> usuarios = new LinkedHashMap<>();
     private static Map<Byte, EstadoTO> estados = new LinkedHashMap<>();
     private static Map<Short, MunicipioTO> municipios = new LinkedHashMap<>();
+    private static Map<Integer, CampaniaTO> campanias = new LinkedHashMap<>();
+    private static Map<Integer, AgendaTO> agenda = new LinkedHashMap<>();
 
     public static void inicializarEstados() {
         Connection con = null;
@@ -109,7 +113,6 @@ public class ParametroCache {
                 mapB.put(c.getId(), c);
             }
             coordinaciones.putAll(mapB);
-
             Set<Integer> keysInA = new LinkedHashSet<>(mapA.keySet());
             Set<Integer> keysInB = new LinkedHashSet<>(mapB.keySet());
             if (!keysInA.equals(keysInB)) {
@@ -131,8 +134,53 @@ public class ParametroCache {
             ConnectionUtil.cerrarConexiones(con);
         }
     }
-    
-    private static List<CampaniaMunicipioTO> consultarListaCoordinacionMunicipios(Connection con,int id) {
+
+    public static void inicializarCampanias() {
+        Map<Integer, CampaniaTO> mapA = new LinkedHashMap<>(campanias);
+        Map<Integer, CampaniaTO> mapB = new LinkedHashMap<>();
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            con = DBConnectionManager.getInstance().getConnection(DBConnectionManager.BD);
+            ps = con.prepareStatement(Index.CONSULTAR_CAMPANIAS);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                CampaniaTO c = new CampaniaTO();
+                c.setId(rs.getInt("ID"));
+                c.setNombre(rs.getString("NOMBRE"));
+                c.setComentario(rs.getString("COMENTARIO"));
+                c.setFecha(rs.getDate("FECHA"));
+                c.setFechaAlta(rs.getTimestamp("FECHA_ALTA"));
+                c.setIdCoordinacion(rs.getInt("ID_COORDINACION"));
+                c.setAvatar(rs.getBytes("AVATAR"));
+                c.setListaMunicipios(consultarListaCoordinacionMunicipios(con, c.getId()));
+                mapB.put(c.getId(), c);
+            }
+            campanias.putAll(mapB);
+            Set<Integer> keysInA = new LinkedHashSet<>(mapA.keySet());
+            Set<Integer> keysInB = new LinkedHashSet<>(mapB.keySet());
+            if (!keysInA.equals(keysInB)) {
+                Set<Integer> inANotB = new LinkedHashSet<>(keysInA);
+                inANotB.removeAll(keysInB);
+                for (Integer i : inANotB) {
+                    campanias.remove(i);
+                }
+                inANotB = null;
+            }
+            mapA = null;
+            mapB = null;
+            keysInA = null;
+            keysInB = null;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionUtil.cerrarConexiones(rs, ps);
+            ConnectionUtil.cerrarConexiones(con);
+        }
+    }
+
+    private static List<CampaniaMunicipioTO> consultarListaCoordinacionMunicipios(Connection con, int id) {
         PreparedStatement ps = null;
         ResultSet rs = null;
         List<CampaniaMunicipioTO> listaCoordinacionMunicipio = new ArrayList<>();
@@ -153,12 +201,10 @@ public class ParametroCache {
         } finally {
             ConnectionUtil.cerrarConexiones(rs, ps);
         }
-
         return listaCoordinacionMunicipio;
     }
 
     public static void inicializarUsuarios() {
-        System.out.println("Inicializando usuarios...");
         Map<String, UsuarioTO> mapA = new LinkedHashMap<>(usuarios);
         Map<String, UsuarioTO> mapB = new LinkedHashMap<>();
         Connection con = null;
@@ -185,10 +231,9 @@ public class ParametroCache {
                 u.setTelefonoTrabajo(rs.getString("TELEFONO_TRABAJO"));
                 u.setTelefonoCelular(rs.getString("TELEFONO_CELULAR"));
                 u.setPasswordRandom(rs.getByte("PASSWORD_RANDOM"));
-                u.setBloqueado(rs.getInt("BLOQUEADO")==1);
+                u.setBloqueado(rs.getInt("BLOQUEADO") == 1);
                 mapB.put(new StringBuilder(u.getUsername()).append('|').append(u.getPassword()).toString(), u);
             }
-
             usuarios.putAll(mapB);
             Set<String> keysInA = new LinkedHashSet<>(mapA.keySet());
             Set<String> keysInB = new LinkedHashSet<>(mapB.keySet());
@@ -205,6 +250,50 @@ public class ParametroCache {
             keysInA = null;
             keysInB = null;
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            ConnectionUtil.cerrarConexiones(rs, ps);
+            ConnectionUtil.cerrarConexiones(con);
+        }
+    }
+
+    public static void inicializarAgenda() {
+        Map<Integer, AgendaTO> mapA = new LinkedHashMap<>(agenda);
+        Map<Integer, AgendaTO> mapB = new LinkedHashMap<>();
+        Connection con = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            con = DBConnectionManager.getInstance().getConnection(DBConnectionManager.BD);
+            ps = con.prepareStatement(Index.CONSULTAR_AGENDA);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                AgendaTO a = new AgendaTO();
+                a.setId(rs.getInt("ID"));
+                a.setTitulo(rs.getString("TITULO"));
+                a.setMensaje(rs.getString("MENSAJE"));
+                a.setFecha(rs.getDate("FECHA"));
+                a.setFechaAlta(rs.getTimestamp("FECHA_ALTA"));
+                a.setIdUsuario(rs.getInt("ID_USUARIO"));
+                a.setIdCoordinacion(rs.getInt("ID_COORDINACION"));
+                mapB.put(a.getId(), a);
+            }
+            agenda.putAll(mapB);
+            Set<Integer> keysInA = new LinkedHashSet<>(mapA.keySet());
+            Set<Integer> keysInB = new LinkedHashSet<>(mapB.keySet());
+            if (!keysInA.equals(keysInB)) {
+                Set<Integer> inANotB = new LinkedHashSet<>(keysInA);
+                inANotB.removeAll(keysInB);
+                for (Integer i : inANotB) {
+                    agenda.remove(i);
+                }
+                inANotB = null;
+            }
+            mapA = null;
+            mapB = null;
+            keysInA = null;
+            keysInB = null;
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -234,6 +323,16 @@ public class ParametroCache {
         }
         return null;
     }
+    
+    public static List<UsuarioTO> obtenerUsuariosPorCoordinacion(int coordinacion){
+        List<UsuarioTO> listaUsuarios = new ArrayList<>();
+        for (UsuarioTO u : usuarios.values()) {
+            if(u.getIdCoordinacion()==coordinacion){
+                listaUsuarios.add(u);
+            }
+        }
+        return listaUsuarios;
+    }
 
     public static Map<String, UsuarioTO> getUsuarios() {
         return usuarios;
@@ -247,4 +346,11 @@ public class ParametroCache {
         return municipios;
     }
 
+    public static Map<Integer, CoordinacionTO> getCoordinaciones() {
+        return coordinaciones;
+    }
+
+    public static Map<Integer, CampaniaTO> getCampanias() {
+        return campanias;
+    }
 }

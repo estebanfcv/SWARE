@@ -20,6 +20,7 @@ public class PermisosUsuario {
         p.setCampania(1);
         p.setPerfiles(1);
         p.setUsuarios(1);
+        p.setDirectorio(1);
         u.setPerfil(p);
         return u;
     }
@@ -35,6 +36,7 @@ public class PermisosUsuario {
         p.setCampania(1);
         p.setPerfiles(1);
         p.setUsuarios(1);
+        p.setDirectorio(1);
         u.setPerfil(p);
         return u;
     }

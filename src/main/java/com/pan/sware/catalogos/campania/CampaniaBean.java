@@ -2,6 +2,7 @@ package com.pan.sware.catalogos.campania;
 
 import com.pan.sware.TO.CampaniaTO;
 import com.pan.sware.Util.Constantes;
+import com.pan.sware.Util.ParametroCache;
 import java.io.Serializable;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -65,7 +66,7 @@ public class CampaniaBean implements Serializable {
                     if (daoCampania.insertarCampania(campania)) {
                         mensajeError = "Inserción Exitosa";
                         color = "color: green";
-                        // parametro cache inicializar campanias 
+                        ParametroCache.inicializarCampanias();
                         inicializar();
                     } else {
                         mensajeError = "La inserción no se pudo realizar";
@@ -77,7 +78,7 @@ public class CampaniaBean implements Serializable {
                     if (daoCampania.modificarCampania(campania)) {
                         mensajeError = "La campaña se modificó exitosamente";
                         color = "color: green";
-                        // parametro cache inicializar campanias 
+                        ParametroCache.inicializarCampanias();
                         inicializar();
                     } else {
                         mensajeError = "La campaña no se pudo modificar";
@@ -180,7 +181,7 @@ public class CampaniaBean implements Serializable {
         if (daoCampania.eliminarCampania(campania)) {
             mensajeError = "La campaña se eliminó con éxito";
             color = "color: green";
-            // parametro cache inicializar campanias
+            ParametroCache.inicializarCampanias();
             inicializar();
         } else {
             mensajeError = "La campaña no se pudo eliminar";

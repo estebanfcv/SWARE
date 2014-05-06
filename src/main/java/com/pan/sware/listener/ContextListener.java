@@ -32,34 +32,11 @@ public class ContextListener implements ServletContextListener {
     }
 
     public static void inicializarParametroCache() {
-        /*
-         * Es importante inicializar todo en este orden, o si no, el Cache no
-         *  se inicializará correctamente y ciertos campos tendrán null
-         */
-        
         System.out.println("SE INICIALIZA TODO");
-//        ParametroCache.inicializarParametros();
-//        ParametroCache.inicializarCorporativos();
-//        ParametroCache.inicializarCiudades();
-//        ParametroCache.inicializarEmpresas();
-//        ParametroCache.inicializarPerfiles();
+        ParametroCache.inicializarCoordinaciones();
         ParametroCache.inicializarUsuarios();
-//        ParametroCache.inicializarSucursales();
-//        ParametroCache.inicializarColonias();
-//        ParametroCache.inicializarCalles();
-//        ParametroCache.inicializarBancos();
-//        ParametroCache.inicializarCuentas();
-//        ParametroCache.inicializarNodos();
-//        ParametroCache.inicializarServicios();
-//        ParametroCache.inicializarSenales();
-//        ParametroCache.inicializarConceptosCobro();
-//        ParametroCache.inicializarVendedores();
-//        ParametroCache.inicializarVehiculos();
-//        ParametroCache.inicializarTecnicos();
-//        ParametroCache.inicializarCombos();
-//        ParametroCache.inicializarMateriales();
-//        ParametroCache.inicializarLimiteMateriales();
-//        ParametroCache.inicializarEquipos();
+        ParametroCache.inicializarCampanias();
+        ParametroCache.inicializarAgenda();
     }
 
     @Override

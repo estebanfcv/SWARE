@@ -83,6 +83,7 @@ public class AgendaBean implements Serializable {
                     if (daoAgenda.insertarAgenda(agendaEventos)) {
                         mensajeError = "Inserción Exitosa";
                         color = "color: green";
+                        ParametroCache.inicializarAgenda();
                         inicializar();
                     } else {
                         mensajeError = "La inserción no se pudo realizar";
@@ -94,7 +95,7 @@ public class AgendaBean implements Serializable {
                     if (daoAgenda.modificarAgenda(agendaEventos)) {
                         mensajeError = "La agenda se modificó exitosamente";
                         color = "color: green";
-                        // parametro cache inicializar coordinaciones 
+                        ParametroCache.inicializarAgenda();
                         inicializar();
                     } else {
                         mensajeError = "La agenda no se pudo modificar";
@@ -116,18 +117,15 @@ public class AgendaBean implements Serializable {
             color = "color: red";
             return false;
         }
-
         return true;
     }
 
     private boolean validarDatos() {
-
         if (Util.obtenerSoloFecha(agendaEventos.getFecha()).compareTo(Util.obtenerSoloFecha(new Date())) < 0) {
             mensajeError = "No se pueden seleccionar dias anteriores a hoy";
             color = "color: red";
             return false;
         }
-
         for (AgendaTO a : listaAgenda) {
             if (a.getTitulo().equals(agendaEventos.getTitulo())) {
                 mensajeError = "El titulo ya existe";
@@ -169,7 +167,6 @@ public class AgendaBean implements Serializable {
                 return false;
             }
         }
-
         return true;
     }
 
@@ -183,13 +180,13 @@ public class AgendaBean implements Serializable {
     public void abrirPopUpEliminar(ActionEvent event) {
         agendaEventos = (AgendaTO) event.getComponent().getAttributes().get("ag");
         popUpEliminar = true;
-
     }
 
     public void confirmarEliminarEvento() {
         if (daoAgenda.eliminarAgenda(agendaEventos)) {
             mensajeError = "EL evento se eliminó con éxito";
             color = "color: green";
+            ParametroCache.inicializarAgenda();
             inicializar();
         } else {
             mensajeError = "El evento no se pudo eliminar";
@@ -263,5 +260,4 @@ public class AgendaBean implements Serializable {
     public String obtenerNombreAutor(int id) {
         return ParametroCache.obtenerUsuarioTOPorId(id).getNombre();
     }
-
 }

@@ -2,6 +2,7 @@ package com.pan.sware.catalogos.usuarios;
 
 import com.pan.sware.TO.UsuarioTO;
 import com.pan.sware.Util.Constantes;
+import com.pan.sware.Util.ParametroCache;
 import com.pan.sware.Util.Util;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -71,6 +72,7 @@ public class UsuariosBean implements Serializable {
                 if (validarDatos()) {
                     if (daoUser.insertarUsuario(usuario)) {
                         mensajeError = "El usuario se insertó con éxito";
+                        ParametroCache.inicializarUsuarios();
                         inicializar();
                     } else {
                         mensajeError = "El usuario no se pudo insertar";
@@ -81,6 +83,7 @@ public class UsuariosBean implements Serializable {
                 if (validarModificaciones()) {
                     if (daoUser.modificarUsuario(usuario)) {
                         mensajeError = "El usuario se modificó con éxito.";
+                        ParametroCache.inicializarUsuarios();
                         inicializar();
                     } else {
                         mensajeError = "El usuario no se pudo modificar.";
@@ -179,6 +182,7 @@ public class UsuariosBean implements Serializable {
     public void confirmarEliminarUsuario() {
         if (daoUser.eliminarUsuario(usuario)) {
             mensajeError = "El usuario se eliminó con éxito";
+            ParametroCache.inicializarUsuarios();
             inicializar();
         } else {
             mensajeError = "El usuario no se pudo eliminar";
@@ -245,5 +249,4 @@ public class UsuariosBean implements Serializable {
     public boolean isPopUpAvatar() {
         return popUpAvatar;
     }
-    
 }

@@ -14,6 +14,7 @@ public class PerfilTO {
     private boolean campania = false;
     private boolean perfiles = false;
     private boolean usuarios = false;
+    private boolean directorio =false;
     private long tiempoSesion = 60000;
 
     public long getTiempoSesion() {
@@ -98,6 +99,14 @@ public class PerfilTO {
 
     public void setUsuarios(int usuarios) {
         this.usuarios = usuarios == 1;
+    }
+
+    public boolean isDirectorio() {
+        return directorio;
+    }
+
+    public void setDirectorio(int directorio) {
+        this.directorio = directorio==1;
     }
 
 }

@@ -2,6 +2,7 @@ package com.pan.sware.catalogos;
 
 import com.pan.sware.TO.CoordinacionTO;
 import com.pan.sware.Util.Constantes;
+import com.pan.sware.Util.ParametroCache;
 import com.pan.sware.Util.Util;
 import java.io.Serializable;
 import java.util.List;
@@ -17,6 +18,7 @@ import javax.faces.event.ActionEvent;
 @ViewScoped
 public class CoordinacionBean implements Serializable {
 //http://www.microrregiones.gob.mx/catloc/
+
     private CoordinacionTO coordinacion;
     private CoordinacionPopUpAvatar popUpAsignarAvatar;
     private CoordinacionDAO DaoCoor;
@@ -36,7 +38,7 @@ public class CoordinacionBean implements Serializable {
 
     private void inicializar() {
         coordinacion = new CoordinacionTO();
-        popUpAsignarAvatar= new CoordinacionPopUpAvatar(coordinacion);
+        popUpAsignarAvatar = new CoordinacionPopUpAvatar(coordinacion);
         DaoCoor = new CoordinacionDAO();
         tablaVisible = false;
         mensajeBoton = Constantes.BOTON_AGREGAR;
@@ -65,8 +67,8 @@ public class CoordinacionBean implements Serializable {
                     if (DaoCoor.insertarCoordinacion(coordinacion)) {
                         mensajeError = "Inserción Exitosa";
                         color = "color: green";
+                        ParametroCache.inicializarCoordinaciones();
                         inicializar();
-                        // parametro cache inicializar coordinaciones 
                     } else {
                         mensajeError = "La inserción no se pudo realizar";
                         color = "color: red";
@@ -76,7 +78,7 @@ public class CoordinacionBean implements Serializable {
                 if (validarModificaciones()) {
                     if (DaoCoor.modificarCoordinacion(coordinacion)) {
                         mensajeError = "La coordinacion se modificó con éxito.";
-                        // parametro cache inicializar coordinaciones 
+                        ParametroCache.inicializarCoordinaciones();
                         inicializar();
                     } else {
                         mensajeError = "La coordinacion no se pudo modificar.";
@@ -88,18 +90,18 @@ public class CoordinacionBean implements Serializable {
     }
 
     private boolean validarCamposObligatorios() {
-        if(coordinacion.getAvatar().length==0){
+        if (coordinacion.getAvatar().length == 0) {
             mensajeError = "Favor de elegir su imagen";
             color = "color: red";
             return false;
         }
-        
+
         if (coordinacion.getNombre().isEmpty()) {
             mensajeError = "Favor de escribir el nombre de la coordinacion.";
             color = "color: red";
             return false;
         }
-        
+
         if (coordinacion.getNombreResponsable().isEmpty()) {
             mensajeError = "Favor de escribir el nombre del responsable.";
             color = "color: red";
@@ -221,7 +223,7 @@ public class CoordinacionBean implements Serializable {
         if (DaoCoor.eliminarCoordinacion(coordinacion)) {
             mensajeError = "La coordinación se eliminó con éxito";
             color = "color: green";
-            // parametro cache inicializar coordinaciones
+           ParametroCache.inicializarCoordinaciones();
             inicializar();
         } else {
             mensajeError = "La coordinación no se pudo eliminar";
@@ -241,7 +243,6 @@ public class CoordinacionBean implements Serializable {
     public void setCoordinacion(CoordinacionTO coordinacion) {
         this.coordinacion = coordinacion;
     }
-
 
     public String getMensajeError() {
         return mensajeError;

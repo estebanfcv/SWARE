@@ -150,6 +150,7 @@ public class MainBean implements Serializable {
         menu = new ArrayList();
         menuCatalogos();
         menuAgenda();
+        menuDirectorio();
 
     }
 
@@ -225,6 +226,15 @@ public class MainBean implements Serializable {
             agenda.setValue("Agenda");
             agenda.setLink("/SWARE-1/Agenda/Agenda.xhtml");
             menu.add(agenda);
+        }
+    }
+    
+    private void menuDirectorio(){
+        if(usuario.getPerfil().isDirectorio()){
+            MenuItem directorio = new MenuItem();
+            directorio.setValue("Directorio");
+            directorio.setLink("/SWARE-1/Directorio/Directorio.xhtml");
+            menu.add(directorio);
         }
     }
 

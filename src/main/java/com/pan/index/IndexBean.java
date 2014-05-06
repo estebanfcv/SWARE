@@ -35,22 +35,24 @@ public class IndexBean implements Serializable {
     public String consultarUsuario() {
         try {
             if (validarCamposVacios()) {
-                usuario = ParametroCache.obtenerUsuarioTOPorUserPass(usuario.getUsername(), Util.encryptMD5(usuario.getPassword()));
-                if (usuario != null) {
-                    if(usuario.isBloqueado()){
-                        mensajeError = "Su usuario fue bloqueado contacte a su coordinador";
-                        color = "color: red";
-                        return "";
-                    }
-//                    if (usuario.getId() == 1) {
-                        usuario = new PermisosUsuario().establecerPermisosUsuarioMaestro(usuario);
-//                    }
+                if (ParametroCache.isUsuarioCoordinacion(usuario.getUsername(), Util.encryptMD5(usuario.getPassword())) != null) {
+                    usuario = new PermisosUsuario().establecerPermisosCoordinacion(usuario);
                     ManejadorSesiones.agregarSesion(usuario);
                     return "cuenta";
                 } else {
-                    if (ParametroCache.isUsuarioCoordinacion(usuario.getUsername(), Util.encryptMD5(usuario.getPassword())) != null) {
-                        usuario = new PermisosUsuario().establecerPermisosCoordinacion(usuario);
+                    usuario = ParametroCache.obtenerUsuarioTOPorUserPass(usuario.getUsername(),
+                            Util.encryptMD5(usuario.getPassword()));
+                    if (usuario != null) {
+                        if (usuario.isBloqueado()) {
+                            mensajeError = "Su usuario fue bloqueado contacte a su coordinador";
+                            color = "color: red";
+                            return "";
+                        }
+//                    if (usuario.getId() == 1) {
+                        usuario = new PermisosUsuario().establecerPermisosUsuarioMaestro(usuario);
+//                    }
                         ManejadorSesiones.agregarSesion(usuario);
+                        return "cuenta";
                     } else {
                         mensajeError = "El username y/o el password son incorrectos.";
                         color = "color: red";
@@ -82,7 +84,6 @@ public class IndexBean implements Serializable {
         mensajeError = "";
         color = "color: green";
         inicializar();
-
     }
 
     public void abrirPopUpRecuperarPassword() {

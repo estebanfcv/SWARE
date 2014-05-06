@@ -5,8 +5,8 @@ package com.pan.sware.Queries;
  * @author estebanfcv
  */
 public class Index {
-    
-    public static final String CONSULTAR_COORDINACIONES ="SELECT "
+
+    public static final String CONSULTAR_COORDINACIONES = "SELECT "
             + "ID,"
             + "NOMBRE,"
             + "NOMBRE_RESPONSABLE,"
@@ -24,13 +24,23 @@ public class Index {
             + "PASSWORD,"
             + "USERNAME "
             + "FROM COORDINACIONES WHERE BORRADO_LOGICO=0";
-    
+
+    public static final String CONSULTAR_CAMPANIAS = "SELECT "
+            + "ID,"
+            + "NOMBRE,"
+            + "COMENTARIO,"
+            + "FECHA,"
+            + "FECHA_ALTA,"
+            + "ID_COORDINACION,"
+            + "AVATAR "
+            + "FROM CAMPANIAS WHERE BORRADO_LOGICO=0";
+
     public static final String CONSULTAR_MUNICIPIOS_CAMPANIA = "SELECT "
             + "ID_COORDINACION,"
             + "ID_ESTADO,"
             + "ID_MUNICIPIO,"
             + "ID_CAMPANIA "
-            + " FROM CAMPANIA_MUNICIPIOS WHERE ID_COORDINACION =?";
+            + "FROM CAMPANIA_MUNICIPIOS WHERE ID_CAMPANIA =?";
 
     public static final String CONSULTAR_USUARIOS = "SELECT "
             + "ID,"
@@ -55,13 +65,23 @@ public class Index {
             + "ID,"
             + "NOMBRE "
             + "FROM ESTADOS";
-    
-    public static final String CONSULTAR_MUNICIPIOS ="SELECT "
+
+    public static final String CONSULTAR_MUNICIPIOS = "SELECT "
             + "ID,"
             + "NOMBRE,"
             + "ID_ESTADO "
             + "FROM MUNICIPIOS";
     
-        public static final String MODIFICAR_PASSWORD = "UPDATE USUARIOS SET PASSWORD=?, PASSWORD_RANDOM=1 WHERE ID=?";
+    public static final String CONSULTAR_AGENDA = "SELECT "
+            + "ID,"
+            + "TITULO,"
+            + "MENSAJE,"
+            + "FECHA,"
+            + "FECHA_ALTA,"
+            + "ID_USUARIO,"
+            + "ID_COORDINACION "
+            + "FROM AGENDA WHERE BORRADO_LOGICO=0";
+
+    public static final String MODIFICAR_PASSWORD = "UPDATE USUARIOS SET PASSWORD=?, PASSWORD_RANDOM=1 WHERE ID=?";
 
 }

@@ -10,7 +10,7 @@
         <table width="820" align="center" bgcolor="#CCCCCC">
             <tr  style="border-bottom: 1px white solid">
                 <td align="center"  bgcolor="#999999">
-                    <ice:outputText value="Datos personales" style="color:white"/>
+                    <ice:outputText value="Datos" style="color:white"/>
                 </td>
             </tr>
         </table>
@@ -21,60 +21,78 @@
                     <ice:outputText value="Nombre" style="width: 100px"/>
                 </td>
                 <td width="150">
-                    <ice:inputText value="#{directorio.dirUsuarios.usuario.nombre}" style="width: 150px"/>
+                    <ice:inputText value="#{directorio.dirOtros.directorio.nombre}" style="width: 150px"/>
                 </td>
-                <td width="125">
-                    <ice:outputText value="A. paterno" style="width: 125px"/>
+                <td width="100">
+                    <ice:outputText value="Email" style="width: 100px"/>
                 </td>
-                <td width="150">
-                    <ice:inputText value="#{directorio.dirUsuarios.usuario.apellidoPaterno}" style="width: 150px"/>
-                </td>
-                <td width="125">
-                    <ice:outputText value="A. materno" style="width: 125px"/>
-                </td>
-                <td width="150">
-                    <ice:inputText value="#{directorio.dirUsuarios.usuario.apellidoMaterno}" style="width: 150px"/>
+                <td width="450">
+                    <ice:inputText value="#{directorio.dirOtros.directorio.email}" style="width: 450px"/>
                 </td>
                 <td width="10"/>
             </tr>
+        </table>
+        <table width="820" align="center" bgcolor="#CCCCCC">
             <tr>
                 <td width="10"/>
                 <td width="100">
-                    <ice:outputText value="Tel. casa" style="width: 100px"/>
+                    <ice:outputText value="Teléfono 1" style="width: 100px"/>
                 </td>
                 <td width="150">
-                    <ice:inputText value="#{directorio.dirUsuarios.usuario.telefonoCasa}" style="width: 150px"/>
+                    <ice:inputText value="#{directorio.dirOtros.directorio.telefono1}" style="width: 150px"/>
                 </td>
                 <td width="125">
-                    <ice:outputText value="Tel. celular" style="width: 125px"/>
+                    <ice:outputText value="Teléfono 2" style="width: 125px"/>
                 </td>
                 <td width="150">
-                    <ice:inputText value="#{directorio.dirUsuarios.usuario.telefonoCelular}" style="width: 150px"/>
+                    <ice:inputText value="#{directorio.dirOtros.directorio.telefono2}" style="width: 150px"/>
                 </td>
                 <td width="125">
-                    <ice:outputText value="Tel. trabajo" style="width: 125px"/>
+                    <ice:outputText value="Teléfono 3" style="width: 125px"/>
                 </td>
                 <td width="150">
-                    <ice:inputText value="#{directorio.dirUsuarios.usuario.telefonoTrabajo}" style="width: 150px"/>
+                    <ice:inputText value="#{directorio.dirOtros.directorio.telefono3}" style="width: 150px"/>
                 </td>
                 <td width="10"/>
+            </tr>
+        </table>
+        <table width="820" align="center" bgcolor="#CCCCCC">
+            <tr>
+                <td width="10"/>
+                <td width="100">
+                    <ice:outputText value="Comentarios" style="width: 100px"/>
+                </td>
+                <td width="700">
+                    <ice:inputTextarea value="#{directorio.dirOtros.directorio.comentario}" style="width: 700px"/>
+                </td>
+                <td width="10"/>
+            </tr>
+        </table>
+        <table width="200" align="center">
+            <tr>
+                <td width="100">
+                    <ice:commandButton value="#{directorio.dirOtros.mensajeBoton}" action="#{directorio.dirOtros.actionAgregarModificar}" style="width: 100px"/>
+                </td>
+                <td width="100">
+                    <ice:commandButton value="Limpiar" action="#{directorio.dirOtros.limpiar}" style="width: 100px"/>
+                </td>
             </tr>
         </table>
         <table width="800" align="center">
             <tr>
                 <td align="center">
-                    <ice:outputText value="#{directorio.dirUsuarios.mensajeError}" style="#{directorio.dirUsuarios.color}"/>
+                    <ice:outputText value="#{directorio.dirOtros.mensajeError}" style="#{directorio.dirOtros.color}"/>
                 </td>
             </tr>
         </table>
-        <ice:panelGroup style="text-align: center" rendered="#{directorio.dirUsuarios.tablaVisible}">
+        <ice:panelGroup style="text-align: center" rendered="#{directorio.dirOtros.tablaVisible}">
             <table width="800" align="center">
                 <tr>
                     <td width="800" align="center">
                         <table width="800" align="center" bgcolor="#CCCCCC">
                             <tr bgcolor="#999999">
                                 <td width="100" align="left">
-                                    <ice:inputText value="#{directorio.dirUsuarios.filas}"
+                                    <ice:inputText value="#{directorio.dirOtros.filas}"
                                                    maxlength="2"
                                                    style="width: 50px;text-align: center"
                                                    onkeyup="var reg = /[^0-9]/gi;
@@ -85,7 +103,7 @@
                                                    partialSubmit="true"/>
                                 </td>
                                 <td width="700" align="center">
-                                    <ice:commandButton value="Email" action="#{directorio.dirUsuarios.abrirPopUp}"
+                                    <ice:commandButton value="Email" action="#{directorio.dirOtros.abrirPopUp}"
                                                        style="width: 100px"/>
                                 </td>
                             </tr>
@@ -94,37 +112,49 @@
                 </tr>
                 <tr>
                     <td width="800" align="center">
-                        <ice:dataTable rows="#{directorio.dirUsuarios.filas}"
-                                       id="directorioUser"
-                                       value="#{directorio.dirUsuarios.listaUsuarios}"
+                        <ice:dataTable rows="#{directorio.dirOtros.filas}"
+                                       id="directorioOtros"
+                                       value="#{directorio.dirOtros.listaDirectorio}"
                                        resizable="false"
                                        var="dir"
                                        rowClasses="whiteRow, grayRow"
                                        headerClasses="headerColumn"
-                                       columnWidths="200px,600px"
+                                       columnWidths="150px,600px,50px"
                                        styleClass="tableStyle"
                                        footerClass="headerColumn">
                             <ice:column>
                                 <f:facet name="header">
                                     <ice:outputText value="Nombre"/>
                                 </f:facet>
-                                <div align="center" style="width: 200px">
-                                    <ice:commandLink value="#{dir.nombre} #{dir.apellidoPaterno}" actionListener="#{directorio.dirUsuarios.actionListenerUsuario}">
-                                        <f:attribute value="#{dir}" name="usuario"/>
+                                <div align="center" style="width: 150px">
+                                    <ice:commandLink value="#{dir.nombre}" actionListener="#{directorio.dirOtros.actionListenerModificar}">
+                                        <f:attribute value="#{dir}" name="directorio"/>
                                     </ice:commandLink>
                                 </div>
                             </ice:column>
                             <ice:column>
-                                    <f:facet name="header">
-                                        <ice:selectBooleanCheckbox value="#{directorio.dirUsuarios.todos}" valueChangeListener="#{directorio.dirUsuarios.valueChangeCorreos}" partialSubmit="true"/> <ice:outputText value="Mandar Email"/>
-                                    </f:facet>
+                                <f:facet name="header">
+                                    <ice:selectBooleanCheckbox value="#{directorio.dirOtros.todos}" valueChangeListener="#{directorio.dirOtros.valueChangeCorreos}" partialSubmit="true"/> <ice:outputText value="Mandar Email"/>
+                                </f:facet>
                                 <div align="left" style="width: 600px">
-                                    <ice:selectBooleanCheckbox value="#{dir.mandarEmail}" style="width: 15px" /><ice:outputText value="#{dir.email}" style="width: 585px"/>
+                                    <ice:selectBooleanCheckbox value="#{dir.mandarEmail}" rendered="#{empty dir.email ?'false':'true'}" style="width: 15px" /><ice:outputText value="#{dir.email}" style="width: 585px"/>
+                                </div>
+                            </ice:column>
+                            <ice:column>
+                                <f:facet name="header">
+                                    <ice:outputLabel value=""/>
+                                </f:facet>
+                                <div align="center">
+                                    <ice:commandButton value="E"
+                                                       style="width: 32px; height: 32px"
+                                                       actionListener="#{directorio.dirOtros.abrirPopUpEliminar}">
+                                        <f:attribute name="directorio" value="#{dir}"/>
+                                    </ice:commandButton>
                                 </div>
                             </ice:column>
                             <f:facet name="footer" >
                                 <div  align="center">
-                                    <ice:dataPaginator id="dataScroll_2" for="directorioUser" 
+                                    <ice:dataPaginator id="dataScroll_4" for="directorioOtros" 
                                                        rowsCountVar="rowsCount"
                                                        displayedRowsCountVar="displayedRowsCount"
                                                        firstRowIndexVar="firstRowIndex"
@@ -141,7 +171,7 @@
                                             <f:param value="#{pageCount}"/>
                                         </ice:outputFormat>
                                     </ice:dataPaginator>
-                                    <ice:dataPaginator id="dataScroll_3" for="directorioUser"
+                                    <ice:dataPaginator id="dataScroll_5" for="directorioOtros"
                                                        paginator="true" fastStep="3"
                                                        paginatorMaxPages="10" style="font: large sans-serif ">
                                         <f:facet name="first">

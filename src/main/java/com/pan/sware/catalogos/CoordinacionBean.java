@@ -45,7 +45,6 @@ public class CoordinacionBean implements Serializable {
         filas = 10;
         popUpEliminar = false;
         consultar();
-
     }
 
     private void consultar() {
@@ -57,7 +56,6 @@ public class CoordinacionBean implements Serializable {
             mensajeError = "No hay coordinaciones.";
             color = "color: red";
         }
-
     }
 
     public void actionAgregarModificar() {
@@ -95,13 +93,11 @@ public class CoordinacionBean implements Serializable {
             color = "color: red";
             return false;
         }
-
         if (coordinacion.getNombre().isEmpty()) {
             mensajeError = "Favor de escribir el nombre de la coordinacion.";
             color = "color: red";
             return false;
         }
-
         if (coordinacion.getNombreResponsable().isEmpty()) {
             mensajeError = "Favor de escribir el nombre del responsable.";
             color = "color: red";

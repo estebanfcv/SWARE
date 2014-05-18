@@ -3,6 +3,7 @@ package com.pan.sware.correo;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.Properties;
+import java.util.StringTokenizer;
 import javax.activation.DataHandler;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -103,7 +104,14 @@ public class MailTask implements Runnable {
         if (cc != null) {
             this.to = new InternetAddress[]{new InternetAddress(to), new InternetAddress(cc)};
         } else {
-            this.to = new InternetAddress[]{new InternetAddress(to)};
+            System.out.println("La lista de emails es:::::: " + to);
+            StringTokenizer token = new StringTokenizer(to, ",");
+            int conta = 0;
+            this.to = new InternetAddress[token.countTokens()];
+            System.out.println("tamanio " + this.to.length);
+            while (token.hasMoreTokens()) {
+                this.to[conta++] = new InternetAddress(token.nextToken().trim());
+            }
         }
 
         this.subject = subject;

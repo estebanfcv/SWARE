@@ -2,6 +2,7 @@ package com.pan.sware.correo;
 
 import com.pan.sware.TO.CoordinacionTO;
 import com.pan.sware.TO.UsuarioTO;
+import com.pan.sware.directorio.PopUpEmail;
 import java.util.Date;
 
 /**
@@ -34,8 +35,9 @@ public class CuerpoCorreos {
                 + "<br> Emitida el " + new Date();
 
         String contenido = "<html><body><b>" + usuario.getNombre() + ":</b><br/><br>" + texto + "</body> </html>";
-       return enviarCorreo(subject, contenido, usuario.getEmail(), null);
+        return enviarCorreo(subject, contenido, usuario.getEmail(), null);
     }
+
     public static boolean enviarCorreoAltaUsuario(UsuarioTO usuario) {
         String subject = "Bienvenido al sistema - " + usuario.getUsername();
         String texto = "A continuacion tiene sus credenciales:"
@@ -46,7 +48,12 @@ public class CuerpoCorreos {
                 + "<hr>"
                 + "<br> Emitida el " + new Date();
         String contenido = "<html><body><b>" + usuario.getNombre() + ":</b><br/><br>" + texto + "</body> </html>";
-       return enviarCorreo(subject, contenido, usuario.getEmail(), null);
+        return enviarCorreo(subject, contenido, usuario.getEmail(), null);
+    }
+
+    public static boolean enviarCorreoDirectorio(PopUpEmail email) {
+        return enviarCorreo(email.getAsunto(), email.getMensaje(), email.getListaCorreos().trim(), null);
+
     }
 
     public static boolean enviarCorreo(String asunto, String texto, String to, String cc) {

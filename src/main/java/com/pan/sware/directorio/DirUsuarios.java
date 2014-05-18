@@ -5,6 +5,7 @@ import com.pan.sware.Util.ParametroCache;
 import com.pan.sware.Util.Util;
 import com.pan.sware.sesiones.ManejadorSesiones;
 import java.util.List;
+import javax.faces.event.ActionEvent;
 import javax.faces.event.ValueChangeEvent;
 
 /**
@@ -17,6 +18,7 @@ public class DirUsuarios {
     private String mensajeError;
     private String color;
     private List<UsuarioTO> listaUsuarios;
+    private UsuarioTO usuario;
     private boolean tablaVisible;
     private byte filas;
     private boolean todos;
@@ -28,7 +30,8 @@ public class DirUsuarios {
     }
 
     private void inicializar() {
-
+        usuario = new UsuarioTO();
+        popUpEmail = new PopUpEmail();
         filas = 10;
         consultar();
     }
@@ -46,14 +49,17 @@ public class DirUsuarios {
 
     public void valueChangeCorreos(ValueChangeEvent event) {
         if (Util.isUpdatePhase(event)) {
-            System.out.println("entre");
             mensajeError = "";
             todos = (boolean) event.getNewValue();
-            System.out.println("todos vale::: " + todos);
             for (UsuarioTO u : listaUsuarios) {
                 u.setMandarEmail(todos);
             }
         }
+    }
+    
+        public void actionListenerUsuario(ActionEvent event) {
+        usuario = ((UsuarioTO) event.getComponent().getAttributes().get("usuario")).clone();
+        mensajeError = "";
     }
 
     public void abrirPopUp() {
@@ -61,11 +67,23 @@ public class DirUsuarios {
         String lista = "";
         for (UsuarioTO u : listaUsuarios) {
             if (u.isMandarEmail()) {
-                lista += u.getEmail() + ",";
+                lista += u.getEmail() + ", ";
             }
         }
-        popUpEmail.setListaCorreos(lista);
-        popUpEmail.abrirPopUp();
+        if (validarCamposObligatorios(lista)) {
+            mensajeError="";
+            popUpEmail.setListaCorreos(lista);
+            popUpEmail.abrirPopUp();
+        }
+    }
+
+    private boolean validarCamposObligatorios(String lista) {
+        if (lista.isEmpty()) {
+            mensajeError = "Favor de seleccionar al menos un Email";
+            color = "color: red";
+            return false;
+        }
+        return true;
     }
 
     public PopUpEmail getPopUpEmail() {
@@ -104,4 +122,7 @@ public class DirUsuarios {
         this.todos = todos;
     }
 
+    public UsuarioTO getUsuario() {
+        return usuario;
+    }
 }

@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:ace="http://www.icefaces.org/icefaces/components">
+    <f:view>
+        <f:facet name="header">
+            <table align="center" width="580px" bgcolor="#2672A1" >
+                <tr>
+                    <td width="560px" align="center" bgcolor="#2672A1">
+                        <ice:outputText style="color: #FFFFFF;"
+                                        value="Enviar Email"/>
+                    </td>
+                    <td width="20px" align="center">
+                        <ice:commandButton style="width:20px"
+                                           styleClass="button"
+                                           action="#{directorio.dirOtros.popUpEmail.cerrarPopup}"
+                                           value="X" partialSubmit="true"/>
+                    </td>
+                </tr>
+            </table>        
+        </f:facet>
+        <f:facet name="body" >
+            <table align="center" width="520" bgcolor="#CCCCCC">
+                <tr>
+                    <td>
+                        <table align="center" width="520" bgcolor="#CCCCCC">
+                            <tr>
+                                <td width="10"/>
+                                <td width="100">
+                                    <ice:outputText value="Para" style="width: 100px"/>
+                                </td>
+                                <td width="400">
+                                    <ice:outputText value="#{directorio.dirOtros.popUpEmail.listaCorreos}"
+                                                    style="width: 400px; word-wrap:break-word"/>
+                                </td>
+                                <td width="10"/>
+                            </tr>
+                            <tr>
+                                <td width="10"/>
+                                <td width="100">
+                                    <ice:outputText value="Asunto" style="width: 100px"/>
+                                </td>
+                                <td width="400">
+                                    <ice:inputText value="#{directorio.dirOtros.popUpEmail.asunto}"
+                                                   style="width: 400px" maxlength="30"/>
+                                </td>
+                                <td width="10"/>
+                            </tr>
+                        </table>
+                        <table align="center" width="520" bgcolor="#CCCCCC">
+                            <tr>
+                                <td width="10"/>
+                                <td width="500">
+                                    <ice:inputRichText value="#{directorio.dirOtros.popUpEmail.mensaje}"
+                                                       saveOnSubmit="true"
+                                                       customConfigPath="/toolBarEmail.js"
+                                                       language="es"
+                                                       skin="kama"
+                                                       toolbar="Texto"
+                                                       height="250"
+                                                       width="500"
+                                                       />
+                                </td>
+                                <td width="10"/>
+                            </tr>
+                        </table>
+                        <table align="center" width="500">
+                            <tr>
+                                <td width="500" align="center">
+                                    <ice:outputText value="#{directorio.dirOtros.popUpEmail.mensajeError}"
+                                                    style="#{directorio.dirOtros.popUpEmail.color}"/>
+                                </td>
+                            </tr>
+                        </table>
+                        <table align="center" width="500">
+                            <tr>
+                                <td width="500" align="center">
+                                    <ice:commandButton value="Enviar" action="#{directorio.dirOtros.popUpEmail.enviarCorreo}"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </f:facet>
+    </f:view>
+</html>

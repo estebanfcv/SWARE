@@ -25,7 +25,6 @@ public class popUpCambioPassword {
     private UsuariosDAO dao;
 
     public popUpCambioPassword(UsuarioTO usuario) {
-        System.out.println("entre aqui");
         this.usuario = usuario;
         mensajeError = "";
         color = "color: green";
@@ -38,7 +37,6 @@ public class popUpCambioPassword {
         passwordActual = "";
         passwordNuevo = "";
         passwordConfirmacion = "";
-        System.out.println("el usuario random es:::::: " + usuario.getPasswordRandom());
         popUp = usuario.getPasswordRandom() == 1;
     }
 

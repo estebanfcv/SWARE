@@ -7,24 +7,106 @@
       xmlns:f="http://java.sun.com/jsf/core">
     <h:head>
         <title>Directorio</title>
+        <!--<link type="text/css" rel="stylesheet" href="../css/xp.css"/>-->
+        <!--<link type="text/css" rel="stylesheet" href="../css/layout.css"/>-->
         <link type="text/css" rel="stylesheet" href="../css/icefaces.css"/>
     </h:head>
-    <h:body>
-        <div id="page-container">
+    <h:body> 
+        <div id="page-container" style="background-image: ">
             <div id="topBar">
                 <ui:insert name="menu_top">
                     <ui:include src="/Header.xhtml"/>
                 </ui:insert>  
-
+                <h:form>
+                    <ice:panelPopup visible="#{directorio.dirUsuarios.popUpEmail.visible}"
+                                    style="z-index:999;left: 20%; top: 20%;
+                                    width: 580px; position:absolute; background: #FFFFFF;"
+                                    modal="true">
+                        <ui:include src="./PopUpEnviarEmail.xhtml" />
+                    </ice:panelPopup>
+                </h:form>
+                <h:form>
+                    <ice:panelPopup visible="#{directorio.dirOtros.popUpEmail.visible}"
+                                    style="z-index:999;left: 20%; top: 20%;
+                                    width: 580px; position:absolute; background: #FFFFFF;"
+                                    modal="true">
+                        <ui:include src="./PopUpEnviarEmailOtros.xhtml" />
+                    </ice:panelPopup>
+                    <ice:panelPopup visible="#{directorio.dirOtros.popUpEliminar}" 
+                                    style="width: 260px; left: 20%; top: 10%;
+                                    z-index:999;position: absolute; background: #FFFFFF;" 
+                                    modal="true">
+                        <f:facet name="header">
+                            <table align="center" width="260"><tr>
+                                    <td width="240" align="center">
+                                        <ice:outputText styleClass="tituloPanel" value="Confirmar eliminar"/>
+                                    </td>
+                                    <td width="20" align="left">
+                                        <ice:commandButton style="width:20px"
+                                                           styleClass="button"
+                                                           action="#{directorio.dirOtros.cerrarPopUpEliminar}"
+                                                           value="X"/>
+                                    </td></tr>
+                            </table>
+                        </f:facet>
+                        <f:facet name="body">
+                            <table width="240" style="border: 1px">
+                                <tr>
+                                    <td align="center">
+                                        <ice:outputText value='¿Desea eliminar el registro?'/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <ice:commandButton value="Si"
+                                                           styleClass="button"
+                                                           action="#{directorio.dirOtros.confirmarEliminarRegistro}"
+                                                           style="width: 75px">
+                                        </ice:commandButton>
+                                    </td>
+                                    <td>
+                                        <ice:commandButton value="No"
+                                                           styleClass="button"
+                                                           action="#{directorio.dirOtros.cerrarPopUpEliminar}"
+                                                           style="width: 75px"/>
+                                    </td>    
+                                </tr>
+                            </table>
+                        </f:facet>
+                    </ice:panelPopup>
+                </h:form>
             </div>
             <div id="content">
                 <h:form>
+                    <table width="900" align="right">
+                        <tr align="right">
+                            <td align="right">
+                                <ice:menuBar orientation="horizontal"  style="float: right">
+                                    <ice:menuItems value="#{main.menuSuperior}" immediate="true" />
+                                </ice:menuBar> 
+                            </td>
+                        </tr>
+                    </table>
+                    <br/> 
+                    <table width="900" align="center">
+                        <tr>
+                            <td width="900">
+                                <ice:menuBar orientation="horizontal" >
+                                    <ice:menuItems value="#{main.regresarMain}" immediate="true" />
+                                </ice:menuBar> 
+                            </td>
+                        </tr>
+                    </table>
+                    <br/>
                     <table align="center" width="820">
                         <tr>
                             <td>
                                 <ice:panelTabSet >
                                     <ice:panelTab label="Usuarios">
                                         <ui:include src="./DirUsuarios.xhtml"/>
+                                    </ice:panelTab>
+                                    <ice:panelTab label="Otros">
+                                        <ui:include src="./DirOtros.xhtml"/>
                                     </ice:panelTab>
                                 </ice:panelTabSet>
                             </td>
